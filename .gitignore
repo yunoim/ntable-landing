@@ -1,0 +1,43 @@
+# ── 서버 파일 (보안 민감) ──
+server.py
+config.py
+db.py
+routers/
+
+# ── DB ──
+*.db
+*.db-shm
+*.db-wal
+
+# ── 업로드 파일 ──
+static/
+
+# ── 환경설정 ──
+*.env
+.env.*
+*.bat
+*.yml
+*.yaml
+
+# ── 서비스 페이지 (랜딩 외) ──
+guest.html
+host.html
+owner.html
+profile.html
+survey.html
+public.html
+
+# ── Python ──
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+
+# ── 기타 ──
+*.log
+.DS_Store
+Thumbs.db
+STATUS.md
