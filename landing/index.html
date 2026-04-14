@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>엔테이블 (ntable) — 연결의 방식을 바꾸다</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+KR:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0f1e;
+    --navy-mid: #111827;
+    --navy-light: #1a2540;
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --white: #f5f2ec;
+    --white-dim: rgba(245,242,236,0.6);
+    --white-faint: rgba(245,242,236,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(10,15,30,0.95), transparent);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    font-weight: 300;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    border: 1px solid var(--gold);
+    color: var(--gold) !important;
+    padding: 8px 24px;
+    border-radius: 2px;
+    transition: background 0.3s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-dim) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 120px 40px 80px;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(26,37,64,0.8) 0%, transparent 60%);
+  }
+
+  .hero-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 0 auto 40px;
+    animation: fadeDown 1.2s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    animation: fadeUp 1s ease 0.3s forwards;
+    opacity: 0;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 100px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+    animation: fadeUp 1s ease 0.5s forwards;
+    opacity: 0;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-subtitle {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 300;
+    color: var(--white-dim);
+    line-height: 1.8;
+    max-width: 560px;
+    margin: 24px auto 56px;
+    animation: fadeUp 1s ease 0.7s forwards;
+    opacity: 0;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 1s ease 0.9s forwards;
+    opacity: 0;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 16px 48px;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 2px;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--white-faint);
+    color: var(--white-dim);
+    padding: 16px 48px;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 300;
+    border-radius: 2px;
+    transition: border-color 0.3s, color 0.3s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* ── STATS ── */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    padding: 80px 60px;
+    border-top: 1px solid var(--white-faint);
+    border-bottom: 1px solid var(--white-faint);
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--white-dim);
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION COMMON ── */
+  section {
+    padding: 120px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-tag::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .section-body {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--white-dim);
+    line-height: 1.9;
+    max-width: 560px;
+  }
+
+  /* ── PROBLEM ── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 80px;
+    align-items: start;
+  }
+
+  .problem-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .problem-card {
+    border: 1px solid var(--white-faint);
+    padding: 32px;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .problem-card:hover { border-color: rgba(201,168,76,0.3); }
+
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  .problem-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .problem-card-body {
+    font-size: 14px;
+    color: var(--white-dim);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── SOLUTION ── */
+  .solution-wrap {
+    background: var(--navy-light);
+    border-radius: 8px;
+    padding: 80px;
+    margin: 80px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .solution-wrap::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .solution-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  .solution-step {
+    position: relative;
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--gold-dim);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--gold-light);
+  }
+
+  .step-body {
+    font-size: 13px;
+    color: var(--white-dim);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── MODEL ── */
+  .model-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 60px;
+    border: 1px solid var(--white-faint);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .model-card {
+    padding: 48px;
+    background: var(--navy-mid);
+    transition: background 0.3s;
+  }
+
+  .model-card:hover { background: var(--navy-light); }
+
+  .model-card-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .model-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+
+  .model-card-body {
+    font-size: 14px;
+    color: var(--white-dim);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .model-plans {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .model-plan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--white-faint);
+    font-size: 13px;
+  }
+
+  .model-plan:last-child { border-bottom: none; }
+
+  .plan-name { color: var(--white-dim); }
+  .plan-price { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 16px; }
+
+  /* ── ROADMAP ── */
+  .roadmap-list {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .roadmap-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 60px;
+    padding: 48px 0;
+    border-bottom: 1px solid var(--white-faint);
+    position: relative;
+  }
+
+  .roadmap-item:first-child { border-top: 1px solid var(--white-faint); }
+
+  .roadmap-phase {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    padding-top: 4px;
+  }
+
+  .roadmap-phase span {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--white-dim);
+    margin-top: 4px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .roadmap-content-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 12px;
+  }
+
+  .roadmap-content-body {
+    font-size: 14px;
+    color: var(--white-dim);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .roadmap-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .roadmap-tag {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  /* ── CONTACT ── */
+  .contact-wrap {
+    background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy) 100%);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    padding: 100px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-wrap::before {
+    content: '';
+    position: absolute;
+    bottom: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+  }
+
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .contact-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .contact-body {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--white-dim);
+    line-height: 1.8;
+    margin-bottom: 48px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-email {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    padding-bottom: 4px;
+    transition: border-color 0.3s;
+  }
+
+  .contact-email:hover { border-color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--white-faint);
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .footer-info {
+    font-size: 12px;
+    color: var(--white-dim);
+    font-weight: 300;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.2;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .stats { gap: 40px; padding: 60px 24px; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .solution-wrap { padding: 48px 32px; }
+    .solution-steps { grid-template-columns: 1fr 1fr; }
+    .model-grid { grid-template-columns: 1fr; }
+    .roadmap-item { grid-template-columns: 1fr; gap: 16px; }
+    .contact-wrap { padding: 60px 32px; }
+    footer { padding: 32px 24px; }
+    .footer-info { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ntable</div>
+  <ul class="nav-links">
+    <li><a href="#problem">문제</a></li>
+    <li><a href="#solution">솔루션</a></li>
+    <li><a href="#model">비즈니스 모델</a></li>
+    <li><a href="#roadmap">로드맵</a></li>
+    <li><a href="#contact" class="nav-cta">문의</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <p class="hero-eyebrow">MLPC Inc. — More Life, People Connect</p>
+  <h1 class="hero-title">
+    사람을 잇는<br><em>새로운 방식</em>
+  </h1>
+  <p class="hero-subtitle">
+    누구나 호스트가 되어 소셜 다이닝 미팅 모임을 열 수 있는<br>
+    경험 설계 기반 소셜 플랫폼
+  </p>
+  <p style="font-size:13px;letter-spacing:0.2em;color:rgba(201,168,76,0.6);margin-top:-20px;margin-bottom:40px;">
+    누구나, 어디서나, 몇 번이든 열 수 있는 테이블
+  </p>
+  <div class="hero-actions">
+    <a href="https://ns.ntable.kr" class="btn-primary">모임 참가하기</a>
+    <a href="#contact" class="btn-secondary">문의하기</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats reveal">
+  <div class="stat-item">
+    <div class="stat-number">50+</div>
+    <div class="stat-label">커뮤니티 멤버</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">4:4</div>
+    <div class="stat-label">소수 정예 미팅</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">SKY</div>
+    <div class="stat-label">출신 직장인 타겟</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">4</div>
+    <div class="stat-label">구독 플랜</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-tag">Problem</div>
+  <div class="problem-grid">
+    <div>
+      <h2 class="section-title">왜 괜찮은 사람을<br>만나기 <em>어려울까</em></h2>
+      <p class="section-body">
+        학교를 졸업하는 순간, 자연스럽던 만남의 기회는 사라진다. 소개팅 앱은 신뢰하기 어렵고, 지인 소개는 부담스럽다. 고대·연대·카이스트 출신 직장인들도 예외가 아니다.
+      </p>
+    </div>
+    <div class="problem-cards reveal">
+      <div class="problem-card">
+        <div class="problem-card-title">소개팅 앱의 한계</div>
+        <div class="problem-card-body">익명성 기반으로 신뢰도가 낮고, 검증된 상대를 만나기 어렵다. 매칭 후 어색한 1:1 첫 만남이 부담으로 작용한다.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-title">지인 소개의 부담</div>
+        <div class="problem-card-body">소개해준 사람을 의식해 솔직한 감정 표현이 어렵고, 거절 시 관계 훼손이 우려된다.</div>
+      </div>
+      <div class="problem-card">
+        <div class="problem-card-title">오프라인 미팅의 한계</div>
+        <div class="problem-card-body">기존 미팅 업체는 고가이며 확장성이 낮고, 경험의 질이 호스트 역량에 지나치게 의존한다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="section-tag">Solution</div>
+  <h2 class="section-title">경험을 <em>설계</em>하다</h2>
+  <p class="section-body">ntable은 단순한 만남 중개가 아니다. 모임 안에서 실시간 인터랙션, 성향 탐구, 매칭 알고리즘이 작동하는 경험 기반 소셜 플랫폼이다.</p>
+
+  <div class="solution-wrap reveal">
+    <div class="solution-steps">
+      <div class="solution-step">
+        <div class="step-num">01</div>
+        <div class="step-title">참가자 소개</div>
+        <div class="step-body">실명 없이 닉네임과 프로필로 자연스럽게 서로를 알아간다.</div>
+      </div>
+      <div class="solution-step">
+        <div class="step-num">02</div>
+        <div class="step-title">성향 탐구</div>
+        <div class="step-body">15문항 A/B 투표로 연애 스타일, 관계관, 가치관을 실시간으로 탐구한다.</div>
+      </div>
+      <div class="solution-step">
+        <div class="step-num">03</div>
+        <div class="step-title">궁합 매칭</div>
+        <div class="step-body">투표 결과 기반으로 남녀 궁합 순위가 실시간으로 도출된다.</div>
+      </div>
+      <div class="solution-step">
+        <div class="step-num">04</div>
+        <div class="step-title">커뮤니티</div>
+        <div class="step-body">모임 후 멤버방 초대로 이어지는 지속적인 커뮤니티 연결.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BUSINESS MODEL -->
+<section id="model">
+  <div class="section-tag">Business Model</div>
+  <h2 class="section-title">양면 플랫폼<br><em>수익 구조</em></h2>
+  <p class="section-body">게스트의 참가비와 호스트의 구독료, 두 축으로 수익이 발생하는 지속 가능한 플랫폼 모델.</p>
+
+  <div class="model-grid reveal">
+    <div class="model-card">
+      <div class="model-card-eyebrow">Guest</div>
+      <div class="model-card-title">참가비 수수료</div>
+      <div class="model-card-body">
+        게스트가 모임 참가 시 지불하는 참가비의 20%를 플랫폼이 수취. 호스트가 참가비를 자유롭게 설정하는 구조.
+      </div>
+    </div>
+    <div class="model-card">
+      <div class="model-card-eyebrow">Host Subscription</div>
+      <div class="model-card-title">호스트 구독 플랜</div>
+      <div class="model-card-body">
+        타 모임 3회 참석 시 호스트 자격 자동 획득. 플랜에 따라 모임 규모가 확장된다.
+      </div>
+      <div class="model-plans">
+        <div class="model-plan">
+          <span class="plan-name">Free — 최대 4명</span>
+          <span class="plan-price">0원</span>
+        </div>
+        <div class="model-plan">
+          <span class="plan-name">Starter — 최대 8명</span>
+          <span class="plan-price">19,900원/월</span>
+        </div>
+        <div class="model-plan">
+          <span class="plan-name">Pro — 최대 16명</span>
+          <span class="plan-price">49,900원/월</span>
+        </div>
+        <div class="model-plan">
+          <span class="plan-name">Enterprise — 무제한</span>
+          <span class="plan-price">99,900원/월</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-tag">Roadmap</div>
+  <h2 class="section-title">단계별 <em>성장 전략</em></h2>
+
+  <div class="roadmap-list reveal">
+    <div class="roadmap-item">
+      <div class="roadmap-phase">
+        Phase 1
+        <span>현재 — 검증</span>
+      </div>
+      <div class="roadmap-content">
+        <div class="roadmap-content-title">오너 직접 운영, 트랙션 확보</div>
+        <div class="roadmap-content-body">고대·연대·카이스트 출신 직장인 타겟으로 4:4 미팅 운영. 플랫폼 기능 완성도 향상 및 데이터 축적.</div>
+        <div class="roadmap-tags">
+          <span class="roadmap-tag">멤버 100명</span>
+          <span class="roadmap-tag">월 4회 모임</span>
+          <span class="roadmap-tag">재방문율 30%</span>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-phase">
+        Phase 2
+        <span>3~6개월 — 베타</span>
+      </div>
+      <div class="roadmap-content">
+        <div class="roadmap-content-title">호스트 셀프서비스 오픈</div>
+        <div class="roadmap-content-body">지인 호스트 5~10명 무료 제공. 참가비 수수료 모델 검증. 토스페이먼츠 결제 연동.</div>
+        <div class="roadmap-tags">
+          <span class="roadmap-tag">호스트 10명</span>
+          <span class="roadmap-tag">게스트 DB 1,000명</span>
+          <span class="roadmap-tag">월 매출 200만원</span>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-phase">
+        Phase 3
+        <span>6~12개월 — 유료화</span>
+      </div>
+      <div class="roadmap-content">
+        <div class="roadmap-content-title">구독 유료화 + Enterprise B2B</div>
+        <div class="roadmap-content-body">호스트 구독 유료화. 기업 팀빌딩 Enterprise 플랜 판매. 그룹핑, 커스텀 질문, 리포트 PDF 기능 출시.</div>
+        <div class="roadmap-tags">
+          <span class="roadmap-tag">호스트 50명</span>
+          <span class="roadmap-tag">게스트 DB 5,000명</span>
+          <span class="roadmap-tag">월 매출 2,000만원</span>
+        </div>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-phase">
+        Phase 4
+        <span>1~2년 — 확장</span>
+      </div>
+      <div class="roadmap-content">
+        <div class="roadmap-content-title">AI 매칭 고도화 + 글로벌</div>
+        <div class="roadmap-content-body">성향/투표/매칭 이력 기반 AI 매칭. 타 지역 확장(부산·대구). 일본 시장 진출.</div>
+        <div class="roadmap-tags">
+          <span class="roadmap-tag">호스트 200명</span>
+          <span class="roadmap-tag">게스트 DB 20,000명</span>
+          <span class="roadmap-tag">월 매출 1억원</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section style="max-width:100%;padding:0 60px 80px;text-align:center;">
+  <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.5vw,26px);font-weight:300;color:rgba(245,242,236,0.5);line-height:1.8;max-width:600px;margin:0 auto;">
+    누구나, 어디서나, 몇 번이든 열 수 있는 테이블.<br>
+    <em style="color:#c9a84c;">n개의 테이블, 무한한 연결.</em>
+  </p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="max-width:100%;padding:0 60px 120px;">
+  <div class="contact-wrap reveal">
+    <h2 class="contact-title">함께 만들어갈<br><em>다음 챕터</em></h2>
+    <p class="contact-body">
+      ntable의 성장에 함께하고 싶으시다면 아래로 연락주세요.
+      사업 제안, 파트너십, 협업 문의 모두 환영합니다.
+    </p>
+    <a href="/cdn-cgi/l/email-protection#670408091306041327091306050b02490c15" class="contact-email"><span class="__cf_email__" data-cfemail="c3a0acadb7a2a0b783adb7a2a1afa6eda8b1">[email&#160;protected]</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ntable</div>
+  <div class="footer-info">
+    MLPC Inc. (More Life, People Connect Inc.) · 사업자등록번호 286-87-02414<br>
+    ns.ntable.kr · ntable.kr<br>
+    © 2026 MLPC Inc. All rights reserved.
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll
