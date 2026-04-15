@@ -93,12 +93,21 @@
     .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
     .nav-links a { font-size: 13px; color: var(--white-dim); letter-spacing: 0.02em; transition: color var(--transition); }
     .nav-links a:hover { color: var(--gold-light); }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
     .nav-cta {
       font-size: 13px; font-weight: 500; padding: 8px 20px;
       border: 1px solid var(--gold-border); border-radius: 40px; color: var(--gold);
       transition: background var(--transition), border-color var(--transition);
     }
     .nav-cta:hover { background: var(--gold-dim); border-color: var(--gold); }
+    .nav-cta-primary {
+      font-size: 13px; font-weight: 600; padding: 8px 20px;
+      background: linear-gradient(135deg, var(--gold), #a07828);
+      color: var(--navy); border-radius: 40px;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 2px 10px rgba(201,168,76,0.25);
+    }
+    .nav-cta-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.38); }
 
     /* HERO */
     #hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
@@ -231,6 +240,7 @@
     .roadmap-content-body { font-size: 14px; font-weight: 300; color: var(--white-dim); line-height: 1.85; margin-bottom: 16px; }
     .roadmap-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .roadmap-tag { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.05em; padding: 4px 12px; border: 1px solid var(--gold-border); border-radius: 40px; color: var(--gold); background: var(--gold-dim); }
+    .roadmap-tag.planned { border-color: rgba(201,168,76,0.12); color: var(--text-muted); background: transparent; font-style: italic; }
 
     /* BUSINESS MODEL */
     .model-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 56px; }
@@ -309,7 +319,10 @@
       <li><a href="#expansion">확장</a></li>
       <li><a href="#roadmap">로드맵</a></li>
     </ul>
-    <a href="#contact-wrap" class="nav-cta">문의하기</a>
+    <div class="nav-actions">
+      <a href="https://demo.ntable.kr" class="nav-cta-primary">모임 참여</a>
+      <a href="#contact-wrap" class="nav-cta">문의</a>
+    </div>
   </div>
 </nav>
 
@@ -328,8 +341,8 @@
       소셜 모임 퍼실리테이터(FT) 플랫폼 — ntable
     </p>
     <div class="hero-actions">
-      <a href="https://ns.ntable.kr" class="btn-primary">모임 참가하기</a>
-      <a href="#contact-wrap" class="btn-secondary">문의하기</a>
+      <a href="https://demo.ntable.kr" class="btn-primary">모임 참여</a>
+      <a href="#contact-wrap" class="btn-secondary">문의</a>
     </div>
   </div>
 </div>
@@ -430,65 +443,74 @@
   <p class="section-body reveal">남산엔테이블 4:4 모임 한 번에는 10개의 경험 설계 장치가 작동한다.</p>
 
   <div class="roadmap-list reveal" style="margin-top:56px;">
+
     <div class="roadmap-item">
       <div class="roadmap-phase">19:00<span>입장 · 스몰톡</span></div>
       <div class="roadmap-content">
         <div class="roadmap-content-title">어색함을 구조로 녹인다</div>
-        <div class="roadmap-content-body">실명 대신 닉네임. 공개하기 싫은 정보는 입력 안 해도 된다. 첫인상 투표가 시작되면 자연스럽게 서로를 의식하게 된다.</div>
+        <div class="roadmap-content-body">실명 대신 닉네임. 공개하기 싫은 정보는 입력 안 해도 된다. QR 접속 후 프로필 입력이 완료되면 자동으로 첫인상 투표가 시작되며 자연스럽게 서로를 의식하게 된다.</div>
         <div class="roadmap-tags">
+          <span class="roadmap-tag">① QR 입장</span>
+          <span class="roadmap-tag">② 첫인상 투표</span>
           <span class="roadmap-tag">닉네임 기반</span>
-          <span class="roadmap-tag">첫인상 투표</span>
           <span class="roadmap-tag">익명 보장</span>
         </div>
       </div>
     </div>
+
     <div class="roadmap-item">
       <div class="roadmap-phase">19:30<span>참가자 소개</span></div>
       <div class="roadmap-content">
         <div class="roadmap-content-title">랜덤 순서, 호스트가 진행하지 않아도 된다</div>
         <div class="roadmap-content-body">플랫폼이 순서를 정하고, 다음 소개자를 화면에 띄워준다. 호스트는 분위기만 잡으면 된다.</div>
         <div class="roadmap-tags">
-          <span class="roadmap-tag">자동 순서</span>
+          <span class="roadmap-tag">③ 자동 소개 순서</span>
           <span class="roadmap-tag">프로필 동기화</span>
         </div>
       </div>
     </div>
+
     <div class="roadmap-item">
-      <div class="roadmap-phase">20:00<span>연애 성향 탐구</span></div>
+      <div class="roadmap-phase">19:50<span>연애 성향 탐구</span></div>
       <div class="roadmap-content">
         <div class="roadmap-content-title">15문항이 어색한 대화를 대신한다</div>
-        <div class="roadmap-content-body">연애 스타일, 관계 탐구, 미래와 가치관 — 3개 카테고리 15문항을 A/B로 선택한다. 투표할수록 실시간으로 나와 맞는 사람의 순위가 올라간다.</div>
+        <div class="roadmap-content-body">연애 스타일, 관계 탐구, 미래와 가치관 — 3개 카테고리 15문항을 A/B로 선택한다. 문항마다 남/여 결과를 공개하며 자연스러운 대화가 유도된다. 투표할수록 실시간으로 나와 맞는 사람의 순위가 올라간다.</div>
         <div class="roadmap-tags">
-          <span class="roadmap-tag">15문항 A/B</span>
-          <span class="roadmap-tag">실시간 매칭 순위</span>
+          <span class="roadmap-tag">④ 15문항 A/B 투표</span>
+          <span class="roadmap-tag">⑤ 실시간 매칭 순위</span>
           <span class="roadmap-tag">성별 분리 집계</span>
         </div>
       </div>
     </div>
+
     <div class="roadmap-item">
       <div class="roadmap-phase">21:00<span>매칭 · 자유 대화</span></div>
       <div class="roadmap-content">
-        <div class="roadmap-content-title">데이터가 베스트 커플을 발표한다</div>
-        <div class="roadmap-content-body">greedy 알고리즘으로 최적 쌍 매칭 결과를 공개한다. MVP·사랑의 작대기·익명 채팅으로 자유 대화 시간을 풍성하게 만든다.</div>
+        <div class="roadmap-content-title">데이터가 발표하고, 플랫폼이 대화를 이어간다</div>
+        <div class="roadmap-content-body">greedy 알고리즘으로 최적 쌍 궁합 결과를 공개한다. 이후 자유 대화 시간에는 대화가 침체되거나 특정 2인에게 쏠릴 때 플랫폼이 자동으로 개입한다. I성향 그룹도 끝까지 활기찬 분위기를 유지하도록 설계됐다.</div>
         <div class="roadmap-tags">
-          <span class="roadmap-tag">베스트 매칭</span>
-          <span class="roadmap-tag">MVP 투표</span>
-          <span class="roadmap-tag">익명 채팅</span>
+          <span class="roadmap-tag">⑥ 궁합 결과 공개</span>
+          <span class="roadmap-tag">⑦ 자리 셔플 넛지</span>
+          <span class="roadmap-tag">⑧ 공통 질문 카드</span>
+          <span class="roadmap-tag planned">⑦⑧ 개발 예정</span>
         </div>
       </div>
     </div>
+
     <div class="roadmap-item">
-      <div class="roadmap-phase">모임 후<span>AI 결과 카드</span></div>
+      <div class="roadmap-phase">22:30<span>마무리 인사</span></div>
       <div class="roadmap-content">
-        <div class="roadmap-content-title">공유하고 싶어지는 콘텐츠</div>
-        <div class="roadmap-content-body">투표 데이터 기반으로 AI가 나의 연애 유형을 분석한 카드를 만든다. 인스타 스토리에 공유하면 ntable이 자연스럽게 홍보된다.</div>
+        <div class="roadmap-content-title">오늘의 주인공을 데이터로 뽑는다</div>
+        <div class="roadmap-content-body">MVP 투표로 오늘 가장 분위기를 이끈 사람을 전체 공개한다. 사랑의 작대기는 비밀 투표로 진행하며 쌍방 매칭이 발생할 때만 당사자에게 공개된다. 모임이 끝난 뒤 AI가 나의 연애 유형 분석 카드를 생성해 인스타 스토리 공유로 이어진다.</div>
         <div class="roadmap-tags">
-          <span class="roadmap-tag">AI 연애 유형 분석</span>
-          <span class="roadmap-tag">스토리 공유</span>
+          <span class="roadmap-tag">⑨ MVP 투표</span>
+          <span class="roadmap-tag">⑩ 사랑의 작대기</span>
+          <span class="roadmap-tag">AI 연애 유형 카드</span>
           <span class="roadmap-tag">바이럴 설계</span>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -561,7 +583,7 @@
       <div class="solution-step">
         <div class="step-num">글로벌</div>
         <div class="step-title">해외 확장</div>
-        <div class="step-body">일본 시장 진출 예정 · 언어 설정만 변경<br><span style="color:rgba(201,168,76,0.55);font-size:12px;">Phase 4</span></div>
+        <div class="step-body">해외 시장 진출 예정 · 언어 설정만 변경<br><span style="color:rgba(201,168,76,0.55);font-size:12px;">Phase 4</span></div>
       </div>
     </div>
   </div>
@@ -625,7 +647,7 @@
       </div>
       <div class="roadmap-content">
         <div class="roadmap-content-title">AI 매칭 고도화 + 글로벌</div>
-        <div class="roadmap-content-body">투표·매칭 이력 기반 AI 추천. 강남·광화문·여의도 확장. 일본 시장 진출. ntable for Teams 독립 런칭.</div>
+        <div class="roadmap-content-body">투표·매칭 이력 기반 AI 추천. 강남·광화문·여의도 확장. 해외 시장 진출. ntable for Teams 독립 런칭.</div>
         <div class="roadmap-tags">
           <span class="roadmap-tag">호스트 200명</span>
           <span class="roadmap-tag">게스트 DB 20,000명</span>
@@ -655,7 +677,7 @@
     <div class="footer-logo">ntable</div>
     <div class="footer-info">
       MLPC Inc. (More Life, People Connect Inc.) · 사업자등록번호 286-87-02414<br>
-      <a href="https://ns.ntable.kr">ns.ntable.kr</a> ·
+      <a href="https://demo.ntable.kr">demo.ntable.kr</a> ·
       <a href="https://ntable.kr">ntable.kr</a> ·
       <a href="/privacy.html">개인정보처리방침</a> ·
       <a href="/terms.html">이용약관</a><br>
