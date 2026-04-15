@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>개인정보처리방침 — ntable</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Serif+KR:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0f1e;
+    --navy-mid: #111827;
+    --navy-light: #1a2540;
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --white: #f5f2ec;
+    --white-dim: rgba(245,242,236,0.65);
+    --white-faint: rgba(245,242,236,0.1);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Noto Serif KR', serif;
+    font-weight: 300;
+    line-height: 1.9;
+  }
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:1000; opacity:0.4;
+  }
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:24px 60px;
+    display:flex; justify-content:space-between; align-items:center;
+    background:rgba(10,15,30,0.97);
+    border-bottom:1px solid var(--white-faint);
+    backdrop-filter:blur(12px);
+  }
+  .nav-logo {
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px; font-weight:300;
+    letter-spacing:0.3em; color:var(--gold);
+    text-decoration:none; text-transform:uppercase;
+  }
+  .nav-back {
+    font-size:12px; letter-spacing:0.15em;
+    color:var(--white-dim); text-decoration:none;
+    font-family:'DM Sans',sans-serif; font-weight:300;
+    transition:color 0.3s;
+  }
+  .nav-back:hover { color:var(--gold); }
+  .container {
+    max-width:780px; margin:0 auto;
+    padding:140px 40px 100px;
+  }
+  .page-tag {
+    font-family:'DM Sans',sans-serif;
+    font-size:10px; letter-spacing:0.4em;
+    color:var(--gold); text-transform:uppercase;
+    margin-bottom:20px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .page-tag::before {
+    content:''; width:24px; height:1px; background:var(--gold);
+  }
+  h1 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:clamp(36px,5vw,56px);
+    font-weight:300; line-height:1.15;
+    margin-bottom:12px;
+  }
+  .effective-date {
+    font-family:'DM Sans',sans-serif;
+    font-size:12px; letter-spacing:0.1em;
+    color:var(--white-dim); margin-bottom:60px;
+  }
+  .toc {
+    background:var(--navy-light);
+    border:1px solid var(--white-faint);
+    border-left:3px solid var(--gold);
+    padding:32px 36px;
+    border-radius:4px;
+    margin-bottom:60px;
+  }
+  .toc-title {
+    font-family:'DM Sans',sans-serif;
+    font-size:11px; letter-spacing:0.25em;
+    color:var(--gold); text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .toc ol {
+    list-style:decimal; padding-left:20px;
+  }
+  .toc li { margin-bottom:8px; }
+  .toc a {
+    color:var(--white-dim); text-decoration:none;
+    font-size:14px; font-family:'DM Sans',sans-serif;
+    font-weight:300; transition:color 0.3s;
+  }
+  .toc a:hover { color:var(--gold); }
+  .section {
+    margin-bottom:56px;
+    padding-bottom:56px;
+    border-bottom:1px solid var(--white-faint);
+  }
+  .section:last-child { border-bottom:none; }
+  h2 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:24px; font-weight:400;
+    color:var(--gold-light); margin-bottom:20px;
+    display:flex; align-items:center; gap:16px;
+  }
+  h2::before {
+    content:attr(data-num);
+    font-size:12px; font-family:'DM Sans',sans-serif;
+    font-weight:300; color:var(--gold);
+    border:1px solid rgba(201,168,76,0.3);
+    padding:2px 8px; border-radius:2px;
+    letter-spacing:0.1em;
+  }
+  p { font-size:15px; color:var(--white-dim); margin-bottom:16px; }
+  ul, ol { padding-left:24px; margin-bottom:16px; }
+  li { font-size:15px; color:var(--white-dim); margin-bottom:8px; }
+  .highlight-box {
+    background:var(--navy-light);
+    border:1px solid var(--white-faint);
+    padding:24px 28px; border-radius:4px;
+    margin:24px 0;
+  }
+  .highlight-box p { margin-bottom:0; }
+  table {
+    width:100%; border-collapse:collapse;
+    margin:24px 0; font-size:14px;
+  }
+  th {
+    background:var(--navy-light);
+    color:var(--gold); font-family:'DM Sans',sans-serif;
+    font-weight:400; font-size:11px;
+    letter-spacing:0.15em; text-transform:uppercase;
+    padding:14px 16px; text-align:left;
+    border-bottom:1px solid rgba(201,168,76,0.2);
+  }
+  td {
+    padding:14px 16px; color:var(--white-dim);
+    border-bottom:1px solid var(--white-faint);
+    vertical-align:top; font-family:'DM Sans',sans-serif;
+    font-weight:300;
+  }
+  tr:last-child td { border-bottom:none; }
+  footer {
+    border-top:1px solid var(--white-faint);
+    padding:40px 60px;
+    display:flex; justify-content:space-between;
+    align-items:center; flex-wrap:wrap; gap:16px;
+  }
+  .footer-logo {
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px; font-weight:300;
+    letter-spacing:0.3em; color:var(--gold);
+  }
+  .footer-links {
+    display:flex; gap:24px;
+  }
+  .footer-links a {
+    font-size:12px; color:var(--white-dim);
+    text-decoration:none; font-family:'DM Sans',sans-serif;
+    font-weight:300; letter-spacing:0.1em;
+    transition:color 0.3s;
+  }
+  .footer-links a:hover { color:var(--gold); }
+  @media(max-width:768px) {
+    nav { padding:20px 24px; }
+    .container { padding:120px 24px 80px; }
+    footer { padding:32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">ntable</a>
+  <a href="/" class="nav-back">← 홈으로</a>
+</nav>
+
+<div class="container">
+  <div class="page-tag">Legal</div>
+  <h1>개인정보처리방침</h1>
+  <p class="effective-date">시행일: 2026년 4월 12일 &nbsp;|&nbsp; 주식회사 엠엘피씨</p>
+
+  <div class="toc">
+    <div class="toc-title">목차</div>
+    <ol>
+      <li><a href="#s1">수집하는 개인정보 항목</a></li>
+      <li><a href="#s2">개인정보 수집 및 이용 목적</a></li>
+      <li><a href="#s3">개인정보 보유 및 이용 기간</a></li>
+      <li><a href="#s4">개인정보 제3자 제공</a></li>
+      <li><a href="#s5">개인정보처리 위탁</a></li>
+      <li><a href="#s6">정보주체의 권리·의무 및 행사 방법</a></li>
+      <li><a href="#s7">개인정보 파기 절차 및 방법</a></li>
+      <li><a href="#s8">개인정보 보호책임자</a></li>
+      <li><a href="#s9">고지의 의무</a></li>
+    </ol>
+  </div>
+
+  <div class="section" id="s1">
+    <h2 data-num="01">수집하는 개인정보 항목</h2>
+    <p>MLPC Inc.(이하 "회사")는 남산엔테이블(ntable) 서비스 제공을 위해 아래와 같이 개인정보를 수집합니다.</p>
+    <table>
+      <tr>
+        <th>구분</th>
+        <th>항목</th>
+        <th>수집 방법</th>
+      </tr>
+      <tr>
+        <td>필수</td>
+        <td>Google 계정 이메일, Google 고유 식별자(sub), 이름</td>
+        <td>Google OAuth 2.0 로그인</td>
+      </tr>
+      <tr>
+        <td>필수 (프로필)</td>
+        <td>닉네임, 성별, 출생연도, 지역, 업종, MBTI, 관심사, 혼인여부</td>
+        <td>서비스 내 직접 입력</td>
+      </tr>
+      <tr>
+        <td>선택</td>
+        <td>프로필 사진, 인스타그램 계정, 실명, 직장, 학교</td>
+        <td>서비스 내 직접 입력</td>
+      </tr>
+      <tr>
+        <td>자동 수집</td>
+        <td>모임 참석 이력, 투표 데이터, 방문 횟수, 접속 일시</td>
+        <td>서비스 이용 과정</td>
+      </tr>
+    </table>
+    <div class="highlight-box">
+      <p>실명, 직장, 학교 정보는 외부에 공개되지 않으며 서비스 내부 운영 목적으로만 사용됩니다.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s2">
+    <h2 data-num="02">개인정보 수집 및 이용 목적</h2>
+    <ul>
+      <li>회원 식별 및 서비스 로그인 처리</li>
+      <li>소셜 미팅 모임 참가자 매칭 및 프로필 제공</li>
+      <li>연애 성향 탐구 투표 결과 집계 및 궁합 분석</li>
+      <li>모임 참석 이력 관리 및 재방문자 구분</li>
+      <li>호스트 자격 요건 확인 (모임 3회 참석 기준)</li>
+      <li>서비스 개선 및 통계 분석 (익명 처리 후 활용)</li>
+      <li>고지사항 전달 및 불만 처리</li>
+    </ul>
+  </div>
+
+  <div class="section" id="s3">
+    <h2 data-num="03">개인정보 보유 및 이용 기간</h2>
+    <p>회사는 원칙적으로 개인정보 수집 및 이용 목적이 달성되면 해당 정보를 지체 없이 파기합니다.</p>
+    <table>
+      <tr>
+        <th>항목</th>
+        <th>보유 기간</th>
+        <th>근거</th>
+      </tr>
+      <tr>
+        <td>회원 정보</td>
+        <td>회원 탈퇴 시까지</td>
+        <td>서비스 제공</td>
+      </tr>
+      <tr>
+        <td>모임 참석 이력</td>
+        <td>회원 탈퇴 후 1년</td>
+        <td>분쟁 해결</td>
+      </tr>
+      <tr>
+        <td>결제 기록 (향후)</td>
+        <td>5년</td>
+        <td>전자상거래법</td>
+      </tr>
+      <tr>
+        <td>접속 로그</td>
+        <td>3개월</td>
+        <td>통신비밀보호법</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section" id="s4">
+    <h2 data-num="04">개인정보 제3자 제공</h2>
+    <p>회사는 원칙적으로 이용자의 개인정보를 외부에 제공하지 않습니다. 다만, 아래의 경우는 예외입니다.</p>
+    <ul>
+      <li>이용자가 사전에 동의한 경우</li>
+      <li>법령의 규정에 의하거나 수사 기관의 요청이 있는 경우</li>
+    </ul>
+    <div class="highlight-box">
+      <p>모임 종료 시 참가자의 닉네임, 성별, 인스타그램 계정은 운영자의 Discord 채널에 전송됩니다. 이는 서비스 운영 목적이며, 본 방침에 동의함으로써 이에 동의한 것으로 간주합니다.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s5">
+    <h2 data-num="05">개인정보처리 위탁</h2>
+    <table>
+      <tr>
+        <th>수탁업체</th>
+        <th>위탁 업무</th>
+      </tr>
+      <tr>
+        <td>Google LLC</td>
+        <td>OAuth 2.0 인증 서비스</td>
+      </tr>
+      <tr>
+        <td>Cloudflare Inc.</td>
+        <td>서버 터널링 및 CDN</td>
+      </tr>
+      <tr>
+        <td>토스페이먼츠 (예정)</td>
+        <td>결제 처리</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section" id="s6">
+    <h2 data-num="06">정보주체의 권리·의무 및 행사 방법</h2>
+    <p>이용자는 언제든지 다음의 권리를 행사할 수 있습니다.</p>
+    <ul>
+      <li>개인정보 열람 요청</li>
+      <li>오류 등이 있을 경우 정정 요청</li>
+      <li>삭제 요청 (단, 법령에 의해 보존 의무가 있는 경우 제외)</li>
+      <li>처리 정지 요청</li>
+    </ul>
+    <p>권리 행사는 아래 개인정보 보호책임자에게 이메일로 요청하시면 지체 없이 조치하겠습니다.</p>
+  </div>
+
+  <div class="section" id="s7">
+    <h2 data-num="07">개인정보 파기 절차 및 방법</h2>
+    <p>회원 탈퇴 또는 보유 기간 종료 시 아래 방법으로 파기합니다.</p>
+    <ul>
+      <li><strong style="color:var(--white);">전자적 파일:</strong> 복구 불가능한 방법으로 영구 삭제</li>
+      <li><strong style="color:var(--white);">출력물:</strong> 해당 없음 (디지털 전용 서비스)</li>
+    </ul>
+  </div>
+
+  <div class="section" id="s8">
+    <h2 data-num="08">개인정보 보호책임자</h2>
+    <div class="highlight-box">
+      <p><strong style="color:var(--white);">회사명:</strong> MLPC Inc.</p>
+      <p><strong style="color:var(--white);">서비스명:</strong> 남산엔테이블 (ntable)</p>
+      <p><strong style="color:var(--white);">이메일:</strong> <a href="mailto:contact@ntable.kr" style="color:var(--gold-light);">contact@ntable.kr</a></p>
+      <p style="margin-bottom:0;"><strong style="color:var(--white);">운영 URL:</strong> https://ntable.kr</p>
+    </div>
+    <p>개인정보 관련 문의, 불만, 피해 구제 등에 관한 사항은 위 이메일로 연락 주시기 바랍니다.</p>
+  </div>
+
+  <div class="section" id="s9">
+    <h2 data-num="09">고지의 의무</h2>
+    <p>현 개인정보처리방침의 내용 추가, 삭제 및 수정이 있을 경우 시행일 최소 7일 전에 서비스 내 공지사항을 통해 고지할 것입니다. 다만 개인정보의 수집 및 활용, 제3자 제공 등과 같이 이용자 권리의 중요한 변경이 있을 경우에는 최소 30일 전에 고지합니다.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-lo
