@@ -82,6 +82,34 @@
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--gold-border);
     }
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center;
+      gap: 5px; cursor: pointer; padding: 6px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--gold); border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background: rgba(10,15,30,0.98); border-top: 1px solid var(--gold-border);
+      padding: 16px 24px 24px;
+    }
+    .mobile-menu a {
+      font-size: 15px; color: var(--white-dim); padding: 10px 0;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+      transition: color var(--transition);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--gold); }
+    @media (max-width: 960px) {
+      .hamburger { display: flex; }
+      .mobile-menu.open { display: flex; }
+    }
     .nav-inner {
       max-width: 1100px; margin: 0 auto; padding: 0 32px;
       height: 62px; display: flex; align-items: center; justify-content: space-between;
@@ -322,7 +350,19 @@
     <div class="nav-actions">
       <a href="https://demo.ntable.kr" class="nav-cta-primary">모임 참여</a>
       <a href="#contact-wrap" class="nav-cta">문의</a>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="메뉴">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#problem" onclick="toggleMenu()">문제</a>
+    <a href="#solution" onclick="toggleMenu()">솔루션</a>
+    <a href="#how" onclick="toggleMenu()">진행 방식</a>
+    <a href="#model" onclick="toggleMenu()">비즈니스 모델</a>
+    <a href="#expansion" onclick="toggleMenu()">확장</a>
+    <a href="#roadmap" onclick="toggleMenu()">로드맵</a>
+    <a href="#contact-wrap" onclick="toggleMenu()">문의</a>
   </div>
 </nav>
 
@@ -334,7 +374,7 @@
     <div class="hero-grid"></div>
   </div>
   <div class="hero-content">
-    <p class="hero-eyebrow">MLPC Inc. — More Life, People Connect</p>
+    <p class="hero-eyebrow">소셜 모임 퍼실리테이터(FT) 플랫폼 — ntable by MLPC Inc.</p>
     <h1 class="hero-title">누가 열어도<br><em>재밌는 모임</em></h1>
     <p class="hero-subtitle">
       모임장 역량에 관계없이, 플랫폼이 퍼실리테이터가 된다.<br>
@@ -359,8 +399,8 @@
       <div class="stat-label">소수 정예 모임</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">I형</div>
-      <div class="stat-label">도 어색하지 않은<br>구조화된 진행</div>
+      <div class="stat-number">I·E</div>
+      <div class="stat-label">성향 모두 어색하지 않은<br>구조화된 진행</div>
     </div>
     <div class="stat-item">
       <div class="stat-number">0원</div>
@@ -378,6 +418,7 @@
     소셜 모임의 퀄리티는 모임장 역량에 달려있다.
     잘 진행하는 사람이 열면 재밌고, 그렇지 않으면 어색하다.
     이 들쭉날쭉한 퀄리티가 소셜 모임 시장의 가장 큰 문제다.
+    ntable은 이 문제를 사람이 아닌 구조로 해결한다.
   </p>
   <div class="problem-cards reveal">
     <div class="problem-card">
@@ -492,7 +533,7 @@
           <span class="roadmap-tag">⑥ 베스트 매칭 공개</span>
           <span class="roadmap-tag">⑦ 자리 셔플 넛지</span>
           <span class="roadmap-tag">⑧ 공통 질문 카드</span>
-          <span class="roadmap-tag planned">⑦⑧ 개발 예정</span>
+          <span class="roadmap-tag planned">⑦⑧ 출시 예정</span>
         </div>
       </div>
     </div>
@@ -519,7 +560,7 @@
 <section id="model">
   <div class="section-tag reveal">Business Model</div>
   <h2 class="section-title reveal">게스트는 무료.<br><em>호스트가 쓴 만큼 낸다.</em></h2>
-  <p class="section-body reveal">구독제 없이 단순하다. 게스트 4명 이하는 무료. 초과 인원당 10,000원. 문토 대비 동일 조건에서 수수료가 더 낮다.</p>
+  <p class="section-body reveal">구독제 없이 단순하다. 참가자 4명까지는 무료. 초과 인원당 10,000원. 문토 대비 동일 조건에서 수수료가 더 낮다.</p>
   <div class="model-grid reveal">
     <div class="model-card">
       <div class="model-eyebrow">Guest</div>
@@ -529,7 +570,7 @@
     <div class="model-card">
       <div class="model-eyebrow">Host · 종량제</div>
       <div class="model-title">쓴 만큼만</div>
-      <div class="model-body">게스트로 3회 참석 시 호스트 자격 자동 획득. 게스트 4명 이하는 무료. 초과 인원당 × 10,000원.</div>
+      <div class="model-body">게스트로 3회 참석 시 호스트 자격 자동 획득. 참가자 4명까지는 무료. 초과 인원당 × 10,000원.</div>
       <div class="model-plans">
         <div class="model-plan-row">
           <span class="model-plan-name">4명 이하</span>
@@ -549,7 +590,7 @@
         </div>
         <hr class="model-divider" />
         <div class="model-plan-row compare">
-          <span class="model-plan-name">문토 동일 조건 수수료</span>
+          <span class="model-plan-name">문토 동일 조건 수수료 <span style="font-size:11px;opacity:0.6;">(참가비 4만원 × 8명 × 20%)</span></span>
           <span class="model-plan-price">64,000원</span>
         </div>
       </div>
@@ -697,6 +738,13 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const btn  = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
 </script>
 </body>
 </html>
