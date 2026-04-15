@@ -16,8 +16,6 @@ static/
 *.env
 .env.*
 *.bat
-*.yml
-*.yaml
 
 # ── 서비스 페이지 (랜딩 외) ──
 guest.html
@@ -36,8 +34,16 @@ __pycache__/
 venv/
 .venv/
 
+# ── 기획/전략 문서 ──
+PLAN.md
+STRATEGY.md
+STATUS.md
+cleanup_db.py
+
+# ── 서비스 페이지 (랜딩 외) ──
+result.html
+
 # ── 기타 ──
 *.log
 .DS_Store
 Thumbs.db
-STATUS.md
