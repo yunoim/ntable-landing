@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="orb1" cx="18%" cy="22%" r="50%">
+      <stop offset="0%" stop-color="#d4a843" stop-opacity="0.22"/>
+      <stop offset="55%" stop-color="#d4a843" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb2" cx="85%" cy="82%" r="45%">
+      <stop offset="0%" stop-color="#5064b4" stop-opacity="0.18"/>
+      <stop offset="60%" stop-color="#5064b4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shimmer" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f0ca60"/>
+      <stop offset="50%" stop-color="#d4a843"/>
+      <stop offset="100%" stop-color="#f0ca60"/>
+    </linearGradient>
+    <pattern id="grid" x="0" y="0" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M 64 0 L 0 0 0 64" fill="none" stroke="#d4a843" stroke-opacity="0.04"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0f1e"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#orb1)"/>
+  <rect width="1200" height="630" fill="url(#orb2)"/>
+  <g font-family="'DM Sans', sans-serif">
+    <text x="96" y="128" font-size="17" font-weight="500" letter-spacing="4" fill="#f0ca60">SOCIAL GATHERING FACILITATOR</text>
+  </g>
+  <g font-family="'Cormorant Garamond', 'Noto Serif KR', serif" font-weight="700">
+    <text x="96" y="270" font-size="104" fill="#f5f2ec">누가 열어도</text>
+    <text x="96" y="390" font-size="104" font-style="italic" fill="url(#shimmer)">재밌는 모임</text>
+  </g>
+  <g font-family="'DM Sans', 'Noto Sans KR', sans-serif">
+    <text x="96" y="475" font-size="26" fill="#f5f2ec" opacity="0.85">모임장 역량에 관계없이, 플랫폼이 진행을 도와준다.</text>
+    <text x="96" y="510" font-size="22" fill="#f5f2ec" opacity="0.6">누구나 호스트가 되는 소셜 모임 플랫폼.</text>
+  </g>
+  <line x1="96" y1="555" x2="1104" y2="555" stroke="#d4a843" stroke-opacity="0.3"/>
+  <g>
+    <text x="96" y="597" font-family="'Cormorant Garamond', serif" font-size="34" font-weight="600" fill="#d4a843" letter-spacing="6">ntable</text>
+    <text x="230" y="597" font-family="'DM Sans', sans-serif" font-size="16" fill="#d4a843" opacity="0.55">· ntable.kr · by MLPC Inc.</text>
+  </g>
+</svg>
