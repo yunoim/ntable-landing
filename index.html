@@ -138,7 +138,7 @@
     }
     .mobile-menu a {
       font-size: 15px; color: var(--white-dim); padding: 10px 0;
-      border-bottom: 1px solid rgba(201,168,76,0.08);
+      border-bottom: 1px solid rgba(212,168,67,0.08);
       transition: color var(--transition);
     }
     .mobile-menu a:last-child { border-bottom: none; }
@@ -180,7 +180,7 @@
     .orb { position: absolute; border-radius: 50%; filter: blur(90px); }
     .orb-1 {
       width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(201,168,76,0.1), transparent 70%);
+      background: radial-gradient(circle, rgba(212,168,67,0.1), transparent 70%);
       top: -80px; right: -80px;
       animation: floatOrb 14s ease-in-out infinite;
     }
@@ -193,8 +193,8 @@
     .hero-grid {
       position: absolute; inset: 0;
       background-image:
-        linear-gradient(rgba(201,168,76,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(201,168,76,0.035) 1px, transparent 1px);
+        linear-gradient(rgba(212,168,67,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,168,67,0.035) 1px, transparent 1px);
       background-size: 64px 64px;
       mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black, transparent);
     }
@@ -270,7 +270,7 @@
       border-radius: var(--radius-lg); padding: 30px 28px;
       transition: border-color var(--transition), transform var(--transition);
     }
-    .problem-card:hover { border-color: rgba(201,168,76,0.45); transform: translateY(-3px); }
+    .problem-card:hover { border-color: rgba(212,168,67,0.45); transform: translateY(-3px); }
     .problem-card-icon { font-size: 26px; margin-bottom: 14px; }
     .problem-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
     .problem-card p { font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.8; }
@@ -290,14 +290,14 @@
       opacity: 0; transition: opacity var(--transition);
     }
     .solution-step:hover::after { opacity: 1; }
-    .solution-step:hover { background: var(--navy-mid); border-color: rgba(201,168,76,0.38); }
+    .solution-step:hover { background: var(--navy-mid); border-color: rgba(212,168,67,0.38); }
     .step-num { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 12px; }
     .step-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--white); margin-bottom: 10px; line-height: 1.3; }
     .step-body { font-size: 13px; font-weight: 300; color: var(--text-muted); line-height: 1.78; }
 
     /* ROADMAP LIST (HOW IT WORKS) */
     .roadmap-list { display: flex; flex-direction: column; }
-    .roadmap-item { display: grid; grid-template-columns: 150px 1fr; gap: 36px; padding: 36px 0; border-bottom: 1px solid rgba(201,168,76,0.09); align-items: start; }
+    .roadmap-item { display: grid; grid-template-columns: 150px 1fr; gap: 36px; padding: 36px 0; border-bottom: 1px solid rgba(212,168,67,0.09); align-items: start; }
     .roadmap-item:last-child { border-bottom: none; }
     .roadmap-phase { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--gold); display: flex; flex-direction: column; gap: 4px; padding-top: 2px; }
     .roadmap-phase span { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 400; }
@@ -305,17 +305,17 @@
     .roadmap-content-body { font-size: 14px; font-weight: 300; color: var(--white-dim); line-height: 1.85; margin-bottom: 16px; }
     .roadmap-tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .roadmap-tag { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.05em; padding: 4px 12px; border: 1px solid var(--gold-border); border-radius: 40px; color: var(--gold); background: var(--gold-dim); }
-    .roadmap-tag.planned { border-color: rgba(201,168,76,0.12); color: var(--text-muted); background: transparent; font-style: italic; }
+    .roadmap-tag.planned { border-color: rgba(212,168,67,0.12); color: var(--text-muted); background: transparent; font-style: italic; }
 
     /* BUSINESS MODEL */
     .model-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 56px; }
     .model-card { background: var(--navy-light); border: 1px solid var(--gold-border); border-radius: var(--radius-lg); padding: 38px 36px; transition: border-color var(--transition); }
-    .model-card:hover { border-color: rgba(201,168,76,0.45); }
+    .model-card:hover { border-color: rgba(212,168,67,0.45); }
     .model-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 14px; }
     .model-title { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
     .model-body { font-size: 14px; font-weight: 300; color: var(--white-dim); line-height: 1.85; margin-bottom: 28px; }
     .model-plans { border-top: 1px solid var(--gold-border); padding-top: 22px; }
-    .model-plan-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(201,168,76,0.06); font-size: 13px; }
+    .model-plan-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(212,168,67,0.06); font-size: 13px; }
     .model-plan-row:last-child { border-bottom: none; }
     .model-plan-name { color: var(--white-dim); font-weight: 300; }
     .model-plan-price { font-family: 'DM Sans', sans-serif; color: var(--gold); font-weight: 500; }
@@ -327,7 +327,7 @@
 
     /* ROADMAP PHASES */
     .phase-list { display: flex; flex-direction: column; margin-top: 56px; }
-    .phase-item { display: grid; grid-template-columns: 150px 1fr; gap: 36px; padding: 36px 0; border-bottom: 1px solid rgba(201,168,76,0.09); align-items: start; }
+    .phase-item { display: grid; grid-template-columns: 150px 1fr; gap: 36px; padding: 36px 0; border-bottom: 1px solid rgba(212,168,67,0.09); align-items: start; }
     .phase-item:last-child { border-bottom: none; }
     .phase-label { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; display: flex; flex-direction: column; gap: 6px; padding-top: 4px; }
     .phase-label strong { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--gold); text-transform: none; letter-spacing: 0; }
@@ -398,7 +398,7 @@
       padding: 22px 20px;
       box-shadow:
         0 40px 80px rgba(0,0,0,0.55),
-        0 0 0 1px rgba(201,168,76,0.06),
+        0 0 0 1px rgba(212,168,67,0.06),
         inset 0 1px 0 rgba(255,255,255,0.04);
       transform: rotateY(-6deg) rotateX(3deg);
       transition: transform 0.6s ease;
@@ -412,7 +412,7 @@
     }
     .mockup-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding-bottom: 14px; border-bottom: 1px solid rgba(201,168,76,0.1);
+      padding-bottom: 14px; border-bottom: 1px solid rgba(212,168,67,0.1);
       margin-bottom: 16px;
     }
     .mockup-code {
@@ -433,7 +433,7 @@
 
     .mockup-body {
       display: grid; grid-template-columns: 110px 1fr; gap: 16px;
-      padding-bottom: 14px; border-bottom: 1px solid rgba(201,168,76,0.08);
+      padding-bottom: 14px; border-bottom: 1px solid rgba(212,168,67,0.08);
       margin-bottom: 14px;
     }
     .mockup-qr {
@@ -445,7 +445,7 @@
     .mockup-chip {
       display: flex; align-items: center; gap: 8px;
       padding: 5px 9px; background: rgba(10,15,30,0.5);
-      border: 1px solid rgba(201,168,76,0.2); border-radius: 20px;
+      border: 1px solid rgba(212,168,67,0.2); border-radius: 20px;
       font-size: 11px; color: var(--white-dim);
     }
     .mockup-chip-avatar {
@@ -470,7 +470,7 @@
     .mockup-bar {
       position: relative; height: 30px;
       background: rgba(10,15,30,0.55); border-radius: 8px;
-      border: 1px solid rgba(201,168,76,0.08);
+      border: 1px solid rgba(212,168,67,0.08);
       display: flex; align-items: center; padding: 0 12px; overflow: hidden;
     }
     .mockup-bar-fill {
@@ -554,7 +554,7 @@
     .problem-example {
       margin-top: 14px;
       padding-top: 12px;
-      border-top: 1px dashed rgba(201,168,76,0.15);
+      border-top: 1px dashed rgba(212,168,67,0.15);
       font-size: 12px;
       font-style: italic;
       color: var(--gold-light);
@@ -614,8 +614,8 @@
       text-align: center;
       font-size: 12px;
       color: var(--white-dim);
-      border-bottom: 1px solid rgba(201,168,76,0.08);
-      border-right: 1px solid rgba(201,168,76,0.04);
+      border-bottom: 1px solid rgba(212,168,67,0.08);
+      border-right: 1px solid rgba(212,168,67,0.04);
     }
     .compare-table tr:last-child td { border-bottom: none; }
     .compare-table th {
@@ -816,8 +816,7 @@
         <p class="hero-eyebrow">Social Gathering Facilitator</p>
         <h1 class="hero-title">누가 열어도<br><em>재밌는 모임</em></h1>
         <p class="hero-subtitle">
-          모임장 역량에 관계없이, 플랫폼이 진행을 도와준다.<br>
-          누구나 호스트가 되어 모임을 여는 ntable.
+          모임장 역량 없이도, 플랫폼이 진행을 도와요.
         </p>
         <div class="hero-actions">
           <a href="https://demo.ntable.kr" class="btn-primary">모임 열기</a>
@@ -925,7 +924,7 @@
       </div>
       <div class="stat-item">
         <div class="stat-number">0원</div>
-        <div class="stat-label">게스트 이용료<br>호스트 4명까지 무료</div>
+        <div class="stat-label">지금은 전체 무료<br>인원 제한 없음</div>
       </div>
     </div>
   </div>
@@ -937,10 +936,7 @@
   <div class="section-tag reveal">Problem</div>
   <h2 class="section-title reveal">모임은 왜 어떤 날은<br><em>재밌고 어떤 날은 어색할까</em></h2>
   <p class="section-body reveal">
-    소셜 모임의 퀄리티는 모임장 역량에 달려있다.
-    잘 진행하는 사람이 열면 재밌고, 그렇지 않으면 어색하다.
-    이 들쭉날쭉한 퀄리티가 소셜 모임 시장의 가장 큰 문제다.
-    ntable은 이 문제를 사람이 아닌 구조로 해결한다.
+    소셜 모임 퀄리티는 모임장 역량에 따라 들쭉날쭉하다. ntable은 이 문제를 사람이 아닌 구조로 푼다.
   </p>
   <div class="problem-cards reveal">
     <div class="problem-card">
@@ -970,10 +966,7 @@
   <div class="section-tag reveal">Solution</div>
   <h2 class="section-title reveal">플랫폼이 <em>퍼실리테이터</em>가 된다</h2>
   <p class="section-body reveal">
-    ntable은 모임 진행 구조 자체를 플랫폼 안에 내재화했다.
-    호스트가 버튼 하나를 누르면 참가자 소개, 성향 탐구,
-    실시간 매칭, 베스트 매칭 발표까지 자동으로 진행된다.
-    누가 열어도 같은 퀄리티의 모임이 만들어진다.
+    진행 구조를 플랫폼에 내재화했다. 호스트는 '다음' 버튼만 누르면 소개·탐구·매칭·발표까지 자동으로 흘러간다.
   </p>
   <div class="solution-wrap reveal">
     <div class="solution-steps">
@@ -1012,7 +1005,7 @@
 <section id="how">
   <div class="section-tag reveal">How It Works</div>
   <h2 class="section-title reveal">한 저녁, <em>10개의 장치</em></h2>
-  <p class="section-body reveal">ntable로 진행되는 한 번의 저녁(약 4시간)에는 10개의 경험 설계 장치가 순서대로 작동한다. 호스트는 각 단계에서 다음 버튼만 누르면 된다.</p>
+  <p class="section-body reveal">한 번의 저녁(약 4시간)에 10개의 경험 설계 장치가 순서대로 작동한다. 호스트는 '다음'만 누르면 된다.</p>
 
   <div class="roadmap-list reveal" style="margin-top:56px;">
 
@@ -1085,7 +1078,7 @@
   </div>
   <div class="section-cta reveal">
     <div>
-      <a href="https://demo.ntable.kr">QR로 4명만 모으면 시작됩니다 →</a>
+      <a href="https://demo.ntable.kr">QR 찍고 2명부터 바로 시작 →</a>
       <span class="section-cta-note">설치 없음 · 웹에서 바로 진행</span>
     </div>
   </div>
@@ -1095,8 +1088,8 @@
 <div class="divider"></div>
 <section id="model">
   <div class="section-tag reveal">Business Model</div>
-  <h2 class="section-title reveal">게스트는 무료.<br><em>호스트가 쓴 만큼 낸다.</em></h2>
-  <p class="section-body reveal">구독제 없이 단순하다. 참가자 4명까지는 무료. 초과 인원당 10,000원. 문토 대비 동일 조건에서 수수료가 더 낮다.</p>
+  <h2 class="section-title reveal">지금은 전체 무료.<br><em>앞으로도 단순하게.</em></h2>
+  <p class="section-body reveal">모든 기능을 제한 없이 무료로 이용할 수 있다. 아래 요금제는 <strong style="color:var(--gold-light)">향후 정식 전환 시점의 계획</strong>이며, 구독제 없이 호스트가 쓴 만큼 내는 구조를 지향한다.</p>
   <div class="model-grid reveal">
     <div class="model-card">
       <div class="model-eyebrow">Guest</div>
@@ -1104,9 +1097,9 @@
       <div class="model-body">게스트는 플랫폼 이용료가 없다. 참가비는 호스트가 자율 설정하며 플랫폼을 거치지 않는다.</div>
     </div>
     <div class="model-card">
-      <div class="model-eyebrow">Host · 종량제</div>
+      <div class="model-eyebrow">Host · 종량제 (예정)</div>
       <div class="model-title">쓴 만큼만</div>
-      <div class="model-body">게스트로 3회 참석 시 호스트 자격 자동 획득. 참가자 4명까지는 무료. 초과 인원당 × 10,000원.</div>
+      <div class="model-body">지금은 인원 제한 없이 전체 무료. 향후 도입 예정 요금제는 아래 표대로 — 게스트 3회 참석 시 호스트 자격 자동 획득, 4명까지 무료, 초과 인원당 × 10,000원.</div>
       <div class="model-plans">
         <div class="model-plan-row">
           <span class="model-plan-name">4명 이하</span>
@@ -1198,8 +1191,8 @@
 
   <div class="section-cta reveal">
     <div>
-      <a href="https://demo.ntable.kr">처음 4명까지 무료로 테스트 →</a>
-      <span class="section-cta-note">카드 등록 없음 · 결제는 5명 이상부터</span>
+      <a href="https://demo.ntable.kr">지금 무료로 바로 시작 →</a>
+      <span class="section-cta-note">카드 등록 없음 · 인원 제한 없음</span>
     </div>
   </div>
 </section>
@@ -1222,22 +1215,22 @@
       <div class="solution-step">
         <div class="step-num">B2C</div>
         <div class="step-title">소셜 모임 (현재)</div>
-        <div class="step-body">성향 탐구 밸런스게임으로 자연스러운 연결<br><span style="color:rgba(201,168,76,0.55);font-size:12px;">직영 쇼케이스 운영 중</span></div>
+        <div class="step-body">성향 탐구 밸런스게임으로 자연스러운 연결<br><span style="color:rgba(212,168,67,0.55);font-size:12px;">직영 쇼케이스 운영 중</span></div>
       </div>
       <div class="solution-step">
         <div class="step-num">B2B</div>
         <div class="step-title">팀빌딩</div>
-        <div class="step-body">업무 스타일 탐구 · 기업 팀빌딩·신입 오리엔테이션<br><span style="color:rgba(201,168,76,0.55);font-size:12px;">5~10만원/인</span></div>
+        <div class="step-body">업무 스타일 탐구 · 기업 팀빌딩·신입 오리엔테이션<br><span style="color:rgba(212,168,67,0.55);font-size:12px;">5~10만원/인</span></div>
       </div>
       <div class="solution-step">
         <div class="step-num">커뮤니티</div>
         <div class="step-title">멤버십 트레이닝</div>
-        <div class="step-body">가치관·역할 탐구 · 동호회·스터디 그룹<br><span style="color:rgba(201,168,76,0.55);font-size:12px;">3~5만원/인</span></div>
+        <div class="step-body">가치관·역할 탐구 · 동호회·스터디 그룹<br><span style="color:rgba(212,168,67,0.55);font-size:12px;">3~5만원/인</span></div>
       </div>
       <div class="solution-step">
         <div class="step-num">글로벌</div>
         <div class="step-title">해외 확장</div>
-        <div class="step-body">해외 시장 진출 예정 · 언어 설정만 변경<br><span style="color:rgba(201,168,76,0.55);font-size:12px;">Phase 4</span></div>
+        <div class="step-body">해외 시장 진출 예정 · 언어 설정만 변경<br><span style="color:rgba(212,168,67,0.55);font-size:12px;">Phase 4</span></div>
       </div>
     </div>
   </div>
@@ -1249,22 +1242,22 @@
       <div class="solution-step">
         <div class="step-num">P1</div>
         <div class="step-title">아이스브레이킹 게임</div>
-        <div class="step-body">어색함을 5분 안에 해소하는 워밍업 게임 모음<br><span style="color:rgba(201,168,76,0.55);font-size:12px;">출시 예정</span></div>
+        <div class="step-body">어색함을 5분 안에 해소하는 워밍업 게임 모음<br><span style="color:rgba(212,168,67,0.55);font-size:12px;">출시 예정</span></div>
       </div>
       <div class="solution-step">
         <div class="step-num">P1</div>
         <div class="step-title">팀 랜덤 배정</div>
-        <div class="step-body">참가자 성향·조건을 섞어 균형 있는 팀을 자동 편성<br><span style="color:rgba(201,168,76,0.55);font-size:12px;">출시 예정</span></div>
+        <div class="step-body">참가자 성향·조건을 섞어 균형 있는 팀을 자동 편성<br><span style="color:rgba(212,168,67,0.55);font-size:12px;">출시 예정</span></div>
       </div>
       <div class="solution-step">
         <div class="step-num">P2</div>
         <div class="step-title">퀴즈 · OX 게임</div>
-        <div class="step-body">실시간 정답 집계와 순위 · 학습·팀빌딩 범용<br><span style="color:rgba(201,168,76,0.55);font-size:12px;">출시 예정</span></div>
+        <div class="step-body">실시간 정답 집계와 순위 · 학습·팀빌딩 범용<br><span style="color:rgba(212,168,67,0.55);font-size:12px;">출시 예정</span></div>
       </div>
       <div class="solution-step">
         <div class="step-num">P3</div>
         <div class="step-title">마피아 게임</div>
-        <div class="step-body">플랫폼이 진행자를 대신하는 본격 역할극 게임<br><span style="color:rgba(201,168,76,0.55);font-size:12px;">장기 로드맵</span></div>
+        <div class="step-body">플랫폼이 진행자를 대신하는 본격 역할극 게임<br><span style="color:rgba(212,168,67,0.55);font-size:12px;">장기 로드맵</span></div>
       </div>
     </div>
   </div>
@@ -1345,25 +1338,9 @@
   <div class="contact-inner reveal">
     <h2 class="contact-title">함께 만들어갈<br><em>다음 챕터</em></h2>
     <p class="contact-body">
-      목적에 맞는 채널로 연락 주세요. 빠르게 답신드리겠습니다.
+      투자·파트너십·호스트 입점 — 어떤 이야기든 환영합니다.<br>
+      모든 문의는 아래 메일로 직접 답신드려요.
     </p>
-    <div class="contact-cards">
-      <a href="mailto:contact@ntable.kr?subject=%5B%ED%88%AC%EC%9E%90%EB%AC%B8%EC%9D%98%5D%20" class="contact-card">
-        <div class="contact-card-eyebrow">Investors</div>
-        <div class="contact-card-title">투자 문의</div>
-        <div class="contact-card-body">Seed 라운드 준비 중. 현재 KPI·로드맵·Data Room 공유 가능.</div>
-      </a>
-      <a href="mailto:contact@ntable.kr?subject=%5B%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8B%AD%5D%20" class="contact-card">
-        <div class="contact-card-eyebrow">Partnership</div>
-        <div class="contact-card-title">파트너십</div>
-        <div class="contact-card-body">B2B 팀빌딩·HR·커뮤니티·교육 기관 협업 제안 환영.</div>
-      </a>
-      <a href="mailto:contact@ntable.kr?subject=%5B%ED%98%B8%EC%8A%A4%ED%8A%B8%EC%9E%85%EC%A0%90%5D%20" class="contact-card">
-        <div class="contact-card-eyebrow">Hosts</div>
-        <div class="contact-card-title">호스트 입점</div>
-        <div class="contact-card-body">모임 운영 경험 보유자 베타 모집 중. 수수료·정산 구조 개별 안내.</div>
-      </a>
-    </div>
     <a href="mailto:contact@ntable.kr" class="contact-email">contact@ntable.kr</a>
   </div>
 </div>
