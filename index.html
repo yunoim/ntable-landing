@@ -531,6 +531,225 @@
       font-size: 12px; color: var(--text-muted); font-weight: 300;
     }
 
+    /* ───────── STATS (Phase 1 라벨 + 간소화) ───────── */
+    .stats-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .stats-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 18px;
+      border: 1px solid var(--gold-border);
+      background: rgba(212,168,67,0.06);
+      border-radius: 40px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 36px;
+    }
+    .stats-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+      box-shadow: 0 0 8px rgba(74,222,128,0.6);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* ───────── PROBLEM 공감 예시 ───────── */
+    .problem-example {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(201,168,76,0.15);
+      font-size: 12px;
+      font-style: italic;
+      color: var(--gold-light);
+      opacity: 0.82;
+      line-height: 1.6;
+    }
+
+    /* ───────── HOW IT WORKS 타임라인 시각 연결 ───────── */
+    .roadmap-list { position: relative; }
+    .roadmap-list::before {
+      content: '';
+      position: absolute;
+      top: 16px; bottom: 16px;
+      left: 68px;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold-border) 6%, var(--gold-border) 94%, transparent);
+      pointer-events: none;
+    }
+    .roadmap-item { position: relative; }
+    .roadmap-item::before {
+      content: '';
+      position: absolute;
+      left: 63px;
+      top: 52px;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 12px rgba(212,168,67,0.4);
+      z-index: 1;
+    }
+    @media (max-width: 960px) {
+      .roadmap-list::before { left: 4px; top: 10px; bottom: 10px; }
+      .roadmap-item::before { left: -1px; top: 6px; }
+    }
+
+    /* ───────── BUSINESS MODEL 4사 비교표 ───────── */
+    .compare-wrap { margin-top: 72px; }
+    .compare-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 600; color: var(--white);
+      margin-bottom: 6px;
+    }
+    .compare-title em { font-style: italic; color: var(--gold-light); }
+    .compare-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 22px; }
+    .compare-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--radius-lg); }
+    table.compare-table {
+      width: 100%; min-width: 760px;
+      border-collapse: collapse;
+      background: var(--navy-light);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .compare-table th, .compare-table td {
+      padding: 14px 14px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--white-dim);
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+      border-right: 1px solid rgba(201,168,76,0.04);
+    }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table th {
+      background: rgba(10,15,30,0.55);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .compare-table th.me, .compare-table td.me {
+      background: rgba(212,168,67,0.08);
+      color: var(--gold-light);
+      border-left: 1px solid var(--gold-border);
+      border-right: 1px solid var(--gold-border);
+    }
+    .compare-table th.me { color: var(--gold); font-weight: 700; font-size: 12px; }
+    .compare-table td.strong { font-weight: 700; font-size: 13px; }
+    .compare-table .axis {
+      text-align: left;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--white-dim);
+      font-weight: 500;
+      min-width: 200px;
+    }
+    .compare-table .note { font-size: 10px; color: var(--text-muted); display: block; margin-top: 2px; }
+    .compare-note {
+      margin-top: 14px;
+      font-size: 11px; color: var(--text-muted);
+      font-style: italic;
+      text-align: right;
+    }
+
+    /* ───────── EXPANSION 엔진 허브 ───────── */
+    .engine-hub { text-align: center; margin: 64px 0 8px; }
+    .engine-core {
+      display: inline-block;
+      padding: 26px 42px;
+      background: linear-gradient(135deg, rgba(212,168,67,0.12), rgba(212,168,67,0.03));
+      border: 1px solid var(--gold);
+      border-radius: 18px;
+      box-shadow: 0 0 48px rgba(212,168,67,0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .engine-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; letter-spacing: 0.2em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .engine-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; color: var(--white); font-weight: 600;
+      line-height: 1.35;
+    }
+    .engine-title em { font-style: italic; color: var(--gold-light); }
+    .engine-arrow {
+      margin: 24px 0 4px;
+      color: var(--gold); font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      opacity: 0.75;
+    }
+    @media (max-width: 580px) {
+      .engine-core { padding: 22px 22px; }
+      .engine-title { font-size: 19px; }
+    }
+
+    /* ───────── ROADMAP active 강조 (Phase 3) ───────── */
+    .phase-item.active {
+      background: linear-gradient(90deg, rgba(212,168,67,0.08), transparent 70%);
+      border-left: 2px solid var(--gold);
+      padding-left: 24px;
+      margin-left: -26px;
+      border-radius: 0 12px 12px 0;
+    }
+    .phase-item.active .roadmap-content-title { color: var(--gold-light); }
+    @media (max-width: 960px) {
+      .phase-item.active { margin-left: 0; padding-left: 18px; }
+    }
+
+    /* ───────── Contact 3분할 (Phase 3) ───────── */
+    .contact-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      max-width: 840px; margin: 0 auto 30px;
+    }
+    .contact-card {
+      display: block;
+      padding: 26px 22px;
+      background: var(--navy-light);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      text-align: left;
+      transition: border-color var(--transition), transform var(--transition), background var(--transition);
+    }
+    .contact-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
+    }
+    .contact-card-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px; letter-spacing: 0.18em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .contact-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 600; color: var(--white);
+      margin-bottom: 8px;
+    }
+    .contact-card-body {
+      font-size: 12px; color: var(--text-muted); line-height: 1.7;
+      font-weight: 300;
+    }
+    @media (max-width: 720px) {
+      .contact-cards { grid-template-columns: 1fr; gap: 12px; }
+    }
+
+    /* ───────── 접근성 (Phase 3) ───────── */
+    :focus-visible {
+      outline: 2px solid var(--gold-light);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    section[id], div[id] { scroll-margin-top: 78px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .mockup-frame { transform: none; }
+    }
+
     /* 모바일 sticky 하단 CTA bar */
     .mobile-cta-bar {
       display: none;
@@ -594,7 +813,7 @@
   <div class="hero-content">
     <div class="hero-inner">
       <div class="hero-left">
-        <p class="hero-eyebrow">누구나 호스트가 되는 모임 플랫폼 — ntable by MLPC Inc.</p>
+        <p class="hero-eyebrow">Social Gathering Facilitator</p>
         <h1 class="hero-title">누가 열어도<br><em>재밌는 모임</em></h1>
         <p class="hero-subtitle">
           모임장 역량에 관계없이, 플랫폼이 진행을 도와준다.<br>
@@ -686,22 +905,28 @@
 
 <!-- STATS -->
 <div id="stats">
-  <div class="stats-grid reveal">
-    <div class="stat-item">
-      <div class="stat-number">50+</div>
-      <div class="stat-label">커뮤니티 멤버</div>
+  <div class="stats-inner reveal">
+    <div class="stats-badge">
+      <span class="stats-badge-dot"></span>
+      Phase 1 · 남산엔테이블 직영 쇼케이스 운영 중
     </div>
-    <div class="stat-item">
-      <div class="stat-number">호스트 자율</div>
-      <div class="stat-label">인원 · 포맷 제한 없음</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">I·E</div>
-      <div class="stat-label">성향 모두 어색하지 않은<br>구조화된 진행</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">0원</div>
-      <div class="stat-label">게스트 플랫폼 이용료</div>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">10개</div>
+        <div class="stat-label">경험 설계 장치<br>누가 열어도 같은 플로우</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5~15</div>
+        <div class="stat-label">호스트가 선택하는<br>탐구 문항 수</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">실시간</div>
+        <div class="stat-label">투표 기반 자동<br>성향 매칭</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">0원</div>
+        <div class="stat-label">게스트 이용료<br>호스트 4명까지 무료</div>
+      </div>
     </div>
   </div>
 </div>
@@ -722,16 +947,19 @@
       <div class="problem-card-icon">🎯</div>
       <h3>모임장 의존성</h3>
       <p>재밌는 모임은 능숙한 진행자의 역량에서 나온다. 하지만 그런 사람은 드물고, 역량을 가르치는 건 한계가 있다.</p>
+      <div class="problem-example">😓 "지난번엔 그렇게 재밌었는데, 오늘은 왜 이렇게 어색하지."</div>
     </div>
     <div class="problem-card">
       <div class="problem-card-icon">🤫</div>
       <h3>I성향의 소외</h3>
       <p>MBTI I성향 인구는 전체의 약 절반. 하지만 기존 소셜 모임은 외향적 사람 중심으로 설계돼 I성향은 매번 어색함 속에 시간을 보낸다.</p>
+      <div class="problem-example">😓 "말 많은 사람만 기억에 남고, 나는 그냥 앉아만 있다가 왔어."</div>
     </div>
     <div class="problem-card">
       <div class="problem-card-icon">📉</div>
       <h3>확장 불가능한 구조</h3>
       <p>좋은 모임을 만들려면 좋은 모임장이 필요하다. 사람에 의존하는 구조는 품질의 일관성도, 규모 확장도 불가능하게 만든다.</p>
+      <div class="problem-example">😓 "에이스 모임장 한 명이 퇴사하면, 그 모임은 끝이다."</div>
     </div>
   </div>
 </section>
@@ -904,6 +1132,70 @@
       </div>
     </div>
   </div>
+
+  <!-- 4사 비교표 -->
+  <div class="compare-wrap reveal">
+    <div class="compare-title">소셜 모임 시장 <em>경쟁사 비교</em></div>
+    <div class="compare-sub">공개된 요금·서비스 정책 기준 · 2026년 4월</div>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="me">ntable</th>
+            <th>문토</th>
+            <th>소모임</th>
+            <th>트레바리</th>
+            <th>넷플연가</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="axis">수수료 (8인 · 참가비 4만원 기준)</td>
+            <td class="me strong">40,000원<span class="note">(12.5% 고정)</span></td>
+            <td>64,000원<span class="note">(20% 수수료)</span></td>
+            <td>~32,000원<span class="note">(~10% 수수료)</span></td>
+            <td>—<span class="note">회비 구독제</span></td>
+            <td>—<span class="note">월 구독제</span></td>
+          </tr>
+          <tr>
+            <td class="axis">호스트 셀프 오픈</td>
+            <td class="me strong">○ 누구나 가능</td>
+            <td>△ 심사</td>
+            <td>○ 자유</td>
+            <td>× 큐레이션</td>
+            <td>× 큐레이션</td>
+          </tr>
+          <tr>
+            <td class="axis">실시간 성향 매칭</td>
+            <td class="me strong">○ 알고리즘</td>
+            <td>× 없음</td>
+            <td>× 없음</td>
+            <td>× 없음</td>
+            <td>△ 수기 매칭</td>
+          </tr>
+          <tr>
+            <td class="axis">구조화된 진행 장치</td>
+            <td class="me strong">○ 10개 장치</td>
+            <td>× 자유</td>
+            <td>× 자유</td>
+            <td>△ 북토크 포맷</td>
+            <td>△ 큐레이션</td>
+          </tr>
+          <tr>
+            <td class="axis">호스트 데이터 활용</td>
+            <td class="me strong">○ AI 분석 카드</td>
+            <td>× 없음</td>
+            <td>× 없음</td>
+            <td>× 없음</td>
+            <td>× 없음</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare-note">* 본 표는 공개 정보 기반 요약이며, 각 서비스의 세부 플랜·시즌에 따라 달라질 수 있습니다.</p>
+  </div>
+
   <div class="section-cta reveal">
     <div>
       <a href="https://demo.ntable.kr">처음 4명까지 무료로 테스트 →</a>
@@ -918,7 +1210,14 @@
   <div class="section-tag reveal">Expansion</div>
   <h2 class="section-title reveal">같은 엔진,<br><em>다른 버티컬</em></h2>
   <p class="section-body reveal">ntable의 실시간 투표·탐구·매칭 엔진은 질문 세트만 바꾸면 어떤 그룹 경험에도 적용된다. 소셜 모임은 첫 번째 버티컬일 뿐이다.</p>
-  <div class="solution-wrap reveal" style="margin-top:56px;">
+  <div class="engine-hub reveal">
+    <div class="engine-core">
+      <div class="engine-eyebrow">Shared Engine</div>
+      <div class="engine-title">실시간 투표 · <em>성향 탐구</em> · 자동 매칭</div>
+    </div>
+    <div class="engine-arrow">↓ 질문셋만 교체하면 ↓</div>
+  </div>
+  <div class="solution-wrap reveal" style="margin-top:24px;">
     <div class="solution-steps">
       <div class="solution-step">
         <div class="step-num">B2C</div>
@@ -1046,9 +1345,25 @@
   <div class="contact-inner reveal">
     <h2 class="contact-title">함께 만들어갈<br><em>다음 챕터</em></h2>
     <p class="contact-body">
-      투자 문의, 파트너십 제안, 호스트 입점 문의.<br>
-      모두 아래 이메일로 연락주세요.
+      목적에 맞는 채널로 연락 주세요. 빠르게 답신드리겠습니다.
     </p>
+    <div class="contact-cards">
+      <a href="mailto:contact@ntable.kr?subject=%5B%ED%88%AC%EC%9E%90%EB%AC%B8%EC%9D%98%5D%20" class="contact-card">
+        <div class="contact-card-eyebrow">Investors</div>
+        <div class="contact-card-title">투자 문의</div>
+        <div class="contact-card-body">Seed 라운드 준비 중. 현재 KPI·로드맵·Data Room 공유 가능.</div>
+      </a>
+      <a href="mailto:contact@ntable.kr?subject=%5B%ED%8C%8C%ED%8A%B8%EB%84%88%EC%8B%AD%5D%20" class="contact-card">
+        <div class="contact-card-eyebrow">Partnership</div>
+        <div class="contact-card-title">파트너십</div>
+        <div class="contact-card-body">B2B 팀빌딩·HR·커뮤니티·교육 기관 협업 제안 환영.</div>
+      </a>
+      <a href="mailto:contact@ntable.kr?subject=%5B%ED%98%B8%EC%8A%A4%ED%8A%B8%EC%9E%85%EC%A0%90%5D%20" class="contact-card">
+        <div class="contact-card-eyebrow">Hosts</div>
+        <div class="contact-card-title">호스트 입점</div>
+        <div class="contact-card-body">모임 운영 경험 보유자 베타 모집 중. 수수료·정산 구조 개별 안내.</div>
+      </a>
+    </div>
     <a href="mailto:contact@ntable.kr" class="contact-email">contact@ntable.kr</a>
   </div>
 </div>
