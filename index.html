@@ -189,7 +189,7 @@
     .hero-content {
       position: relative; z-index: 1;
       max-width: 1100px; margin: 0 auto;
-      padding: 130px 32px 90px; width: 100%;
+      padding: 110px 32px 60px; width: 100%;
     }
     .hero-eyebrow {
       font-family: 'DM Sans', sans-serif; font-size: 11px;
@@ -271,7 +271,7 @@
     .btn-secondary:hover { background: rgba(232,184,75,0.18); border-color: #e8b84b; }
 
     /* STATS */
-    #stats { padding: 72px 32px; border-top: 1px solid rgba(212,168,67,0.45); border-bottom: 1px solid rgba(212,168,67,0.45); background: #131c33; }
+    #stats { padding: 56px 32px; border-top: 1px solid rgba(212,168,67,0.45); border-bottom: 1px solid rgba(212,168,67,0.45); background: #131c33; }
     .stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 40px; }
     .stat-item { text-align: center; }
     .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 700; color: #d4a843; line-height: 1; margin-bottom: 10px; }
@@ -369,7 +369,7 @@
     }
 
     /* CONTACT */
-    #contact-wrap { padding: 96px 32px; background: #131c33; border-top: 1px solid rgba(212,168,67,0.45); }
+    #contact-wrap { padding: 64px 32px; background: #131c33; border-top: 1px solid rgba(212,168,67,0.45); }
     .contact-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
     .contact-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px,5.5vw,60px); font-weight: 700; color: #ffffff; line-height: 1.18; margin-bottom: 18px; }
     .contact-title em { font-style: italic; color: #e8b84b; }
@@ -380,8 +380,8 @@
     /* FOOTER */
     footer { background: #0e1628; border-top: 1px solid rgba(212,168,67,0.45); padding: 28px 32px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #d4a843; letter-spacing: 0.06em; display: flex; flex-direction: column; gap: 2px; }
-    .footer-slogan { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 400; color: #c0c0c0; letter-spacing: 0.06em; font-style: italic; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 600; color: #d4a843; letter-spacing: 0.06em; display: flex; flex-direction: column; gap: 1px; opacity: 0.85; }
+    .footer-slogan { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; color: #c0c0c0; letter-spacing: 0.06em; font-style: italic; opacity: 0.85; }
     .footer-info { font-size: 12px; font-weight: 300; color: #c0c0c0; line-height: 1.8; text-align: right; }
     .footer-info a { color: inherit; transition: color var(--transition); }
     .footer-info a:hover { color: #d4a843; }
@@ -407,11 +407,11 @@
     /* ───────── HERO 2-COLUMN + PRODUCT MOCKUP ───────── */
     .hero-inner {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 56px;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 48px;
       align-items: center;
     }
-    .hero-left { max-width: 560px; }
+    .hero-left { max-width: 620px; }
     .hero-right {
       position: relative;
       animation: fadeUp 0.85s 0.5s ease both;
@@ -718,10 +718,10 @@
       color: #c0c0c0;
     }
     .compare-table th.me, .compare-table td.me {
-      background: rgba(212,168,67,0.08);
+      background: rgba(212,168,67,0.16);
       color: #e8b84b;
-      border-left: 1px solid rgba(212,168,67,0.45);
-      border-right: 1px solid rgba(212,168,67,0.45);
+      border-left: 1px solid rgba(212,168,67,0.5);
+      border-right: 1px solid rgba(212,168,67,0.5);
     }
     .compare-table th.me { color: #d4a843; font-weight: 700; font-size: 12px; }
     .compare-table td.strong { font-weight: 700; font-size: 13px; }
@@ -744,7 +744,8 @@
     .engine-hub { text-align: center; margin: 64px 0 8px; }
     .engine-core {
       display: inline-block;
-      padding: 26px 42px;
+      padding: 32px 56px;
+      width: min(70%, 720px);
       background: linear-gradient(135deg, rgba(212,168,67,0.12), rgba(212,168,67,0.03));
       border: 1px solid #d4a843;
       border-radius: 18px;
@@ -875,8 +876,8 @@
     <ul class="nav-links">
       <li><a href="#problem">문제</a></li>
       <li><a href="#solution">솔루션</a></li>
-      <li><a href="#how">진행 방식</a></li>
-      <li><a href="#model">비즈니스 모델</a></li>
+      <li><a href="#how">진행</a></li>
+      <li><a href="#model">요금</a></li>
       <li><a href="#expansion">확장</a></li>
       <li><a href="#roadmap">로드맵</a></li>
     </ul>
@@ -890,8 +891,8 @@
   <div class="mobile-menu" id="mobile-menu">
     <a href="#problem" onclick="toggleMenu()">문제</a>
     <a href="#solution" onclick="toggleMenu()">솔루션</a>
-    <a href="#how" onclick="toggleMenu()">진행 방식</a>
-    <a href="#model" onclick="toggleMenu()">비즈니스 모델</a>
+    <a href="#how" onclick="toggleMenu()">진행</a>
+    <a href="#model" onclick="toggleMenu()">요금</a>
     <a href="#expansion" onclick="toggleMenu()">확장</a>
     <a href="#roadmap" onclick="toggleMenu()">로드맵</a>
     <a href="#contact-wrap" onclick="toggleMenu()">문의</a>
@@ -1021,7 +1022,7 @@
     <div class="stats-grid">
       <div class="stat-item">
         <div class="stat-number">10개</div>
-        <div class="stat-label">진행 장치<br>일반 모임 0개 vs ntable 10개</div>
+        <div class="stat-label">진행 장치<br>보통 모임엔 없는 10개 장치</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">11종</div>
@@ -1091,7 +1092,7 @@
       </div>
       <div class="solution-step">
         <div class="step-num">03</div>
-        <div class="step-title">데이터가 매칭한다</div>
+        <div class="step-title">주관 없이 매칭</div>
         <div class="step-body">투표 결과로 공통점이 많은 짝을 실시간 계산해 공개합니다. 호스트의 주관이 끼어들 틈이 없습니다.</div>
       </div>
       <div class="solution-step">
@@ -1198,6 +1199,12 @@
       <div class="model-eyebrow">게스트</div>
       <div class="model-title">언제나 무료</div>
       <div class="model-body">게스트는 플랫폼 이용료가 없습니다. 참가비는 호스트가 직접 정하고, 플랫폼을 거치지 않습니다.</div>
+      <div class="model-plans">
+        <div class="model-plan-row"><span class="model-plan-name">🔒 익명 보장 (방 안에서만 닉네임)</span></div>
+        <div class="model-plan-row"><span class="model-plan-name">💳 카드 등록 불필요</span></div>
+        <div class="model-plan-row"><span class="model-plan-name">📱 앱 설치 불필요 — 웹에서 바로</span></div>
+        <div class="model-plan-row"><span class="model-plan-name">⏱️ 모임 종료 후 데이터 자동 정리</span></div>
+      </div>
     </div>
     <div class="model-card">
       <div class="model-eyebrow">호스트 · 종량제 (예정)</div>
@@ -1231,7 +1238,7 @@
 
   <!-- 4사 비교표 -->
   <div class="compare-wrap reveal">
-    <div class="compare-title">소셜 모임 시장 <em>경쟁사 비교</em></div>
+    <div class="compare-title">왜 <em>ntable</em>인가</div>
     <div class="compare-sub">공개된 요금·서비스 정책 기준 · 2026년 4월</div>
     <div class="compare-table-wrap">
       <table class="compare-table">
@@ -1280,7 +1287,7 @@
           </tr>
           <tr>
             <td class="axis">호스트 데이터 활용</td>
-            <td class="me strong">◐ AI 분석 카드<span class="note">(부분 구현 · 확장 중)</span></td>
+            <td class="me strong">◐ AI 분석 카드<span class="note">v1 · 확장 예정</span></td>
             <td>× 없음</td>
             <td>× 없음</td>
             <td>× 없음</td>
@@ -1343,12 +1350,12 @@
   <div class="solution-wrap reveal">
     <div class="solution-steps">
       <div class="solution-step">
-        <div class="step-num">다음</div>
+        <div class="step-num">1순위</div>
         <div class="step-title">아이스브레이킹 게임</div>
         <div class="step-body">어색함을 5분 안에 해소하는 워밍업 게임 모음<span class="step-status">출시 예정</span></div>
       </div>
       <div class="solution-step">
-        <div class="step-num">다음</div>
+        <div class="step-num">2순위</div>
         <div class="step-title">팀 랜덤 배정</div>
         <div class="step-body">참가자 성향·조건을 섞어 균형 있는 팀을 자동 편성<span class="step-status">출시 예정</span></div>
       </div>
@@ -1386,6 +1393,7 @@
           <span class="roadmap-tag">AI 성향 카드 가동 중</span>
           <span class="roadmap-tag">호스트 평가 누적</span>
         </div>
+        <div style="font-size:11px;color:#9aa0ac;margin-top:8px;letter-spacing:0.02em;">→ 표시는 목표 · 표시 없음은 현재 가동 중</div>
       </div>
     </div>
     <div class="phase-item">
@@ -1566,7 +1574,7 @@
         const rooms = Number(data.active_rooms ?? 0);
         const people = Number(data.participants ?? 0);
         const cumRooms = Number(data.total_rooms ?? 0);
-        const cumPeople = Number(data.total_attendances ?? 0);
+        const cumPeople = Number(data.unique_people ?? 0);
         state.lastFetchAt = Date.now();
         render(rooms, people);
         if (cumRoomsEl) animateCount(cumRoomsEl, state.cumRooms, cumRooms);
