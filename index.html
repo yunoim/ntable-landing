@@ -623,6 +623,17 @@
     .live-stats[data-state="empty"] + .live-stats-empty-cta a {
       color: #e8b84b; text-decoration: underline; text-underline-offset: 3px;
     }
+    .cumulative-stats {
+      display: block; margin-top: 14px; text-align: center;
+      font-size: 13px; color: #d0d0d0; font-weight: 300;
+      letter-spacing: 0.02em;
+    }
+    .cumulative-stats strong {
+      color: #e8b84b; font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      transition: color var(--transition);
+    }
+    .cumulative-stats strong.flash { color: #ffffff; }
     @media (max-width: 520px) {
       .live-stats { gap: 14px; padding: 10px 16px; }
       .live-stats-num { font-size: 20px; }
@@ -1002,6 +1013,10 @@
         </div>
       </div>
       <span class="live-stats-empty-cta">지금은 조용한 시간 — <a href="https://app.ntable.kr">당신이 첫 호스트가 되어보세요</a></span>
+      <div class="cumulative-stats" id="cumulativeStats" aria-live="polite">
+        지금까지 <strong id="cumRooms">—</strong>개의 모임에서
+        <strong id="cumPeople">—</strong>명이 참여했어요
+      </div>
       <span class="live-stats-meta" id="liveStatsMeta"></span>
     </div>
     <div class="stats-grid">
@@ -1073,7 +1088,7 @@
       <div class="solution-step">
         <div class="step-num">02</div>
         <div class="step-title">말 없이도 섞인다</div>
-        <div class="step-body">모임 성격별 팩을 골라 1~15개 문항을 A/B 투표로 진행합니다. 말수가 적은 사람도 선택 하나로 자기 이야기를 하게 됩니다.</div>
+        <div class="step-body">11종 팩 중 모임 성격대로 고르기만 하면 끝. 말수가 적은 사람도 선택 하나로 자기 이야기를 하게 됩니다.</div>
       </div>
       <div class="solution-step">
         <div class="step-num">03</div>
@@ -1083,7 +1098,7 @@
       <div class="solution-step">
         <div class="step-num">04</div>
         <div class="step-title">끝나도 이야기가 이어진다</div>
-        <div class="step-body">모임이 끝나면 AI가 각자의 성향 카드를 만들어줍니다. 인스타 스토리로 자연스럽게 공유됩니다.</div>
+        <div class="step-body">AI 성향 카드는 인스타 스토리로 공유되고, 비밀 호감 투표는 양쪽이 같은 선택을 했을 때만 알려집니다. 호스트 평가도 별점·코멘트로 누적됩니다.</div>
       </div>
     </div>
   </div>
@@ -1375,7 +1390,8 @@
         <div class="roadmap-tags">
           <span class="roadmap-tag">멤버 100명</span>
           <span class="roadmap-tag">월 4회 모임</span>
-          <span class="roadmap-tag">AI 결과 카드 출시</span>
+          <span class="roadmap-tag">AI 성향 카드 가동 중</span>
+          <span class="roadmap-tag">호스트 평가 누적</span>
         </div>
       </div>
     </div>
@@ -1489,10 +1505,12 @@
     const metaEl = document.getElementById('liveStatsMeta');
     const hero = document.getElementById('heroLive');
     const heroText = document.getElementById('heroLiveText');
+    const cumRoomsEl = document.getElementById('cumRooms');
+    const cumPeopleEl = document.getElementById('cumPeople');
 
     if (!wrap && !hero) return;
 
-    let state = { rooms: 0, people: 0, lastFetchAt: null };
+    let state = { rooms: 0, people: 0, cumRooms: 0, cumPeople: 0, lastFetchAt: null };
 
     function animateCount(el, from, to, dur = 800) {
       if (!el) return;
@@ -1560,8 +1578,14 @@
         const data = await res.json();
         const rooms = Number(data.active_rooms ?? 0);
         const people = Number(data.participants ?? 0);
+        const cumRooms = Number(data.total_rooms ?? 0);
+        const cumPeople = Number(data.total_attendances ?? 0);
         state.lastFetchAt = Date.now();
         render(rooms, people);
+        if (cumRoomsEl) animateCount(cumRoomsEl, state.cumRooms, cumRooms);
+        if (cumPeopleEl) animateCount(cumPeopleEl, state.cumPeople, cumPeople);
+        state.cumRooms = cumRooms;
+        state.cumPeople = cumPeople;
         renderMeta();
       } catch {
         if (roomsEl) roomsEl.textContent = '—';
@@ -1569,6 +1593,8 @@
         if (wrap) wrap.dataset.state = 'empty';
         if (hero) hero.dataset.state = 'empty';
         if (heroText) heroText.textContent = '라이브 현황을 불러올 수 없어요';
+        if (cumRoomsEl) cumRoomsEl.textContent = '—';
+        if (cumPeopleEl) cumPeopleEl.textContent = '—';
       }
     }
 
