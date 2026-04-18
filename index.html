@@ -549,6 +549,36 @@
       box-shadow: 0 0 8px rgba(74,222,128,0.6);
       animation: pulse 2s ease-in-out infinite;
     }
+    .live-stats {
+      display: inline-flex; align-items: center; gap: 22px;
+      padding: 12px 22px;
+      border: 1px solid var(--gold-border);
+      background: rgba(10,15,30,0.6);
+      border-radius: 999px;
+      font-family: 'DM Sans', sans-serif;
+      margin-bottom: 18px;
+    }
+    .live-stats-item { display: inline-flex; align-items: center; gap: 8px; }
+    .live-stats-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 600;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .live-stats-label {
+      font-size: 11px; color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+    .live-stats-sep {
+      width: 1px; height: 20px;
+      background: var(--gold-border);
+      opacity: 0.5;
+    }
+    .live-stats[data-state="empty"] .live-stats-num { color: var(--text-muted); }
+    @media (max-width: 520px) {
+      .live-stats { gap: 14px; padding: 10px 16px; }
+      .live-stats-num { font-size: 20px; }
+    }
 
     /* ───────── PROBLEM 공감 예시 ───────── */
     .problem-example {
@@ -901,13 +931,26 @@
       <span class="stats-badge-dot"></span>
       Phase 1 · 남산엔테이블 직영 쇼케이스 운영 중
     </div>
+    <div>
+      <div class="live-stats" id="liveStats" data-state="empty" aria-live="polite">
+        <div class="live-stats-item">
+          <span class="live-stats-num" id="liveRooms">—</span>
+          <span class="live-stats-label">지금 진행 중인 모임</span>
+        </div>
+        <div class="live-stats-sep"></div>
+        <div class="live-stats-item">
+          <span class="live-stats-num" id="liveParticipants">—</span>
+          <span class="live-stats-label">동시 참여 중</span>
+        </div>
+      </div>
+    </div>
     <div class="stats-grid">
       <div class="stat-item">
         <div class="stat-number">10개</div>
         <div class="stat-label">경험 설계 장치<br>누가 열어도 같은 플로우</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">5~15</div>
+        <div class="stat-number">1~15</div>
         <div class="stat-label">호스트가 선택하는<br>탐구 문항 수</div>
       </div>
       <div class="stat-item">
@@ -1375,6 +1418,35 @@
     menu.classList.toggle('open');
     btn.classList.toggle('open');
   }
+
+  // 라이브 스탯: 현재 진행 중인 모임/참여자 수를 demo 서버에서 polling
+  (function() {
+    const wrap = document.getElementById('liveStats');
+    const roomsEl = document.getElementById('liveRooms');
+    const partEl = document.getElementById('liveParticipants');
+    if (!wrap || !roomsEl || !partEl) return;
+
+    const API = 'https://demo.ntable.kr/api/stats';
+
+    async function tick() {
+      try {
+        const res = await fetch(API, { cache: 'no-store' });
+        if (!res.ok) throw new Error('stats not ok');
+        const data = await res.json();
+        const rooms = Number(data.active_rooms ?? 0);
+        const people = Number(data.participants ?? 0);
+        roomsEl.textContent = rooms;
+        partEl.textContent = people;
+        wrap.dataset.state = (rooms > 0 || people > 0) ? 'live' : 'empty';
+      } catch {
+        roomsEl.textContent = '—';
+        partEl.textContent = '—';
+        wrap.dataset.state = 'empty';
+      }
+    }
+    tick();
+    setInterval(tick, 30000);
+  })();
 
   // 모바일 CTA bar: hero 50% 이상 스크롤 시 노출, contact 도달 시 숨김
   (function() {
