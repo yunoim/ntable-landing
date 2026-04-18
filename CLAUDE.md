@@ -8,9 +8,9 @@
 **법인명:** MLPC (More Life People Connect)
 **사업자:** 286-87-02414
 
-이 레포는 ntable.kr 랜딩페이지만 관리한다. FastAPI 운영 서버(ntable), 데모(ntable-demo)와 완전 분리.
+이 레포는 ntable.kr 랜딩페이지만 관리한다. FastAPI 운영 서버(ntable), 데모(ntable-app)와 완전 분리.
 
-> **🧊 ns 동결 (2026-04-17부)**: ns.ntable.kr(ntable 디렉토리)는 신규 개발 중단. 랜딩 문구에서 남산엔테이블을 Phase 1 직영 소개로 언급하는 건 OK지만, ns 기능 업데이트 계획을 추가하지 말 것. 플랫폼 기능 설명은 ntable-demo 기준으로 작성.
+> **🧊 ns 동결 (2026-04-17부)**: ns.ntable.kr(ntable 디렉토리)는 신규 개발 중단. 랜딩 문구에서 남산엔테이블을 Phase 1 직영 소개로 언급하는 건 OK지만, ns 기능 업데이트 계획을 추가하지 말 것. 플랫폼 기능 설명은 ntable-app 기준으로 작성.
 
 ---
 
@@ -61,4 +61,4 @@ C:\Users\quite\Documents\ntable-landing\
 - Notion 허브: https://www.notion.so/340eff09d94281e1b31dd190cfab0fef
 - 랜딩 URL: https://ntable.kr
 - 운영 레포: ntable/ (별도)
-- 데모 레포: ntable-demo/ (별도)
+- 데모 레포: ntable-app/ (별도)
