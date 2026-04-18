@@ -216,6 +216,29 @@
     }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp 0.75s 0.36s ease both; }
 
+    /* Hero 진입 마찰 제거 신호 */
+    .hero-trust-row {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 18px;
+      animation: fadeUp 0.75s 0.44s ease both;
+    }
+    .hero-trust-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: #d0d0d0;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(212,168,67,0.25);
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+    }
+    .hero-trust-chip::before {
+      content: '✓';
+      color: #7ee8a2;
+      font-weight: 700;
+      font-size: 11px;
+    }
+
     /* Hero 라이브 배지 (1차 social proof) */
     .hero-live {
       display: inline-flex; align-items: center; gap: 10px;
@@ -917,6 +940,11 @@
         <div class="hero-actions">
           <a href="https://app.ntable.kr" class="btn-primary">모임 열기</a>
           <a href="#how" class="btn-secondary">진행 방식 보기</a>
+        </div>
+        <div class="hero-trust-row" aria-label="진입 마찰 제거">
+          <span class="hero-trust-chip">회원가입 없이</span>
+          <span class="hero-trust-chip">결제정보 없이</span>
+          <span class="hero-trust-chip">앱 설치 없이</span>
         </div>
         <a href="https://app.ntable.kr" class="hero-live" id="heroLive" data-state="empty" aria-live="polite">
           <span class="hero-live-dot"></span>
