@@ -227,6 +227,44 @@
       animation: fadeUp 0.75s 0.24s ease both;
     }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp 0.75s 0.36s ease both; }
+
+    /* Hero 라이브 배지 (1차 social proof) */
+    .hero-live {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 22px;
+      padding: 9px 16px;
+      border: 1px solid var(--gold-border);
+      background: rgba(10,15,30,0.5);
+      border-radius: 999px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: var(--white-dim);
+      text-decoration: none;
+      animation: fadeUp 0.75s 0.5s ease both;
+      transition: border-color var(--transition), background var(--transition), transform var(--transition);
+    }
+    .hero-live:hover { border-color: var(--gold); background: rgba(212,168,67,0.08); transform: translateY(-1px); }
+    .hero-live-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px rgba(74,222,128,0.7);
+      animation: livePulse 2.2s ease-in-out infinite;
+    }
+    .hero-live[data-state="empty"] .hero-live-dot {
+      background: var(--text-muted);
+      box-shadow: none;
+      animation: none;
+    }
+    .hero-live[data-state="flash"] .hero-live-dot { animation: livePulse 0.6s ease-in-out; }
+    .hero-live-text strong {
+      color: var(--gold-light);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    @keyframes livePulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(74,222,128,0.7); }
+      50%      { transform: scale(1.35); box-shadow: 0 0 14px rgba(74,222,128,0.9); }
+    }
     .btn-primary {
       display: inline-flex; align-items: center; padding: 13px 30px;
       background: linear-gradient(135deg, var(--gold-light), #b07820);
@@ -575,6 +613,20 @@
       opacity: 0.5;
     }
     .live-stats[data-state="empty"] .live-stats-num { color: var(--text-muted); }
+    .live-stats-num { font-variant-numeric: tabular-nums; transition: color var(--transition); }
+    .live-stats-num.flash { color: var(--gold); }
+    .live-stats-meta {
+      display: block; margin-top: 8px; text-align: center;
+      font-size: 10.5px; color: var(--text-muted); letter-spacing: 0.04em;
+    }
+    .live-stats-empty-cta {
+      display: none; margin-top: 10px; text-align: center;
+      font-size: 12px; color: var(--gold-light);
+    }
+    .live-stats[data-state="empty"] + .live-stats-empty-cta { display: block; }
+    .live-stats[data-state="empty"] + .live-stats-empty-cta a {
+      color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px;
+    }
     @media (max-width: 520px) {
       .live-stats { gap: 14px; padding: 10px 16px; }
       .live-stats-num { font-size: 20px; }
@@ -852,6 +904,10 @@
           <a href="https://app.ntable.kr" class="btn-primary">모임 열기</a>
           <a href="#how" class="btn-secondary">진행 방식 보기</a>
         </div>
+        <a href="https://app.ntable.kr" class="hero-live" id="heroLive" data-state="empty" aria-live="polite">
+          <span class="hero-live-dot"></span>
+          <span class="hero-live-text" id="heroLiveText">라이브 현황 불러오는 중…</span>
+        </a>
       </div>
       <div class="hero-right" aria-hidden="true">
         <div class="mockup-frame">
@@ -943,6 +999,8 @@
           <span class="live-stats-label">지금 참여 중인 사람</span>
         </div>
       </div>
+      <span class="live-stats-empty-cta">지금은 조용한 시간 — <a href="https://app.ntable.kr">당신이 첫 호스트가 되어보세요</a></span>
+      <span class="live-stats-meta" id="liveStatsMeta"></span>
     </div>
     <div class="stats-grid">
       <div class="stat-item">
@@ -1419,14 +1477,79 @@
     btn.classList.toggle('open');
   }
 
-  // 라이브 스탯: 현재 진행 중인 모임/참여자 수를 demo 서버에서 polling
+  // 라이브 스탯 — 히어로 배지 + STATS 섹션 위젯 동시 갱신, count-up + pulse
   (function() {
+    const API = 'https://app.ntable.kr/api/stats';
+
     const wrap = document.getElementById('liveStats');
     const roomsEl = document.getElementById('liveRooms');
     const partEl = document.getElementById('liveParticipants');
-    if (!wrap || !roomsEl || !partEl) return;
+    const metaEl = document.getElementById('liveStatsMeta');
+    const hero = document.getElementById('heroLive');
+    const heroText = document.getElementById('heroLiveText');
 
-    const API = 'https://app.ntable.kr/api/stats';
+    if (!wrap && !hero) return;
+
+    let state = { rooms: 0, people: 0, lastFetchAt: null };
+
+    function animateCount(el, from, to, dur = 800) {
+      if (!el) return;
+      if (from === to) { el.textContent = to; return; }
+      const start = performance.now();
+      function step(now) {
+        const t = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(from + (to - from) * eased);
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      el.classList.add('flash');
+      setTimeout(() => el.classList.remove('flash'), 700);
+    }
+
+    function formatRelative(ts) {
+      if (!ts) return '';
+      const diff = Math.max(0, Math.round((Date.now() - ts) / 1000));
+      if (diff < 5) return '방금 업데이트';
+      if (diff < 60) return `${diff}초 전 업데이트`;
+      const m = Math.floor(diff / 60);
+      return `${m}분 전 업데이트`;
+    }
+
+    function render(rooms, people) {
+      const isEmpty = (rooms === 0 && people === 0);
+
+      // STATS 섹션 위젯
+      if (wrap && roomsEl && partEl) {
+        animateCount(roomsEl, state.rooms, rooms);
+        animateCount(partEl, state.people, people);
+        wrap.dataset.state = isEmpty ? 'empty' : 'live';
+      }
+
+      // Hero 배지
+      if (hero && heroText) {
+        if (isEmpty) {
+          heroText.innerHTML = '지금 조용한 시간 — <strong>당신이 첫 호스트</strong>가 될 수 있어요';
+          hero.dataset.state = 'empty';
+        } else {
+          heroText.innerHTML = `지금 <strong>${rooms}곳</strong>의 모임에서 <strong>${people}명</strong>이 대화 중`;
+          const prevState = hero.dataset.state;
+          hero.dataset.state = 'live';
+          // 상태 변화 혹은 숫자 변화 시 pulse
+          if (prevState !== 'live' || state.rooms !== rooms || state.people !== people) {
+            hero.dataset.state = 'flash';
+            setTimeout(() => { hero.dataset.state = 'live'; }, 600);
+          }
+        }
+      }
+
+      state.rooms = rooms;
+      state.people = people;
+    }
+
+    function renderMeta() {
+      if (metaEl) metaEl.textContent = formatRelative(state.lastFetchAt);
+    }
 
     async function tick() {
       try {
@@ -1435,17 +1558,21 @@
         const data = await res.json();
         const rooms = Number(data.active_rooms ?? 0);
         const people = Number(data.participants ?? 0);
-        roomsEl.textContent = rooms;
-        partEl.textContent = people;
-        wrap.dataset.state = (rooms > 0 || people > 0) ? 'live' : 'empty';
+        state.lastFetchAt = Date.now();
+        render(rooms, people);
+        renderMeta();
       } catch {
-        roomsEl.textContent = '—';
-        partEl.textContent = '—';
-        wrap.dataset.state = 'empty';
+        if (roomsEl) roomsEl.textContent = '—';
+        if (partEl) partEl.textContent = '—';
+        if (wrap) wrap.dataset.state = 'empty';
+        if (hero) hero.dataset.state = 'empty';
+        if (heroText) heroText.textContent = '라이브 현황을 불러올 수 없어요';
       }
     }
+
     tick();
     setInterval(tick, 30000);
+    setInterval(renderMeta, 5000); // "N초 전" 카운터 자연스럽게 흐르게
   })();
 
   // 모바일 CTA bar: hero 50% 이상 스크롤 시 노출, contact 도달 시 숨김
