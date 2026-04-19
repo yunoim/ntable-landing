@@ -516,8 +516,45 @@
     .mockup-chip.host { border-color: #e8b84b; background: rgba(212,168,67,0.12); }
     .mockup-chip.host .mockup-chip-mark {
       margin-left: auto; font-size: 9px; color: #e8b84b;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.04em;
     }
+    /* 단계 네비 스트립 */
+    .mockup-phases {
+      display: flex; gap: 12px; align-items: center;
+      padding: 6px 0 14px;
+      border-bottom: 1px solid rgba(212,168,67,0.08);
+      margin-bottom: 14px;
+    }
+    .mockup-phase {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; color: #828aa0; letter-spacing: 0.04em;
+    }
+    .mockup-phase-num {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: rgba(212,168,67,0.08); color: #828aa0;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 700;
+    }
+    .mockup-phase.active { color: #e8b84b; }
+    .mockup-phase.active .mockup-phase-num {
+      background: #e8b84b; color: #0a0f1e;
+      box-shadow: 0 0 0 3px rgba(212,168,67,0.18);
+    }
+    .mockup-phase.done .mockup-phase-num {
+      background: rgba(212,168,67,0.35); color: #0a0f1e;
+    }
+    /* host-stats 미니 라인 */
+    .mockup-stats-row {
+      display: flex; gap: 10px; align-items: center;
+      font-size: 9.5px; color: #c0c0c0;
+      padding: 6px 9px;
+      background: rgba(212,168,67,0.05);
+      border: 1px solid rgba(212,168,67,0.18);
+      border-radius: 8px;
+      margin-top: 8px;
+      letter-spacing: 0.02em;
+    }
+    .mockup-stats-row strong { color: #e8b84b; font-weight: 700; }
 
     .mockup-vote-label {
       font-size: 10px; letter-spacing: 0.14em; color: #d4a843;
@@ -954,11 +991,17 @@
       <div class="hero-right" aria-hidden="true">
         <div class="mockup-frame">
           <div class="mockup-header">
-            <div class="mockup-code">모임 코드 <strong>ABC123</strong> <span style="opacity:0.5;letter-spacing:0.1em;">· 미리보기</span></div>
+            <div class="mockup-code">모임 코드 <strong>ABC123</strong> <span style="opacity:0.5;letter-spacing:0.1em;">· 라이브</span></div>
             <div class="mockup-presence">
               <span class="mockup-presence-dot"></span>
-              <span>2명 접속 중</span>
+              <span>4명 접속 중</span>
             </div>
+          </div>
+          <div class="mockup-phases">
+            <span class="mockup-phase done"><span class="mockup-phase-num">01</span>소개</span>
+            <span class="mockup-phase active"><span class="mockup-phase-num">02</span>탐구</span>
+            <span class="mockup-phase"><span class="mockup-phase-num">03</span>자유대화</span>
+            <span class="mockup-phase"><span class="mockup-phase-num">04</span>마무리</span>
           </div>
           <div class="mockup-body">
             <svg class="mockup-qr" viewBox="0 0 120 120" role="img" aria-label="QR 미리보기">
@@ -988,16 +1031,30 @@
               <div class="mockup-chip host">
                 <span class="mockup-chip-avatar">J</span>
                 <span>진호</span>
-                <span class="mockup-chip-mark">HOST</span>
+                <span class="mockup-chip-mark">👑 호스트</span>
               </div>
               <div class="mockup-chip">
                 <span class="mockup-chip-avatar">S</span>
                 <span>서연</span>
               </div>
+              <div class="mockup-chip">
+                <span class="mockup-chip-avatar">M</span>
+                <span>민지</span>
+              </div>
+              <div class="mockup-chip">
+                <span class="mockup-chip-avatar">D</span>
+                <span>도윤</span>
+              </div>
             </div>
           </div>
-          <div>
-            <div class="mockup-vote-label">Q 3 / 10 · 실시간 투표</div>
+          <div class="mockup-stats-row">
+            <span>👥 <strong>4</strong>명</span>
+            <span>📷 <strong>3</strong></span>
+            <span>🗳 <strong>60%</strong></span>
+            <span>💘 <strong>1</strong>쌍</span>
+          </div>
+          <div style="margin-top:14px;">
+            <div class="mockup-vote-label">Q 3 / 5 · 실시간 투표</div>
             <div class="mockup-question">주말에 더 끌리는 건? 조용한 카페 vs 사람 많은 펍</div>
             <div class="mockup-bars">
               <div class="mockup-bar a">
