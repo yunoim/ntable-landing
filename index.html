@@ -814,6 +814,56 @@
       min-width: 200px;
     }
     .compare-table .note { font-size: 10px; color: #c0c0c0; display: block; margin-top: 2px; }
+
+    /* 경쟁사 비교표 — 모바일 카드화 (가로 스크롤 안티패턴 제거) */
+    @media (max-width: 768px) {
+      .compare-table-wrap { overflow-x: visible; border-radius: 0; background: transparent; border: none; }
+      .compare-table { min-width: 0; border-collapse: separate; }
+      .compare-table thead { display: none; }
+      .compare-table, .compare-table tbody, .compare-table tr, .compare-table td { display: block; }
+      .compare-table tr {
+        margin-bottom: 14px;
+        padding: 16px;
+        background: rgba(255,255,255,0.025);
+        border: 1px solid rgba(212,168,67,0.25);
+        border-radius: 14px;
+      }
+      .compare-table td {
+        border: none;
+        padding: 8px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+        color: #e8e8e8;
+      }
+      .compare-table td:not(.axis)::before {
+        content: attr(data-label);
+        color: #c0c0c0;
+        font-size: 12px;
+        font-weight: 500;
+        flex-shrink: 0;
+      }
+      .compare-table td.me::before { color: #e8b84b; font-weight: 700; }
+      .compare-table td.axis {
+        font-size: 12px;
+        color: #d4a843;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0 0 10px 0;
+        margin-bottom: 8px;
+        border-bottom: 1px solid rgba(212,168,67,0.22);
+        display: block;
+      }
+      .compare-table td .note {
+        display: block;
+        font-size: 10px;
+        margin-top: 4px;
+        color: #9aa0ac;
+      }
+    }
     .compare-note {
       margin-top: 14px;
       font-size: 11px; color: #c0c0c0;
@@ -1322,43 +1372,43 @@
         <tbody>
           <tr>
             <td class="axis">호스트 셀프 오픈</td>
-            <td class="me strong">○ 누구나 가능</td>
-            <td>△ 심사</td>
-            <td>○ 자유</td>
-            <td>× 큐레이션</td>
-            <td>× 큐레이션</td>
+            <td class="me strong" data-label="ntable">○ 누구나 가능</td>
+            <td data-label="문토">△ 심사</td>
+            <td data-label="소모임">○ 자유</td>
+            <td data-label="트레바리">× 큐레이션</td>
+            <td data-label="넷플연가">× 큐레이션</td>
           </tr>
           <tr>
             <td class="axis">실시간 성향 매칭</td>
-            <td class="me strong">○ AI 매칭</td>
-            <td>× 없음</td>
-            <td>× 없음</td>
-            <td>× 없음</td>
-            <td>△ 수기 매칭</td>
+            <td class="me strong" data-label="ntable">○ AI 매칭</td>
+            <td data-label="문토">× 없음</td>
+            <td data-label="소모임">× 없음</td>
+            <td data-label="트레바리">× 없음</td>
+            <td data-label="넷플연가">△ 수기 매칭</td>
           </tr>
           <tr>
             <td class="axis">구조화된 진행 장치</td>
-            <td class="me strong">○ 12개 장치</td>
-            <td>× 자유</td>
-            <td>× 자유</td>
-            <td>△ 북토크 포맷</td>
-            <td>△ 큐레이션</td>
+            <td class="me strong" data-label="ntable">○ 12개 장치</td>
+            <td data-label="문토">× 자유</td>
+            <td data-label="소모임">× 자유</td>
+            <td data-label="트레바리">△ 북토크 포맷</td>
+            <td data-label="넷플연가">△ 큐레이션</td>
           </tr>
           <tr>
             <td class="axis">호스트 데이터 활용</td>
-            <td class="me strong">◐ AI 분석 카드<span class="note">v1 · 확장 예정</span></td>
-            <td>× 없음</td>
-            <td>× 없음</td>
-            <td>× 없음</td>
-            <td>× 없음</td>
+            <td class="me strong" data-label="ntable">◐ AI 분석 카드<span class="note">v1 · 확장 예정</span></td>
+            <td data-label="문토">× 없음</td>
+            <td data-label="소모임">× 없음</td>
+            <td data-label="트레바리">× 없음</td>
+            <td data-label="넷플연가">× 없음</td>
           </tr>
           <tr>
             <td class="axis">진입 마찰</td>
-            <td class="me strong">○ 회원가입·결제정보·앱 모두 불필요</td>
-            <td>△ 회원가입 + 앱 설치</td>
-            <td>△ 회원가입 + 앱 설치</td>
-            <td>△ 회원가입 + 결제</td>
-            <td>△ 회원가입 + 결제</td>
+            <td class="me strong" data-label="ntable">○ 회원가입·결제정보·앱 모두 불필요</td>
+            <td data-label="문토">△ 회원가입 + 앱 설치</td>
+            <td data-label="소모임">△ 회원가입 + 앱 설치</td>
+            <td data-label="트레바리">△ 회원가입 + 결제</td>
+            <td data-label="넷플연가">△ 회원가입 + 결제</td>
           </tr>
         </tbody>
       </table>
