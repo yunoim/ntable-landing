@@ -297,7 +297,7 @@
     #stats { padding: 56px 32px; border-top: 1px solid rgba(212,168,67,0.45); border-bottom: 1px solid rgba(212,168,67,0.45); background: #131c33; }
     .stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 40px; }
     .stat-item { text-align: center; }
-    .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 700; color: #d4a843; line-height: 1; margin-bottom: 10px; }
+    .stat-number { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 700; color: #d4a843; line-height: 1; margin-bottom: 10px; font-variant-numeric: lining-nums tabular-nums; font-feature-settings: 'lnum' 1, 'tnum' 1; }
     .stat-label { font-size: 13px; font-weight: 300; color: #d0d0d0; line-height: 1.55; }
 
     /* SECTION COMMON */
@@ -327,6 +327,7 @@
     /* SOLUTION */
     .solution-wrap { margin-top: 56px; }
     .solution-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+    .solution-steps.five-cols { grid-template-columns: repeat(5,1fr); }
     .solution-step {
       background: #131c33; border: 1px solid rgba(212,168,67,0.45);
       border-radius: var(--radius-lg); padding: 26px 22px;
@@ -340,7 +341,8 @@
     }
     .solution-step:hover::after { opacity: 1; }
     .solution-step:hover { background: #1a2540; border-color: rgba(212,168,67,0.38); }
-    .step-num { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #d4a843; letter-spacing: 0.1em; margin-bottom: 12px; }
+    .step-num { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #d4a843; letter-spacing: 0.1em; margin-bottom: 12px; font-variant-numeric: lining-nums tabular-nums; font-feature-settings: 'lnum' 1, 'tnum' 1; }
+    .five-cols .step-num { font-size: 28px; line-height: 1; letter-spacing: normal; margin-bottom: 14px; }
     .step-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #ffffff; margin-bottom: 10px; line-height: 1.3; }
     .step-body { font-size: 13px; font-weight: 300; color: #c0c0c0; line-height: 1.78; }
 
@@ -348,7 +350,7 @@
     .roadmap-list { display: flex; flex-direction: column; }
     .roadmap-item { display: grid; grid-template-columns: 150px 1fr; gap: 36px; padding: 36px 0; border-bottom: 1px solid rgba(212,168,67,0.09); align-items: start; }
     .roadmap-item:last-child { border-bottom: none; }
-    .roadmap-phase { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: #d4a843; display: flex; flex-direction: column; gap: 4px; padding-top: 2px; }
+    .roadmap-phase { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: #d4a843; display: flex; flex-direction: column; gap: 4px; padding-top: 2px; font-variant-numeric: lining-nums tabular-nums; font-feature-settings: 'lnum' 1, 'tnum' 1; }
     .roadmap-phase span { font-family: 'DM Sans', sans-serif; font-size: 11px; letter-spacing: 0.1em; color: #c0c0c0; font-weight: 400; }
     .roadmap-content-title { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600; color: #ffffff; margin-bottom: 10px; line-height: 1.3; }
     .roadmap-content-body { font-size: 14px; font-weight: 300; color: #e8e8e8; line-height: 1.85; margin-bottom: 16px; }
@@ -515,8 +517,13 @@
     }
     .mockup-chip.host { border-color: #e8b84b; background: rgba(212,168,67,0.12); }
     .mockup-chip.host .mockup-chip-mark {
-      margin-left: auto; font-size: 9px; color: #e8b84b;
-      letter-spacing: 0.04em;
+      margin-left: auto;
+      padding: 2px 7px;
+      background: rgba(212,168,67,0.22);
+      border-radius: 999px;
+      font-size: 9px; color: #e8b84b;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
     }
     /* 단계 네비 스트립 */
     .mockup-phases {
@@ -534,6 +541,8 @@
       background: rgba(212,168,67,0.08); color: #828aa0;
       display: inline-flex; align-items: center; justify-content: center;
       font-size: 9px; font-weight: 700;
+      font-variant-numeric: lining-nums tabular-nums;
+      font-feature-settings: 'lnum' 1, 'tnum' 1;
     }
     .mockup-phase.active { color: #e8b84b; }
     .mockup-phase.active .mockup-phase-num {
@@ -1048,10 +1057,9 @@
             </div>
           </div>
           <div class="mockup-stats-row">
-            <span>👥 <strong>4</strong>명</span>
-            <span>📷 <strong>3</strong></span>
-            <span>🗳 <strong>60%</strong></span>
-            <span>💘 <strong>1</strong>쌍</span>
+            <span>👥 <strong>4</strong>명 참여</span>
+            <span>🗳 투표 진행 <strong>60%</strong></span>
+            <span>💘 매칭 <strong>1</strong>쌍</span>
           </div>
           <div style="margin-top:14px;">
             <div class="mockup-vote-label">Q 3 / 5 · 실시간 투표</div>
@@ -1083,7 +1091,7 @@
   <div class="stats-inner reveal">
     <div class="stats-badge">
       <span class="stats-badge-dot"></span>
-      Phase 1 · 지금 운영 중 · 첫 모임 모집 전
+      Phase 1 — 첫 모임 준비 중
     </div>
     <div>
       <div class="live-stats" id="liveStats" data-state="empty" aria-live="polite">
@@ -1107,12 +1115,12 @@
     </div>
     <div class="stats-grid">
       <div class="stat-item">
-        <div class="stat-number">12개</div>
-        <div class="stat-label">진행 장치<br>보통 모임엔 없는 12개 장치</div>
+        <div class="stat-number">12</div>
+        <div class="stat-label">진행 장치<br>보통 모임엔 없는 장치 12개</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">5종</div>
-        <div class="stat-label">모임별 팩<br>둘이서·아이스브레이커·소개팅·재회·팀빌딩</div>
+        <div class="stat-number">5</div>
+        <div class="stat-label">모임 팩<br>둘이서·첫만남·소개팅·재회·팀빌딩</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">즉시</div>
@@ -1136,7 +1144,7 @@
   </p>
   <div class="problem-cards reveal">
     <div class="problem-card">
-      <div class="problem-card-icon">🎯</div>
+      <div class="problem-card-icon">🤹</div>
       <h3>호스트 의존</h3>
       <p>재밌는 모임은 결국 능숙한 호스트 한 명에서 나옵니다. 그런 사람은 드물고, 가르쳐 만드는 것도 쉽지 않습니다.</p>
       <div class="problem-example">😓 "지난번엔 그렇게 재밌었는데, 오늘은 왜 이렇게 어색하지."</div>
@@ -1148,7 +1156,7 @@
       <div class="problem-example">😓 "말 많은 사람만 기억에 남고, 나는 그냥 앉아만 있다가 왔어."</div>
     </div>
     <div class="problem-card">
-      <div class="problem-card-icon">📉</div>
+      <div class="problem-card-icon">🔗</div>
       <h3>사람에 의존하는 구조</h3>
       <p>좋은 모임을 만들려면 좋은 호스트가 필요합니다. 사람에 기대는 운영은 품질도, 규모도 키울 수 없습니다.</p>
       <div class="problem-example">😓 "에이스 호스트 한 명이 그만두면, 모임은 거기서 끝이다."</div>
@@ -1214,7 +1222,7 @@
           <span class="roadmap-tag">① QR 자동 입장</span>
           <span class="roadmap-tag">② 익명 닉네임</span>
           <span class="roadmap-tag">③ 카드 정보 hide 옵션</span>
-          <span class="roadmap-tag">사진 업로드 선택</span>
+          <span class="roadmap-tag">아바타 이모지 선택</span>
         </div>
       </div>
     </div>
@@ -1227,21 +1235,20 @@
         <div class="roadmap-tags">
           <span class="roadmap-tag">④ 1~15문항 A/B 투표</span>
           <span class="roadmap-tag">⑤ 실시간 호환도 순위</span>
-          <span class="roadmap-tag">답 변경 가능</span>
+          <span class="roadmap-tag">언제든 다시 선택</span>
         </div>
       </div>
     </div>
 
     <div class="roadmap-item">
-      <div class="roadmap-phase">Step 03<span>자유 대화</span></div>
+      <div class="roadmap-phase">Step 03<span>자유대화</span></div>
       <div class="roadmap-content">
-        <div class="roadmap-content-title">대화가 가라앉으면 플랫폼이 먼저 개입합니다</div>
-        <div class="roadmap-content-body">호스트가 모임 성격에 맞춰 도구를 켭니다. 타이머로 흐름을 잡고, 익명 채팅으로 말 못한 이야기를 보내고, 주제 카드로 침묵을 깹니다. 자리가 한쪽에 쏠리면 자리 셔플 넛지가 자연스럽게 이동을 유도합니다.</div>
+        <div class="roadmap-content-title">대화가 끊기지 않도록 플랫폼이 도와줍니다</div>
+        <div class="roadmap-content-body">호스트가 모임 성격에 맞춰 도구를 켜둡니다. 타이머가 모두에게 동일하게 흐르고, 익명 채팅으로 말 못한 이야기를 보내고, 주제 카드로 새로운 대화 거리를 던집니다.</div>
         <div class="roadmap-tags">
           <span class="roadmap-tag">⑥ 자유대화 타이머</span>
           <span class="roadmap-tag">⑦ 익명 채팅</span>
           <span class="roadmap-tag">⑧ 주제 카드</span>
-          <span class="roadmap-tag">⑨ 자리 셔플 넛지</span>
         </div>
       </div>
     </div>
@@ -1249,13 +1256,13 @@
     <div class="roadmap-item">
       <div class="roadmap-phase">Step 04<span>마무리</span></div>
       <div class="roadmap-content">
-        <div class="roadmap-content-title">오늘의 주인공과 인연을 데이터가 뽑습니다</div>
-        <div class="roadmap-content-body">MVP 투표로 분위기를 가장 잘 이끈 참가자를 공개합니다. 사랑의 작대기는 서로가 서로를 고른 경우에만 양쪽에 매칭이 공개됩니다. 매칭 카드에는 닉네임·사진·공통 답변이 함께 노출되고, 양쪽이 인스타를 입력해야만 서로의 인스타가 자동으로 풀립니다.</div>
+        <div class="roadmap-content-title">오늘의 주인공과 인연을 데이터가 골라줍니다</div>
+        <div class="roadmap-content-body">MVP 투표로 분위기를 가장 잘 이끈 참가자를 공개하고, 사랑의 작대기로 서로가 서로를 고른 짝을 찾아냅니다. 매칭 카드에는 닉네임·아바타·공통 답변이 함께 보이고, 양쪽이 인스타를 입력하면 그 자리에서 서로의 인스타가 풀립니다.</div>
         <div class="roadmap-tags">
-          <span class="roadmap-tag">⑩ MVP 투표</span>
-          <span class="roadmap-tag">⑪ 사랑의 작대기 매칭</span>
-          <span class="roadmap-tag">⑫ 인스타 상호 공개</span>
-          <span class="roadmap-tag">AI 성향 카드</span>
+          <span class="roadmap-tag">⑨ MVP 투표</span>
+          <span class="roadmap-tag">⑩ 사랑의 작대기 매칭</span>
+          <span class="roadmap-tag">⑪ 인스타 상호 공개</span>
+          <span class="roadmap-tag">⑫ AI 성향 카드</span>
         </div>
       </div>
     </div>
@@ -1275,9 +1282,8 @@
       <div class="model-title">언제 어디서나 무료</div>
       <div class="model-body">참가비는 호스트가 직접 정하고 플랫폼을 거치지 않습니다. 게스트는 익명으로 참가하고, 호스트는 누구나 모임을 열 수 있습니다.</div>
       <div class="model-plans">
+        <div class="model-plan-row" style="border-bottom:1px solid rgba(212,168,67,0.18);padding-bottom:10px;margin-bottom:6px;"><span class="model-plan-name"><strong>진입 마찰 0</strong> — 회원가입·결제정보·앱 설치 모두 불필요</span></div>
         <div class="model-plan-row"><span class="model-plan-name">🔒 익명 보장 (모임 안에서만 닉네임)</span></div>
-        <div class="model-plan-row"><span class="model-plan-name">💳 카드 등록·결제 정보 불필요</span></div>
-        <div class="model-plan-row"><span class="model-plan-name">📱 앱 설치 불필요 — 웹에서 바로</span></div>
         <div class="model-plan-row"><span class="model-plan-name">👥 참가 인원 제한 없음</span></div>
         <div class="model-plan-row"><span class="model-plan-name">🛠 5종 모임 팩 + 진행 도구 풀세트</span></div>
         <div class="model-plan-row"><span class="model-plan-name">⏱️ 모임 종료 후 개인 데이터 자동 정리</span></div>
@@ -1288,7 +1294,7 @@
   <!-- 4사 비교표 — 비용 row 제거, 본질 차이만 -->
   <div class="compare-wrap reveal">
     <div class="compare-title">왜 <em>ntable</em>인가</div>
-    <div class="compare-sub">공개된 서비스 정책 기준 · 2026년 4월</div>
+    <div class="compare-sub">사람에 의존하지 않는 진행 엔진 · 진입 마찰 제로 · 정확한 매칭 — 다른 플랫폼과 본질 차이를 한 표로</div>
     <div class="compare-table-wrap">
       <table class="compare-table">
         <thead>
@@ -1370,7 +1376,7 @@
     <div class="engine-arrow">↓ 질문셋만 교체하면 ↓</div>
   </div>
   <div class="solution-wrap reveal" style="margin-top:24px;">
-    <div class="solution-steps">
+    <div class="solution-steps five-cols">
       <div class="solution-step">
         <div class="step-num">👫</div>
         <div class="step-title">둘이서</div>
@@ -1404,19 +1410,19 @@
   <div class="solution-wrap reveal">
     <div class="solution-steps">
       <div class="solution-step">
-        <div class="step-num">1순위</div>
+        <div class="step-num">단기</div>
         <div class="step-title">취미·스터디 팩</div>
         <div class="step-body">독서·운동·여행·음식·영화·가족 모임 등 다양한 팩 추가<span class="step-status">개발 중</span></div>
       </div>
       <div class="solution-step">
-        <div class="step-num">2순위</div>
+        <div class="step-num">단기</div>
         <div class="step-title">팀 랜덤 배정</div>
         <div class="step-body">참가자 성향·조건을 섞어 균형 있는 팀을 자동 편성<span class="step-status">개발 중</span></div>
       </div>
       <div class="solution-step">
         <div class="step-num">중기</div>
         <div class="step-title">퀴즈 · OX 게임</div>
-        <div class="step-body">실시간 정답 집계와 순위 · 학습·팀빌딩 범용<span class="step-status">예정</span></div>
+        <div class="step-body">실시간 정답 집계와 순위 — 학습·팀빌딩 범용<span class="step-status">예정</span></div>
       </div>
       <div class="solution-step">
         <div class="step-num">중기</div>
@@ -1426,7 +1432,7 @@
       <div class="solution-step">
         <div class="step-num">장기</div>
         <div class="step-title">마피아·역할극</div>
-        <div class="step-body">플랫폼이 진행자를 대신하는 본격 역할극 게임<span class="step-status">장기 로드맵</span></div>
+        <div class="step-body">플랫폼이 진행자를 대신하는 본격 역할극 게임<span class="step-status">예정</span></div>
       </div>
     </div>
   </div>
@@ -1593,11 +1599,16 @@
     function render(rooms, people) {
       const isEmpty = (rooms === 0 && people === 0);
 
-      // STATS 섹션 위젯
+      // STATS 섹션 위젯 — 0/0이면 통째로 숨김 (의미 없는 0 노출 방지)
       if (wrap && roomsEl && partEl) {
-        animateCount(roomsEl, state.rooms, rooms);
-        animateCount(partEl, state.people, people);
-        wrap.dataset.state = isEmpty ? 'empty' : 'live';
+        if (isEmpty) {
+          wrap.style.display = 'none';
+        } else {
+          wrap.style.display = '';
+          animateCount(roomsEl, state.rooms, rooms);
+          animateCount(partEl, state.people, people);
+          wrap.dataset.state = 'live';
+        }
       }
 
       // Hero 배지
@@ -1636,8 +1647,15 @@
         const cumPeople = Number(data.unique_people ?? 0);
         state.lastFetchAt = Date.now();
         render(rooms, people);
-        if (cumRoomsEl) animateCount(cumRoomsEl, state.cumRooms, cumRooms);
-        if (cumPeopleEl) animateCount(cumPeopleEl, state.cumPeople, cumPeople);
+        // 누적 통계도 의미 없는 값(둘 다 0)이면 통째로 숨김
+        const cumWrap = document.getElementById('cumulativeStats');
+        if (cumRooms === 0 && cumPeople === 0) {
+          if (cumWrap) cumWrap.style.display = 'none';
+        } else {
+          if (cumWrap) cumWrap.style.display = '';
+          if (cumRoomsEl) animateCount(cumRoomsEl, state.cumRooms, cumRooms);
+          if (cumPeopleEl) animateCount(cumPeopleEl, state.cumPeople, cumPeople);
+        }
         state.cumRooms = cumRooms;
         state.cumPeople = cumPeople;
         renderMeta();
