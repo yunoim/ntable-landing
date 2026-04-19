@@ -351,7 +351,8 @@
     .solution-step:hover::after { opacity: 1; }
     .solution-step:hover { background: #1a2540; border-color: rgba(212,168,67,0.38); }
     .step-num { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; color: #d4a843; letter-spacing: 0.1em; margin-bottom: 12px; font-variant-numeric: lining-nums tabular-nums; font-feature-settings: 'lnum' 1, 'tnum' 1; }
-    .five-cols .step-num { font-size: 28px; line-height: 1; letter-spacing: normal; margin-bottom: 14px; }
+    /* 이모지 전용 step-num — .emoji 클래스가 있을 때만 큰 사이즈 */
+    .step-num.emoji { font-size: 28px; line-height: 1; letter-spacing: normal; margin-bottom: 14px; font-family: inherit; }
     .step-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #ffffff; margin-bottom: 10px; line-height: 1.3; }
     .step-body { font-size: 13px; font-weight: 300; color: #c0c0c0; line-height: 1.78; }
 
@@ -1266,8 +1267,8 @@
   </div>
   <div class="section-cta reveal">
     <div>
-      <a href="https://app.ntable.kr">지금 바로 모임 열어보기 →</a>
-      <span class="section-cta-note">닉네임만 있으면 시작 · 로그인 불필요</span>
+      <a href="https://app.ntable.kr">지금 바로 모임 열어보기</a>
+      <span class="section-cta-note">회원가입 없이 · 3초면 시작</span>
     </div>
   </div>
 </section>
@@ -1424,8 +1425,8 @@
 
   <div class="section-cta reveal">
     <div>
-      <a href="https://app.ntable.kr">지금 무료로 시작하기 →</a>
-      <span class="section-cta-note">카드 등록 불필요 · 인원 제한 없음</span>
+      <a href="https://app.ntable.kr">지금 무료로 시작하기</a>
+      <span class="section-cta-note">회원가입 · 결제정보 · 앱 모두 없이</span>
     </div>
   </div>
 </section>
@@ -1446,27 +1447,27 @@
   <div class="solution-wrap reveal" style="margin-top:24px;">
     <div class="solution-steps five-cols">
       <div class="solution-step">
-        <div class="step-num">👫</div>
+        <div class="step-num emoji">👫</div>
         <div class="step-title">둘이서</div>
         <div class="step-body">2인 전용 — 가벼운 대화부터 깊은 질문까지<span class="step-status">지금 사용 가능</span></div>
       </div>
       <div class="solution-step">
-        <div class="step-num">🤝</div>
+        <div class="step-num emoji">🤝</div>
         <div class="step-title">처음 만나는 사이</div>
         <div class="step-body">아이스브레이커 — 5분 안에 어색함을 해소<span class="step-status">지금 사용 가능</span></div>
       </div>
       <div class="solution-step">
-        <div class="step-num">💘</div>
+        <div class="step-num emoji">💘</div>
         <div class="step-title">소개팅·연애</div>
         <div class="step-body">밸런스 게임 + 사랑의 작대기 매칭 + 인스타 상호 공개<span class="step-status">지금 사용 가능</span></div>
       </div>
       <div class="solution-step">
-        <div class="step-num">🍻</div>
+        <div class="step-num emoji">🍻</div>
         <div class="step-title">오랜만의 만남</div>
         <div class="step-body">친구 재회 — 그동안 어떻게 변했는지 탐구<span class="step-status">지금 사용 가능</span></div>
       </div>
       <div class="solution-step">
-        <div class="step-num">💼</div>
+        <div class="step-num emoji">💼</div>
         <div class="step-title">팀·회사</div>
         <div class="step-body">팀빌딩 — 업무 스타일 탐구·신입 OT·워크숍<span class="step-status">지금 사용 가능</span></div>
       </div>
