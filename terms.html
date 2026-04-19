@@ -19,8 +19,8 @@
   nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(14,22,40,0.97); border-bottom:1px solid rgba(212,168,67,0.45); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
   .nav-inner { max-width:1100px; margin:0 auto; padding:0 32px; height:62px; display:flex; align-items:center; justify-content:space-between; }
   .nav-logo { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:600; color:#d4a843; letter-spacing:0.08em; text-decoration:none; }
-  .nav-cta { font-size:13px; font-weight:600; padding:8px 20px; border:1.5px solid #d4a843; border-radius:40px; color:#e8b84b; text-decoration:none; transition:background 0.32s cubic-bezier(0.4,0,0.2,1), border-color 0.32s cubic-bezier(0.4,0,0.2,1); }
-  .nav-cta:hover { background:rgba(232,184,75,0.18); border-color:#e8b84b; }
+  .nav-cta-primary { font-size:13px; font-weight:700; padding:8px 20px; background:#e8b84b; color:#0a0f1e; border-radius:40px; text-decoration:none; box-shadow:0 2px 12px rgba(212,168,67,0.4); transition:transform 0.32s cubic-bezier(0.4,0,0.2,1), box-shadow 0.32s cubic-bezier(0.4,0,0.2,1); }
+  .nav-cta-primary:hover { transform:translateY(-1px); box-shadow:0 4px 18px rgba(212,168,67,0.55); }
   .container { max-width:780px; margin:0 auto; padding:140px 40px 100px; }
   .page-tag { font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:0.4em; color:#d4a843; text-transform:uppercase; margin-bottom:20px; display:flex; align-items:center; gap:12px; }
   .page-tag::before { content:''; width:24px; height:1px; background:#d4a843; }
@@ -60,7 +60,7 @@
 <nav>
   <div class="nav-inner">
     <a href="/" class="nav-logo">ntable</a>
-    <a href="/" class="nav-cta">← 홈으로</a>
+    <a href="/" class="nav-cta-primary">홈으로</a>
   </div>
 </nav>
 
