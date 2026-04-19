@@ -5,7 +5,7 @@
 **레포:** ntable-landing (ntable.kr 랜딩페이지 전용)
 **배포:** Cloudflare Workers (GitHub Actions 자동배포)
 **도메인:** ntable.kr
-**법인명:** MLPC (More Life People Connect)
+**법인명:** MLPC Inc. (More Life. People Connect.)
 **사업자:** 286-87-02414
 
 이 레포는 ntable.kr 랜딩페이지만 관리한다. FastAPI 운영 서버(ntable), 데모(ntable-app)와 완전 분리.
