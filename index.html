@@ -62,6 +62,8 @@
       font-family: 'DM Sans', 'Noto Serif KR', sans-serif;
       line-height: 1.7;
       overflow-x: hidden;
+      word-break: keep-all; /* 한글 — 단어 단위 줄바꿈 기본화 (글자 단위 ripping 방지) */
+      overflow-wrap: break-word;
     }
     a { color: inherit; text-decoration: none; }
 
@@ -328,11 +330,18 @@
     .solution-wrap { margin-top: 56px; }
     .solution-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
     .solution-steps.five-cols { grid-template-columns: repeat(5,1fr); }
+    /* Expansion 5팩 반응형 — 모바일 1열, 태블릿 2~3열 */
+    @media (max-width: 1024px) { .solution-steps.five-cols { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width: 640px)  { .solution-steps.five-cols { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 420px)  { .solution-steps.five-cols { grid-template-columns: 1fr; } }
     .solution-step {
       background: #131c33; border: 1px solid rgba(212,168,67,0.45);
       border-radius: var(--radius-lg); padding: 26px 22px;
       position: relative; overflow: hidden;
       transition: border-color var(--transition), background var(--transition);
+      min-width: 0; /* grid 자식 overflow 방어 */
+      word-break: keep-all; /* 한글 단어 단위 줄바꿈 유지 (글자 ripping 방지) */
+      overflow-wrap: anywhere;
     }
     .solution-step::after {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
@@ -410,6 +419,9 @@
     .footer-info { font-size: 12px; font-weight: 300; color: #c0c0c0; line-height: 1.8; text-align: right; }
     .footer-info a { color: inherit; transition: color var(--transition); }
     .footer-info a:hover { color: #d4a843; }
+
+    /* grid 자식 overflow 방어 + 한글 줄바꿈 단어 단위 */
+    .stats-grid > *, .problem-cards > *, .model-grid > *, .solution-steps > * { min-width: 0; }
 
     /* Responsive */
     @media (max-width: 960px) {
@@ -1408,7 +1420,7 @@
   <h3 class="reveal" style="font-family: 'Cormorant Garamond', serif; color: #ffffff; font-size: clamp(26px,3.6vw,34px); margin-top: 76px; margin-bottom: 10px; font-weight: 600;">퍼실리테이션 툴킷 로드맵</h3>
   <p class="section-body reveal" style="margin-bottom: 32px;">ntable은 모임 팩과 진행 도구 단위로 늘어납니다. 호스트가 모임 성격에 맞춰 고를 수 있는 툴킷이 계속 추가됩니다.</p>
   <div class="solution-wrap reveal">
-    <div class="solution-steps">
+    <div class="solution-steps five-cols">
       <div class="solution-step">
         <div class="step-num">단기</div>
         <div class="step-title">취미·스터디 팩</div>
