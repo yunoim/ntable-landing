@@ -3,11 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light only">
+<meta name="color-scheme" content="only dark">
 <title>개인정보처리방침 — ntable</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Serif+KR:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
+  /* OS/브라우저 강제 다크모드 오버라이드 차단 */
+  :root { color-scheme: only dark; }
+  html { color-scheme: only dark; forced-color-adjust: none; -webkit-text-size-adjust: 100%; }
+  input, textarea, select, button { color-scheme: only dark; forced-color-adjust: none; }
+  @media (prefers-color-scheme: light) { html { color-scheme: only dark !important; } }
   body {
     background: #0e1628;
     color: #ffffff;

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light only" />
+  <meta name="color-scheme" content="only dark" />
   <title>ntable — 누가 열어도 재밌는 모임</title>
   <meta name="description" content="누가 열어도 재밌는 모임 — ntable. 누구나 호스트가 되는 소셜 모임 플랫폼. 모임장 역량에 관계없이 플랫폼이 진행을 도와준다." />
   <link rel="canonical" href="https://ntable.kr/" />
@@ -55,7 +55,11 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    /* OS/브라우저 강제 다크모드 오버라이드 차단 — 디자인된 색 그대로 유지 */
+    :root { color-scheme: only dark; }
+    html { scroll-behavior: smooth; color-scheme: only dark; forced-color-adjust: none; -webkit-text-size-adjust: 100%; }
+    input, textarea, select, button { color-scheme: only dark; forced-color-adjust: none; }
+    @media (prefers-color-scheme: light) { html { color-scheme: only dark !important; } }
     body {
       background: #0e1628;
       color: #e0e0e0;

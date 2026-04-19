@@ -3,11 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light only">
+<meta name="color-scheme" content="only dark">
 <title>이용약관 — ntable</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Serif+KR:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
+  /* OS/브라우저 강제 다크모드 오버라이드 차단 */
+  :root { color-scheme: only dark; }
+  html { color-scheme: only dark; forced-color-adjust: none; -webkit-text-size-adjust: 100%; }
+  input, textarea, select, button { color-scheme: only dark; forced-color-adjust: none; }
+  @media (prefers-color-scheme: light) { html { color-scheme: only dark !important; } }
   body { background:#0e1628; color:#ffffff; font-family:'Noto Serif KR',serif; font-weight:300; line-height:1.9; }
   body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.4; }
   nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:24px 60px; display:flex; justify-content:space-between; align-items:center; background:rgba(14,22,40,0.97); border-bottom:1px solid rgba(255,255,255,0.22); backdrop-filter:blur(12px); }
