@@ -824,27 +824,35 @@
 
     /* 경쟁사 비교표 — 모바일 카드화 (가로 스크롤 안티패턴 제거) */
     @media (max-width: 768px) {
-      .compare-table-wrap { overflow-x: visible; border-radius: 0; background: transparent; border: none; }
-      .compare-table { min-width: 0; border-collapse: separate; }
+      .compare-wrap { max-width: 100%; overflow-x: hidden; }
+      .compare-table-wrap { overflow-x: hidden; border-radius: 0; background: transparent; border: none; max-width: 100%; }
+      .compare-table { min-width: 0; width: 100%; border-collapse: separate; table-layout: fixed; }
       .compare-table thead { display: none; }
-      .compare-table, .compare-table tbody, .compare-table tr, .compare-table td { display: block; }
+      .compare-table, .compare-table tbody, .compare-table tr, .compare-table td { display: block; max-width: 100%; box-sizing: border-box; }
       .compare-table tr {
         margin-bottom: 14px;
         padding: 16px;
         background: rgba(255,255,255,0.025);
         border: 1px solid rgba(212,168,67,0.25);
         border-radius: 14px;
+        width: 100%;
+        min-width: 0;
       }
       .compare-table td {
         border: none;
         padding: 8px 0;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
-        align-items: center;
-        gap: 12px;
+        align-items: baseline;
+        gap: 6px 12px;
         font-size: 13px;
         color: #e8e8e8;
+        min-width: 0;
+        word-break: keep-all;
+        overflow-wrap: anywhere;
       }
+      .compare-table td > * { min-width: 0; }
       .compare-table td:not(.axis)::before {
         content: attr(data-label);
         color: #c0c0c0;
