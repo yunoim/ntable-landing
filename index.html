@@ -761,6 +761,12 @@
       .roadmap-list::before { left: 4px; top: 10px; bottom: 10px; }
       .roadmap-item::before { left: -1px; top: 6px; }
     }
+    /* 모바일 (< 768px): 타임라인 세로선·dot 숨김. Step 구분은 여백만 */
+    @media (max-width: 768px) {
+      .roadmap-list::before { display: none; }
+      .roadmap-item::before { display: none; }
+      .roadmap-item { padding: 26px 0; }
+    }
 
     /* ───────── BUSINESS MODEL 4사 비교표 ───────── */
     .compare-wrap { margin-top: 72px; }
