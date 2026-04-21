@@ -26,10 +26,10 @@
   </g>
   <g font-family="'Cormorant Garamond', 'Noto Serif KR', serif" font-weight="700">
     <text x="96" y="270" font-size="104" fill="#f5f2ec">누구나</text>
-    <text x="96" y="390" font-size="104" font-style="italic" fill="url(#shimmer)">호스트가 되는 모임</text>
+    <text x="96" y="390" font-size="104" font-style="italic" fill="url(#shimmer)">모임장이 되는 모임</text>
   </g>
   <g font-family="'DM Sans', 'Noto Sans KR', sans-serif">
-    <text x="96" y="475" font-size="26" fill="#f5f2ec" opacity="0.85">호스트가 '다음' 버튼만 누르는 오프라인 모임 앱.</text>
+    <text x="96" y="475" font-size="26" fill="#f5f2ec" opacity="0.85">모임장이 '다음' 버튼만 누르는 오프라인 모임 앱.</text>
     <text x="96" y="510" font-size="22" fill="#f5f2ec" opacity="0.6">아이스브레이킹·대화·매칭·결과 정리까지 앱이 맡아요.</text>
   </g>
   <line x1="96" y1="555" x2="1104" y2="555" stroke="#d4a843" stroke-opacity="0.3"/>
