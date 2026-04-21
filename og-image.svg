@@ -22,15 +22,15 @@
   <rect width="1200" height="630" fill="url(#orb1)"/>
   <rect width="1200" height="630" fill="url(#orb2)"/>
   <g font-family="'DM Sans', sans-serif">
-    <text x="96" y="128" font-size="17" font-weight="500" letter-spacing="4" fill="#f0ca60">SOCIAL GATHERING FACILITATOR</text>
+    <text x="96" y="128" font-size="17" font-weight="500" letter-spacing="4" fill="#f0ca60">NOJAM, NO PROBLEM</text>
   </g>
   <g font-family="'Cormorant Garamond', 'Noto Serif KR', serif" font-weight="700">
-    <text x="96" y="270" font-size="104" fill="#f5f2ec">누가 열어도</text>
-    <text x="96" y="390" font-size="104" font-style="italic" fill="url(#shimmer)">재밌는 모임</text>
+    <text x="96" y="270" font-size="104" fill="#f5f2ec">누구나 유잼</text>
+    <text x="96" y="390" font-size="104" font-style="italic" fill="url(#shimmer)">모임장이 되도록</text>
   </g>
   <g font-family="'DM Sans', 'Noto Sans KR', sans-serif">
-    <text x="96" y="475" font-size="26" fill="#f5f2ec" opacity="0.85">모임장 역량에 관계없이, 플랫폼이 진행을 도와준다.</text>
-    <text x="96" y="510" font-size="22" fill="#f5f2ec" opacity="0.6">누구나 호스트가 되는 소셜 모임 플랫폼.</text>
+    <text x="96" y="475" font-size="26" fill="#f5f2ec" opacity="0.85">노잼 인간도 모임장이 되는 앱.</text>
+    <text x="96" y="510" font-size="22" fill="#f5f2ec" opacity="0.6">아이스브레이킹·대화·매칭·결과 정리까지 앱이 맡아요.</text>
   </g>
   <line x1="96" y1="555" x2="1104" y2="555" stroke="#d4a843" stroke-opacity="0.3"/>
   <g>
