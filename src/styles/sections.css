@@ -54,6 +54,7 @@ section {
   color: var(--text-highlight);
   max-width: 600px;
   line-height: 1.9;
+  white-space: pre-line; /* 2026-04-22: YAML 의 \n 을 줄바꿈으로 렌더 — 두 문장 이상 카피 가독성. */
 }
 
 .section-cta {
