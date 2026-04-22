@@ -1,0 +1,93 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import '../styles/animations.css';
+import '../styles/sections.css';
+import { loadContent } from '../lib/loadContent';
+
+export interface Props {
+  locale?: string;
+  htmlLang?: string;
+  pageTitle?: string;
+  pageDescription?: string;
+}
+
+const { locale = 'ko', htmlLang, pageTitle, pageDescription } = Astro.props;
+const meta = loadContent('meta', locale);
+const title = pageTitle ?? meta.title;
+const description = pageDescription ?? meta.description;
+const lang = htmlLang ?? meta.lang;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: meta.organization.name,
+  slogan: meta.organization.slogan,
+  url: meta.organization.url,
+  logo: meta.organization.logo,
+  email: meta.organization.email,
+  description: meta.organization.description,
+  sameAs: meta.organization.same_as,
+};
+
+const faviconSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0f1e'/%3E%3Ctext x='50' y='72' font-size='68' text-anchor='middle' font-family='Cormorant Garamond, serif' font-weight='700' fill='%23d4a843'%3En%3C/text%3E%3C/svg%3E`;
+
+const fontsHref = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Noto+Serif+KR:wght@300;400;500;700&family=DM+Sans:wght@300;400;500;600&display=swap';
+---
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={meta.canonical} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={meta.og.type} />
+  <meta property="og:url" content={meta.og.url} />
+  <meta property="og:title" content={meta.og.title} />
+  <meta property="og:description" content={meta.og.description} />
+  <meta property="og:image" content={meta.og.image} />
+  <meta property="og:image:width" content={String(meta.og.image_width)} />
+  <meta property="og:image:height" content={String(meta.og.image_height)} />
+  <meta property="og:site_name" content={meta.og.site_name} />
+  <meta property="og:locale" content={meta.locale} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content={meta.twitter.card} />
+  <meta name="twitter:title" content={meta.twitter.title} />
+  <meta name="twitter:description" content={meta.twitter.description} />
+  <meta name="twitter:image" content={meta.twitter.image} />
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" type="image/svg+xml" href={faviconSvg} />
+
+  <!-- JSON-LD Organization -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href={fontsHref} rel="stylesheet" />
+
+  <slot name="head" />
+</head>
+<body>
+  <slot />
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>

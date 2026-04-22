@@ -1,0 +1,25 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { loadLegal } from '../lib/loadContent';
+
+const { frontmatter, html } = loadLegal('privacy', 'ko');
+---
+
+<LegalLayout title={frontmatter.title}>
+  <div class="page-tag">{frontmatter.page_tag}</div>
+  <h1>{frontmatter.title}</h1>
+  <p class="effective-date">시행일: {frontmatter.effective_date} &nbsp;|&nbsp; {frontmatter.company_label}</p>
+
+  <div class="toc">
+    <div class="toc-title">{frontmatter.toc_title}</div>
+    <ol>
+      {frontmatter.toc.map((item) => (
+        <li><a href={`#${item.anchor}`}>{item.label}</a></li>
+      ))}
+    </ol>
+  </div>
+
+  <div class="legal-body">
+    <Fragment set:html={html} />
+  </div>
+</LegalLayout>

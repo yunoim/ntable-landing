@@ -38,6 +38,135 @@ const { data } = Astro.props;
   </div>
 </div>
 
+<script>
+  // Live stats — polls #stats[data-api] every refresh_ms, updates Stats widget
+  // + Hero live badge. Zero-state suppresses widget; error-state falls back
+  // to #heroLive placeholder text.
+  (function () {
+    const statsEl = document.getElementById('stats');
+    if (!statsEl) return;
+    const api = statsEl.dataset.api || '';
+    const refreshMs = Number(statsEl.dataset.refreshMs || 30000);
+    const metaRefreshMs = Number(statsEl.dataset.metaRefreshMs || 5000);
+
+    const wrap = document.getElementById('liveStats');
+    const roomsEl = document.getElementById('liveRooms');
+    const partEl = document.getElementById('liveParticipants');
+    const metaEl = document.getElementById('liveStatsMeta');
+    const hero = document.getElementById('heroLive');
+    const heroText = document.getElementById('heroLiveText');
+    const cumRoomsEl = document.getElementById('cumRooms');
+    const cumPeopleEl = document.getElementById('cumPeople');
+    const cumWrap = document.getElementById('cumulativeStats');
+
+    if (!wrap && !hero) return;
+
+    const state: { rooms: number; people: number; cumRooms: number; cumPeople: number; lastFetchAt: number | null } = {
+      rooms: 0, people: 0, cumRooms: 0, cumPeople: 0, lastFetchAt: null,
+    };
+
+    const emptyHtml = hero?.dataset.emptyHtml || '';
+    const liveTemplate = hero?.dataset.liveTemplate || '';
+    const errorText = hero?.dataset.errorText || '';
+
+    function animateCount(el: HTMLElement | null, from: number, to: number, dur = 800) {
+      if (!el) return;
+      if (from === to) { el.textContent = String(to); return; }
+      const start = performance.now();
+      function step(now: number) {
+        const t = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        if (el) el.textContent = String(Math.round(from + (to - from) * eased));
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      el.classList.add('flash');
+      setTimeout(() => el.classList.remove('flash'), 700);
+    }
+
+    function formatRelative(ts: number | null) {
+      if (!ts) return '';
+      const diff = Math.max(0, Math.round((Date.now() - ts) / 1000));
+      if (diff < 5) return '방금 업데이트';
+      if (diff < 60) return `${diff}초 전 업데이트`;
+      const m = Math.floor(diff / 60);
+      return `${m}분 전 업데이트`;
+    }
+
+    function render(rooms: number, people: number) {
+      const isEmpty = rooms === 0 && people === 0;
+      if (wrap && roomsEl && partEl) {
+        if (isEmpty) {
+          (wrap as HTMLElement).style.display = 'none';
+        } else {
+          (wrap as HTMLElement).style.display = '';
+          animateCount(roomsEl, state.rooms, rooms);
+          animateCount(partEl, state.people, people);
+          wrap.dataset.state = 'live';
+        }
+      }
+      if (hero && heroText) {
+        if (isEmpty) {
+          heroText.innerHTML = emptyHtml;
+          hero.dataset.state = 'empty';
+        } else {
+          heroText.innerHTML = liveTemplate
+            .replace('{rooms}', String(rooms))
+            .replace('{people}', String(people));
+          const prevState = hero.dataset.state;
+          hero.dataset.state = 'live';
+          if (prevState !== 'live' || state.rooms !== rooms || state.people !== people) {
+            hero.dataset.state = 'flash';
+            setTimeout(() => { if (hero) hero.dataset.state = 'live'; }, 600);
+          }
+        }
+      }
+      state.rooms = rooms;
+      state.people = people;
+    }
+
+    function renderMeta() {
+      if (metaEl) metaEl.textContent = formatRelative(state.lastFetchAt);
+    }
+
+    async function tick() {
+      try {
+        const res = await fetch(api, { cache: 'no-store' });
+        if (!res.ok) throw new Error('stats not ok');
+        const data = await res.json();
+        const rooms = Number(data.active_rooms ?? 0);
+        const people = Number(data.participants ?? 0);
+        const cumRooms = Number(data.total_rooms ?? 0);
+        const cumPeople = Number(data.unique_people ?? 0);
+        state.lastFetchAt = Date.now();
+        render(rooms, people);
+        if (cumRooms === 0 && cumPeople === 0) {
+          if (cumWrap) (cumWrap as HTMLElement).style.display = 'none';
+        } else {
+          if (cumWrap) (cumWrap as HTMLElement).style.display = '';
+          if (cumRoomsEl) animateCount(cumRoomsEl, state.cumRooms, cumRooms);
+          if (cumPeopleEl) animateCount(cumPeopleEl, state.cumPeople, cumPeople);
+        }
+        state.cumRooms = cumRooms;
+        state.cumPeople = cumPeople;
+        renderMeta();
+      } catch {
+        if (roomsEl) roomsEl.textContent = '—';
+        if (partEl) partEl.textContent = '—';
+        if (wrap) wrap.dataset.state = 'empty';
+        if (hero) hero.dataset.state = 'empty';
+        if (heroText) heroText.textContent = errorText;
+        if (cumRoomsEl) cumRoomsEl.textContent = '—';
+        if (cumPeopleEl) cumPeopleEl.textContent = '—';
+      }
+    }
+
+    tick();
+    setInterval(tick, refreshMs);
+    setInterval(renderMeta, metaRefreshMs);
+  })();
+</script>
+
 <style>
   #stats {
     padding: 56px 32px;

@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import Problem from '../components/Problem.astro';
+import Solution from '../components/Solution.astro';
+import How from '../components/How.astro';
+import Model from '../components/Model.astro';
+import Expansion from '../components/Expansion.astro';
+import Roadmap from '../components/Roadmap.astro';
+import Contact from '../components/Contact.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import { loadContent } from '../lib/loadContent';
+
+const locale = 'ko';
+const nav = loadContent('nav', locale);
+const hero = loadContent('hero', locale);
+const stats = loadContent('stats', locale);
+const problems = loadContent('problems', locale);
+const solutions = loadContent('solutions', locale);
+const how = loadContent('how', locale);
+const model = loadContent('model', locale);
+const expansion = loadContent('expansion', locale);
+const roadmap = loadContent('roadmap', locale);
+const contact = loadContent('contact', locale);
+const faq = loadContent('faq', locale);
+const footer = loadContent('footer', locale);
+---
+
+<Layout locale={locale}>
+  <Nav data={nav} />
+  <Hero data={hero} />
+  <Stats data={stats} />
+  <div class="divider"></div>
+  <Problem data={problems} />
+  <div class="divider"></div>
+  <Solution data={solutions} />
+  <div class="divider"></div>
+  <How data={how} />
+  <div class="divider"></div>
+  <Model data={model} />
+  <div class="divider"></div>
+  <Expansion data={expansion} />
+  <div class="divider"></div>
+  <Roadmap data={roadmap} />
+  <div class="divider"></div>
+  <Contact data={contact} />
+  <FAQ data={faq} />
+  <Footer data={footer} />
+</Layout>

@@ -37,6 +37,9 @@ const { title } = data;
           id="heroLive"
           data-state="empty"
           data-event={data.live_badge.event}
+          data-empty-html={data.live_badge.empty_html}
+          data-live-template={data.live_badge.live_template_html}
+          data-error-text={data.live_badge.error_text}
           aria-live="polite"
         >
           <span class="hero-live-dot"></span>

@@ -29,6 +29,16 @@ const { data } = Astro.props;
   </div>
 </nav>
 
+<script is:inline>
+  // is:inline because onclick="toggleMenu()" in template requires window-scope function.
+  window.toggleMenu = function () {
+    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById('hamburger');
+    menu && menu.classList.toggle('open');
+    btn && btn.classList.toggle('open');
+  };
+</script>
+
 <style>
   nav {
     position: fixed;
