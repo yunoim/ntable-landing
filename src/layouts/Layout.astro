@@ -4,6 +4,7 @@ import '../styles/global.css';
 import '../styles/animations.css';
 import '../styles/sections.css';
 import { loadContent } from '../lib/loadContent';
+import AnalyticsScript from '../components/AnalyticsScript.astro';
 
 export interface Props {
   locale?: string;
@@ -71,6 +72,8 @@ const fontsHref = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:i
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href={fontsHref} rel="stylesheet" />
+
+  <AnalyticsScript />
 
   <slot name="head" />
 </head>

@@ -1,0 +1,34 @@
+---
+// Conditional Plausible analytics script.
+// Injected only if PUBLIC_PLAUSIBLE_DOMAIN env var is set.
+//
+// Setup:
+// - Production: Cloudflare Workers env vars
+//   (Dashboard → Workers & Pages → ntable-landing → Settings → Variables)
+// - Local dev: .env file with PUBLIC_PLAUSIBLE_DOMAIN=ntable.kr
+// - Optional: PUBLIC_PLAUSIBLE_SCRIPT_SRC to override default script URL
+//   (self-hosted Plausible: your script URL)
+//
+// Click tracking runs regardless of Plausible presence — any element
+// with [data-event] fires window.plausible?.(eventName) on click.
+// Plausible absent → no-op.
+
+const domain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+const scriptSrc =
+  import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT_SRC || 'https://plausible.io/js/script.js';
+---
+{domain && <script is:inline defer data-domain={domain} src={scriptSrc}></script>}
+
+<script>
+  // Event delegation for [data-event] click tracking. Works without
+  // Plausible loaded (the optional chaining no-ops).
+  document.addEventListener('click', (e) => {
+    const target = e.target;
+    if (!(target instanceof HTMLElement)) return;
+    const trigger = target.closest('[data-event]');
+    if (!trigger) return;
+    const name = trigger.getAttribute('data-event');
+    if (!name) return;
+    window.plausible?.(name);
+  });
+</script>
