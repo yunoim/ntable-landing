@@ -47,3 +47,8 @@ result.html
 *.log
 .DS_Store
 Thumbs.db
+
+# ── Node / Astro ──
+node_modules/
+dist/
+.astro/
