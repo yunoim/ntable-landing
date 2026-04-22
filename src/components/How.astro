@@ -31,33 +31,15 @@ const { data } = Astro.props;
 </section>
 
 <style>
-  /* 2026-04-23: 타임라인 rail·dot 정렬 정리.
-     - phase cell width = var(--phase-w) 로 토큰화, rail/dot 중앙축을 cell 중앙과 픽셀 단위 일치.
-     - rail 은 첫 dot 중앙 → 마지막 dot 중앙 구간만. 각 item dot 의 top 은 phase-num 의 세로 중앙.
-     - phase 숫자는 DM Sans lining-nums 로 글리프 안전. */
+  /* 2026-04-23 (revised): 세로 timeline rail + 원형 dot 완전 제거 (사용자 요청).
+     가로 구분선(roadmap-item border-bottom) 과 Step 라벨 강조는 유지.
+     phase cell width 150px 도 그대로 — 레이아웃 시프트 없음. */
   .roadmap-list {
     display: flex;
     flex-direction: column;
-    position: relative;
     --phase-w: 150px;
-    --rail-x: calc(var(--phase-w) / 2);     /* 150/2 = 75px */
-    --dot-size: 11px;
-    --dot-top: 48px;                         /* item padding-top(36) + phase num 세로 중앙(~12) */
-  }
-  /* rail — 첫 item dot 중앙에서 마지막 item dot 중앙까지. calc 으로 item 높이 의존 제거. */
-  .roadmap-list::before {
-    content: '';
-    position: absolute;
-    left: calc(var(--rail-x) - 0.5px);       /* 1px 선의 왼쪽 엣지 = 중앙축 - 0.5 */
-    top: var(--dot-top);
-    bottom: var(--dot-top);
-    width: 1px;
-    background: linear-gradient(to bottom, var(--gold) 0%, var(--border-strong) 20%, var(--border-strong) 80%, var(--gold) 100%);
-    opacity: 0.55;
-    pointer-events: none;
   }
   .roadmap-item {
-    position: relative;
     display: grid;
     grid-template-columns: var(--phase-w) 1fr;
     gap: 36px;
@@ -66,29 +48,13 @@ const { data } = Astro.props;
     align-items: start;
   }
   .roadmap-item:last-child { border-bottom: none; }
-  /* dot — rail 중앙축(var(--rail-x)) 에 수평 중심 맞춤. top = phase-num 세로 중앙. */
-  .roadmap-item::before {
-    content: '';
-    position: absolute;
-    left: calc(var(--rail-x) - (var(--dot-size) / 2));
-    top: calc(var(--dot-top) - (var(--dot-size) / 2));
-    width: var(--dot-size);
-    height: var(--dot-size);
-    border-radius: 50%;
-    background: var(--bg);
-    border: 2px solid var(--gold);
-    box-shadow: 0 0 12px rgba(212,168,67,0.45);
-    z-index: 1;
-  }
 
-  /* phase cell — 라벨을 cell 가로 중앙에 놓아 rail 중앙축과 일치시킴. */
+  /* phase cell — 왼쪽 정렬(기본). rail 제거로 중앙 정렬 필요 없음. */
   .roadmap-phase {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 4px;
     padding-top: 2px;
-    text-align: center;
   }
   .roadmap-phase-num {
     font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
@@ -139,14 +105,12 @@ const { data } = Astro.props;
   }
 
   @media (max-width: 960px) {
-    /* 태블릿: phase cell 을 상단 배지로. rail/dot 숨김 (사용자 요구 4번). */
+    /* 태블릿: phase cell 을 상단 배지로 (한 줄). */
     .roadmap-item { grid-template-columns: 1fr; gap: 10px; }
-    .roadmap-phase { flex-direction: row; gap: 10px; align-items: baseline; text-align: left; }
-    .roadmap-list::before { display: none; }
-    .roadmap-item::before { display: none; }
+    .roadmap-phase { flex-direction: row; gap: 10px; align-items: baseline; }
   }
   @media (max-width: 768px) {
-    /* 모바일: 동일. padding 축소. */
+    /* 모바일: padding 축소. */
     .roadmap-item { padding: 26px 0; }
   }
 </style>
