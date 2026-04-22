@@ -11,17 +11,6 @@ const { data } = Astro.props;
       {data.badge}
     </div>
     <div>
-      <div class="live-stats" id="liveStats" data-state="empty" aria-live="polite">
-        <div class="live-stats-item">
-          <span class="live-stats-num" id="liveRooms">—</span>
-          <span class="live-stats-label">{data.live_widget.rooms_label}</span>
-        </div>
-        <div class="live-stats-sep"></div>
-        <div class="live-stats-item">
-          <span class="live-stats-num" id="liveParticipants">—</span>
-          <span class="live-stats-label">{data.live_widget.people_label}</span>
-        </div>
-      </div>
       <div class="cumulative-stats" id="cumulativeStats" aria-live="polite" data-template={data.live_widget.cumulative_template_html}>
         <Fragment set:html={data.live_widget.cumulative_template_html.replace('{people}', '<strong id="cumPeople">—</strong>').replace('{rooms}', '<strong id="cumRooms">—</strong>')} />
       </div>
@@ -49,9 +38,6 @@ const { data } = Astro.props;
     const refreshMs = Number(statsEl.dataset.refreshMs || 30000);
     const metaRefreshMs = Number(statsEl.dataset.metaRefreshMs || 5000);
 
-    const wrap = document.getElementById('liveStats');
-    const roomsEl = document.getElementById('liveRooms');
-    const partEl = document.getElementById('liveParticipants');
     const metaEl = document.getElementById('liveStatsMeta');
     const hero = document.getElementById('heroLive');
     const heroText = document.getElementById('heroLiveText');
@@ -59,14 +45,13 @@ const { data } = Astro.props;
     const cumPeopleEl = document.getElementById('cumPeople');
     const cumWrap = document.getElementById('cumulativeStats');
 
-    if (!wrap && !hero) return;
+    if (!hero) return;
 
-    const state: { rooms: number; people: number; cumRooms: number; cumPeople: number; lastFetchAt: number | null } = {
-      rooms: 0, people: 0, cumRooms: 0, cumPeople: 0, lastFetchAt: null,
+    const state: { cumRooms: number; cumPeople: number; lastFetchAt: number | null } = {
+      cumRooms: 0, cumPeople: 0, lastFetchAt: null,
     };
 
     const emptyHtml = hero?.dataset.emptyHtml || '';
-    const liveTemplate = hero?.dataset.liveTemplate || '';
     const errorText = hero?.dataset.errorText || '';
 
     function animateCount(el: HTMLElement | null, from: number, to: number, dur = 800) {
@@ -93,36 +78,14 @@ const { data } = Astro.props;
       return `${m}분 전 업데이트`;
     }
 
-    function render(rooms: number, people: number) {
-      const isEmpty = rooms === 0 && people === 0;
-      if (wrap && roomsEl && partEl) {
-        if (isEmpty) {
-          (wrap as HTMLElement).style.display = 'none';
-        } else {
-          (wrap as HTMLElement).style.display = '';
-          animateCount(roomsEl, state.rooms, rooms);
-          animateCount(partEl, state.people, people);
-          wrap.dataset.state = 'live';
-        }
-      }
+    function renderHeroEmpty() {
+      // Hero badge stays in "empty" invitation state — no live numbers.
+      // Live room/participant counts intentionally not surfaced; only
+      // cumulative totals render in this section (see tick()).
       if (hero && heroText) {
-        if (isEmpty) {
-          heroText.innerHTML = emptyHtml;
-          hero.dataset.state = 'empty';
-        } else {
-          heroText.innerHTML = liveTemplate
-            .replace('{rooms}', String(rooms))
-            .replace('{people}', String(people));
-          const prevState = hero.dataset.state;
-          hero.dataset.state = 'live';
-          if (prevState !== 'live' || state.rooms !== rooms || state.people !== people) {
-            hero.dataset.state = 'flash';
-            setTimeout(() => { if (hero) hero.dataset.state = 'live'; }, 600);
-          }
-        }
+        heroText.innerHTML = emptyHtml;
+        hero.dataset.state = 'empty';
       }
-      state.rooms = rooms;
-      state.people = people;
     }
 
     function renderMeta() {
@@ -134,12 +97,10 @@ const { data } = Astro.props;
         const res = await fetch(api, { cache: 'no-store' });
         if (!res.ok) throw new Error('stats not ok');
         const data = await res.json();
-        const rooms = Number(data.active_rooms ?? 0);
-        const people = Number(data.participants ?? 0);
         const cumRooms = Number(data.total_rooms ?? 0);
         const cumPeople = Number(data.unique_people ?? 0);
         state.lastFetchAt = Date.now();
-        render(rooms, people);
+        renderHeroEmpty();
         if (cumRooms === 0 && cumPeople === 0) {
           if (cumWrap) (cumWrap as HTMLElement).style.display = 'none';
         } else {
@@ -151,9 +112,6 @@ const { data } = Astro.props;
         state.cumPeople = cumPeople;
         renderMeta();
       } catch {
-        if (roomsEl) roomsEl.textContent = '—';
-        if (partEl) partEl.textContent = '—';
-        if (wrap) wrap.dataset.state = 'empty';
         if (hero) hero.dataset.state = 'empty';
         if (heroText) heroText.textContent = errorText;
         if (cumRoomsEl) cumRoomsEl.textContent = '—';
@@ -201,44 +159,6 @@ const { data } = Astro.props;
     animation: pulse 2s ease-in-out infinite;
   }
 
-  .live-stats {
-    display: inline-flex;
-    align-items: center;
-    gap: 22px;
-    padding: 12px 22px;
-    border: 1px solid var(--border-strong);
-    background: rgba(14,22,40,0.6);
-    border-radius: 999px;
-    font-family: 'DM Sans', sans-serif;
-    margin-bottom: 18px;
-  }
-  .live-stats-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .live-stats-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--gold-bright);
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-    transition: color var(--transition);
-  }
-  .live-stats-num.flash { color: var(--gold); }
-  .live-stats[data-state="empty"] .live-stats-num { color: var(--text-muted); }
-  .live-stats-label {
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
-  }
-  .live-stats-sep {
-    width: 1px;
-    height: 20px;
-    background: var(--border-strong);
-    opacity: 0.5;
-  }
   .live-stats-meta {
     display: block;
     margin-top: 8px;
@@ -296,9 +216,5 @@ const { data } = Astro.props;
   }
   @media (max-width: 580px) {
     #stats { padding: 56px 20px; }
-  }
-  @media (max-width: 520px) {
-    .live-stats { gap: 14px; padding: 10px 16px; }
-    .live-stats-num { font-size: 20px; }
   }
 </style>

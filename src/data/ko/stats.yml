@@ -1,4 +1,4 @@
-badge: Phase 1 — 첫 모임 준비 중
+badge: Phase 1 — 첫 쇼케이스 준비 중
 
 live_widget:
   api: https://app.ntable.kr/api/stats
@@ -10,10 +10,10 @@ live_widget:
 
 cards:
   - number: '12'
-    label_html: '진행 장치<br>보통 모임엔 없는 장치 12개'
+    label_html: '12개의 진행 장치가<br>모임장을 돕습니다'
   - number: '5'
-    label_html: '모임 유형<br>둘이서·첫만남·소개팅·플리 공유회·팀·회사'
+    label_html: '5가지 모임에<br>바로 쓰는 엔진'
   - number: 즉시
-    label_html: '투표 결과로<br>성향 매칭 자동 공개'
+    label_html: '투표 결과로<br>성향 매칭이 바로'
   - number: 0원
-    label_html: '전 기능 무료<br>카드 등록·인원 제한 없음'
+    label_html: '모든 기능<br>지금은 무료'

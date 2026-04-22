@@ -27,7 +27,7 @@ const { title } = data;
   </div>
   <div class="section-cta reveal">
     <div>
-      <a href={data.cta.href} data-event={data.cta.event}>{data.cta.label}</a>
+      <a href={data.cta.href} class="section-cta-ghost" data-event={data.cta.event}>{data.cta.label}</a>
       <span class="section-cta-note">{data.cta.note}</span>
     </div>
   </div>
@@ -63,7 +63,7 @@ const { title } = data;
     transition: opacity var(--transition);
   }
   .solution-step:hover::after { opacity: 1; }
-  .solution-step:hover { background: var(--bg-hover); border-color: rgba(212,168,67,0.38); }
+  .solution-step:hover { background: var(--bg-hover); border-color: var(--border-strong); }
   .step-num {
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;

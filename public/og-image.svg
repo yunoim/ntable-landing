@@ -24,17 +24,17 @@
   <g font-family="'DM Sans', sans-serif">
     <text x="96" y="128" font-size="17" font-weight="500" letter-spacing="4" fill="#f0ca60">SOCIAL GATHERING FACILITATOR</text>
   </g>
-  <g font-family="'Cormorant Garamond', 'Noto Serif KR', serif" font-weight="700">
+  <g font-family="'Cormorant Garamond', serif" font-weight="700">
     <text x="96" y="270" font-size="104" fill="#f5f2ec">누구나</text>
-    <text x="96" y="390" font-size="104" font-style="italic" fill="url(#shimmer)">모임장이 되는 모임</text>
+    <text x="96" y="390" font-size="104" font-style="italic" fill="url(#shimmer)">모임장이 된다</text>
   </g>
-  <g font-family="'DM Sans', 'Noto Sans KR', sans-serif">
+  <g font-family="'DM Sans', sans-serif">
     <text x="96" y="475" font-size="26" fill="#f5f2ec" opacity="0.85">모임장이 '다음' 버튼만 누르는 모임 진행 앱.</text>
     <text x="96" y="510" font-size="22" fill="#f5f2ec" opacity="0.6">아이스브레이킹·대화·매칭·결과 정리까지 앱이 맡아요.</text>
   </g>
   <line x1="96" y1="555" x2="1104" y2="555" stroke="#d4a843" stroke-opacity="0.3"/>
   <g>
     <text x="96" y="597" font-family="'Cormorant Garamond', serif" font-size="34" font-weight="600" fill="#d4a843" letter-spacing="6">ntable</text>
-    <text x="230" y="597" font-family="'DM Sans', sans-serif" font-size="16" fill="#d4a843" opacity="0.55">· ntable.kr · More Life. People Connect.</text>
+    <text x="230" y="597" font-family="'DM Sans', sans-serif" font-size="16" fill="#d4a843" opacity="0.55">· ntable.kr · 모임 진행 도우미</text>
   </g>
 </svg>

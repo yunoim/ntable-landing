@@ -80,6 +80,16 @@ section {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(212,168,67,0.55);
 }
+.section-cta a.section-cta-ghost {
+  background: transparent;
+  color: var(--gold-bright);
+  border: 1.5px solid var(--gold);
+  box-shadow: none;
+}
+.section-cta a.section-cta-ghost:hover {
+  background: rgba(232,184,75,0.12);
+  box-shadow: none;
+}
 .section-cta-note {
   display: block;
   margin-top: 12px;

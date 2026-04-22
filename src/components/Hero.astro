@@ -43,10 +43,10 @@ const { title } = data;
           aria-live="polite"
         >
           <span class="hero-live-dot"></span>
-          <span class="hero-live-text" id="heroLiveText">{data.live_badge.initial_text}</span>
+          <span class="hero-live-text" id="heroLiveText" set:html={data.live_badge.empty_html}></span>
         </a>
       </div>
-      <div class="hero-right" aria-hidden="true">
+      <div class="hero-right" role="group" aria-label="제품 미리보기 — 라이브 투표 진행 화면">
         <div class="mockup-frame">
           <div class="mockup-header">
             <div class="mockup-code">
@@ -342,7 +342,7 @@ const { title } = data;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 14px;
-    border-bottom: 1px solid rgba(212,168,67,0.1);
+    border-bottom: 1px solid var(--border-subtle);
     margin-bottom: 16px;
   }
   .mockup-code {

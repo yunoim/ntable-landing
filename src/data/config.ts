@@ -250,7 +250,7 @@ export const expansionSchema = z.object({
     emoji: z.string(),
     title: z.string(),
     body: z.string(),
-    status: z.string(),
+    status: z.string().optional(),
   })),
   toolkit: z.object({
     title: z.string(),

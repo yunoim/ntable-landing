@@ -1,7 +1,9 @@
 section_tag: Problem
 
 title:
-  prefix: "모임은 왜 어떤 날은\n재밌고 어떤 날은 어색할까"
+  prefix: "재밌는 모임은 사람이 아니라\n"
+  emphasis: 구조
+  suffix: 가 만듭니다
 
 body: 모임의 재미는 모임장 한 사람의 역량에 좌우된다. ntable은 이 문제를 사람이 아닌 구조로 풉니다.
 

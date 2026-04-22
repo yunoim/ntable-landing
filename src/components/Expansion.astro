@@ -31,7 +31,7 @@ const engineTitle = data.engine_hub.title;
         <div class="solution-step">
           <div class="step-num emoji">{p.emoji}</div>
           <div class="step-title">{p.title}</div>
-          <div class="step-body">{p.body}<span class="step-status">{p.status}</span></div>
+          <div class="step-body">{p.body}{p.status && <span class="step-status">{p.status}</span>}</div>
         </div>
       ))}
     </div>
@@ -40,12 +40,12 @@ const engineTitle = data.engine_hub.title;
   <h3 class="toolkit-title reveal">{data.toolkit.title}</h3>
   <p class="section-body reveal" style="margin-bottom: 32px;">{data.toolkit.body}</p>
   <div class="solution-wrap reveal">
-    <div class="solution-steps five-cols">
+    <div class="solution-steps">
       {data.toolkit.items.map((i) => (
         <div class="solution-step">
           <div class="step-num">{i.horizon}</div>
           <div class="step-title">{i.title}</div>
-          <div class="step-body">{i.body}<span class="step-status">{i.status}</span></div>
+          <div class="step-body">{i.body}{i.status && <span class="step-status">{i.status}</span>}</div>
         </div>
       ))}
     </div>
@@ -82,7 +82,7 @@ const engineTitle = data.engine_hub.title;
     transition: opacity var(--transition);
   }
   .solution-step:hover::after { opacity: 1; }
-  .solution-step:hover { background: var(--bg-hover); border-color: rgba(212,168,67,0.38); }
+  .solution-step:hover { background: var(--bg-hover); border-color: var(--border-strong); }
   .step-num {
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
