@@ -1,0 +1,95 @@
+---
+import '../styles/sections.css';
+import type { ContentFor } from '../data/config';
+import { renderInlineBreaks } from '../lib/loadContent';
+type Props = { data: ContentFor<'faq'> };
+const { data } = Astro.props;
+const { title } = data;
+---
+
+<section id="faq" class="faq-section">
+  <p class="section-eyebrow reveal">{data.eyebrow}</p>
+  <h2 class="section-title reveal">
+    <Fragment set:html={renderInlineBreaks(title.prefix)} />
+    {title.emphasis && <em>{title.emphasis}</em>}
+    {title.suffix && <Fragment set:html={renderInlineBreaks(title.suffix)} />}
+  </h2>
+  <div class="faq-list reveal">
+    {data.items.map((item) => (
+      <details class="faq-item">
+        <summary>{item.q}</summary>
+        <div class="faq-body"><Fragment set:html={item.a_html} /></div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    padding: 80px 32px;
+    background: var(--bg-alt);
+    border-top: 1px solid rgba(212,168,67,0.12);
+  }
+  .faq-list {
+    max-width: 760px;
+    margin: 40px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .faq-item {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color var(--transition);
+  }
+  .faq-item[open] { border-color: rgba(212,168,67,0.6); }
+  .faq-item summary {
+    padding: 18px 22px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-paper);
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: 44px;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--gold);
+    transition: transform var(--transition);
+    font-weight: 300;
+    line-height: 1;
+  }
+  .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-item summary:hover { color: var(--text-rose); }
+  .faq-body {
+    padding: 0 22px 20px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+  .faq-body :global(a) {
+    color: var(--text-rose);
+    border-bottom: 1px solid rgba(240,202,96,0.35);
+  }
+  .faq-body :global(strong) {
+    color: var(--text-rose);
+    font-weight: 500;
+  }
+
+  @media (max-width: 720px) {
+    .faq-section { padding: 56px 20px; }
+    .faq-item summary { font-size: 14px; padding: 16px 18px; padding-right: 40px; }
+    .faq-body { font-size: 13.5px; padding: 0 18px 18px; }
+  }
+</style>

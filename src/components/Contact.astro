@@ -1,0 +1,63 @@
+---
+import type { ContentFor } from '../data/config';
+import { renderInlineBreaks } from '../lib/loadContent';
+type Props = { data: ContentFor<'contact'> };
+const { data } = Astro.props;
+---
+
+<div id="contact-wrap">
+  <div class="contact-inner reveal">
+    <h2 class="contact-title"><Fragment set:html={renderInlineBreaks(data.title)} /></h2>
+    <p class="contact-body"><Fragment set:html={renderInlineBreaks(data.body)} /></p>
+    <a href={`mailto:${data.email}`} class="contact-email" data-event={data.email_event}>{data.email}</a>
+  </div>
+</div>
+
+<style>
+  #contact-wrap {
+    padding: 64px 32px;
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--border-strong);
+  }
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 5.5vw, 60px);
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+  .contact-title :global(em) {
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+  .contact-body {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text-highlight);
+    line-height: 1.85;
+    margin-bottom: 36px;
+  }
+  .contact-email {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--gold);
+    border-bottom: 1px solid var(--border-strong);
+    padding-bottom: 3px;
+    transition: color var(--transition), border-color var(--transition);
+  }
+  .contact-email:hover {
+    color: var(--gold-bright);
+    border-color: var(--gold);
+  }
+
+  @media (max-width: 580px) {
+    #contact-wrap { padding: 72px 20px; }
+  }
+</style>

@@ -1,0 +1,39 @@
+:root {
+  /* Gold palette */
+  --gold: #d4a843;
+  --gold-bright: #e8b84b;
+  --gold-deep: #a07828;
+
+  /* Backgrounds */
+  --bg: #0e1628;
+  --bg-elevated: #131c33;
+  --bg-deep: #0a0f1e;
+  --bg-alt: #0c1324;
+  --bg-hover: #1a2540;
+
+  /* Text */
+  --text: #e0e0e0;
+  --text-bright: #ffffff;
+  --text-muted: #c0c0c0;
+  --text-highlight: #e8e8e8;
+  --text-cream: #d0d0d0;
+  --text-subtle: #828aa0;
+  --text-paper: #f5f2ec;
+  --text-rose: #f0ca60;
+
+  /* Accent */
+  --accent-green: #4ade80;
+
+  /* Borders (gold-derived alpha) */
+  --border-strong: rgba(212,168,67,0.45);
+  --border: rgba(212,168,67,0.22);
+  --border-subtle: rgba(212,168,67,0.08);
+  --border-faint: rgba(212,168,67,0.04);
+
+  /* Shape */
+  --radius: 10px;
+  --radius-lg: 18px;
+
+  /* Motion */
+  --transition: 0.32s cubic-bezier(0.4,0,0.2,1);
+}

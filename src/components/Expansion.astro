@@ -1,0 +1,191 @@
+---
+import '../styles/sections.css';
+import type { ContentFor } from '../data/config';
+import { renderInlineBreaks } from '../lib/loadContent';
+type Props = { data: ContentFor<'expansion'> };
+const { data } = Astro.props;
+const engineTitle = data.engine_hub.title;
+---
+
+<section id="expansion">
+  <div class="section-tag reveal">{data.section_tag}</div>
+  <h2 class="section-title reveal">{data.title}</h2>
+  <p class="section-body reveal">
+    {data.body.before}<strong>{data.body.highlight}</strong>{data.body.after}
+  </p>
+
+  <div class="engine-hub reveal">
+    <div class="engine-core">
+      <div class="engine-eyebrow">{data.engine_hub.eyebrow}</div>
+      <div class="engine-title">
+        <Fragment set:html={renderInlineBreaks(engineTitle.prefix)} />
+        {engineTitle.emphasis && <em>{engineTitle.emphasis}</em>}
+        {engineTitle.suffix && <Fragment set:html={renderInlineBreaks(engineTitle.suffix)} />}
+      </div>
+    </div>
+    <div class="engine-arrow">{data.engine_hub.arrow}</div>
+  </div>
+
+  <div class="solution-wrap reveal" style="margin-top:24px;">
+    <div class="solution-steps five-cols">
+      {data.packs.map((p) => (
+        <div class="solution-step">
+          <div class="step-num emoji">{p.emoji}</div>
+          <div class="step-title">{p.title}</div>
+          <div class="step-body">{p.body}<span class="step-status">{p.status}</span></div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <h3 class="toolkit-title reveal">{data.toolkit.title}</h3>
+  <p class="section-body reveal" style="margin-bottom: 32px;">{data.toolkit.body}</p>
+  <div class="solution-wrap reveal">
+    <div class="solution-steps five-cols">
+      {data.toolkit.items.map((i) => (
+        <div class="solution-step">
+          <div class="step-num">{i.horizon}</div>
+          <div class="step-title">{i.title}</div>
+          <div class="step-body">{i.body}<span class="step-status">{i.status}</span></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .solution-wrap { margin-top: 56px; }
+  .solution-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+  }
+  .solution-steps > * { min-width: 0; }
+  .solution-step {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    padding: 26px 22px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color var(--transition), background var(--transition);
+    min-width: 0;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  .solution-step::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+  .solution-step:hover::after { opacity: 1; }
+  .solution-step:hover { background: var(--bg-hover); border-color: rgba(212,168,67,0.38); }
+  .step-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: 'lnum' 1, 'tnum' 1;
+  }
+  .step-num.emoji {
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: normal;
+    margin-bottom: 14px;
+    font-family: inherit;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .step-body {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.78;
+  }
+  .step-status {
+    display: block;
+    margin-top: 6px;
+    color: rgba(212,168,67,0.55);
+    font-size: 12px;
+  }
+
+  .engine-hub {
+    text-align: center;
+    margin: 64px 0 8px;
+  }
+  .engine-core {
+    display: inline-block;
+    padding: 32px 56px;
+    width: min(70%, 720px);
+    background: linear-gradient(135deg, rgba(212,168,67,0.12), rgba(212,168,67,0.03));
+    border: 1px solid var(--gold);
+    border-radius: 18px;
+    box-shadow: 0 0 48px rgba(212,168,67,0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+  .engine-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .engine-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--text-bright);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .engine-title :global(em) {
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+  .engine-arrow {
+    margin: 24px 0 4px;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .toolkit-title {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--text-bright);
+    font-size: clamp(26px, 3.6vw, 34px);
+    margin-top: 76px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 1024px) {
+    .solution-steps.five-cols { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 960px) {
+    .solution-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .solution-steps.five-cols { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 580px) {
+    .engine-core { padding: 22px 22px; }
+    .engine-title { font-size: 19px; }
+  }
+  @media (max-width: 420px) {
+    .solution-steps.five-cols { grid-template-columns: 1fr; }
+  }
+</style>

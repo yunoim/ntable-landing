@@ -1,0 +1,534 @@
+---
+import type { ContentFor } from '../data/config';
+import { renderInlineBreaks } from '../lib/loadContent';
+type Props = { data: ContentFor<'hero'> };
+const { data } = Astro.props;
+const { title } = data;
+---
+
+<div id="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <p class="hero-eyebrow">{data.eyebrow}</p>
+        <h1 class="hero-title">
+          <Fragment set:html={renderInlineBreaks(title.prefix)} />
+          {title.emphasis && <em>{title.emphasis}</em>}
+          {title.suffix && <Fragment set:html={renderInlineBreaks(title.suffix)} />}
+        </h1>
+        <p class="hero-subtitle">{data.subtitle}</p>
+        <div class="hero-actions">
+          <a href={data.cta.primary.href} class="btn-primary" data-event={data.cta.primary.event}>{data.cta.primary.label}</a>
+          <a href={data.cta.secondary.href} class="btn-secondary" data-event={data.cta.secondary.event}>{data.cta.secondary.label}</a>
+        </div>
+        <div class="hero-trust-row" aria-label="진입 마찰 제거">
+          {data.trust_chips.map((chip) => (
+            <span class="hero-trust-chip">{chip}</span>
+          ))}
+        </div>
+        <a
+          href={data.live_badge.href}
+          class="hero-live"
+          id="heroLive"
+          data-state="empty"
+          data-event={data.live_badge.event}
+          aria-live="polite"
+        >
+          <span class="hero-live-dot"></span>
+          <span class="hero-live-text" id="heroLiveText">{data.live_badge.initial_text}</span>
+        </a>
+      </div>
+      <div class="hero-right" aria-hidden="true">
+        <div class="mockup-frame">
+          <div class="mockup-header">
+            <div class="mockup-code">
+              모임 코드 <strong>{data.mockup.code}</strong>
+              <span style="opacity:0.5;letter-spacing:0.1em;">· {data.mockup.status_label}</span>
+            </div>
+            <div class="mockup-presence">
+              <span class="mockup-presence-dot"></span>
+              <span>{data.mockup.presence_count}{data.mockup.presence_label}</span>
+            </div>
+          </div>
+          <div class="mockup-phases">
+            {data.mockup.phases.map((p) => (
+              <span class={`mockup-phase${p.state ? ' ' + p.state : ''}`}>
+                <span class="mockup-phase-num">{p.num}</span>{p.label}
+              </span>
+            ))}
+          </div>
+          <div class="mockup-body">
+            <svg class="mockup-qr" viewBox="0 0 120 120" role="img" aria-label="QR 미리보기">
+              <g fill="#0a0f1e">
+                <rect x="10" y="10" width="26" height="26" rx="2"/>
+                <rect x="14" y="14" width="18" height="18" rx="1" fill="#f5f2ec"/>
+                <rect x="19" y="19" width="8" height="8"/>
+                <rect x="84" y="10" width="26" height="26" rx="2"/>
+                <rect x="88" y="14" width="18" height="18" rx="1" fill="#f5f2ec"/>
+                <rect x="93" y="19" width="8" height="8"/>
+                <rect x="10" y="84" width="26" height="26" rx="2"/>
+                <rect x="14" y="88" width="18" height="18" rx="1" fill="#f5f2ec"/>
+                <rect x="19" y="93" width="8" height="8"/>
+                <rect x="44" y="10" width="4" height="4"/><rect x="52" y="10" width="4" height="4"/><rect x="64" y="10" width="4" height="4"/><rect x="72" y="10" width="4" height="4"/>
+                <rect x="48" y="18" width="4" height="4"/><rect x="56" y="18" width="4" height="4"/><rect x="68" y="18" width="4" height="4"/>
+                <rect x="44" y="26" width="4" height="4"/><rect x="60" y="26" width="4" height="4"/><rect x="72" y="26" width="4" height="4"/>
+                <rect x="10" y="44" width="4" height="4"/><rect x="22" y="44" width="4" height="4"/><rect x="34" y="44" width="4" height="4"/><rect x="48" y="44" width="4" height="4"/><rect x="60" y="44" width="4" height="4"/><rect x="72" y="44" width="4" height="4"/><rect x="84" y="44" width="4" height="4"/><rect x="96" y="44" width="4" height="4"/>
+                <rect x="16" y="52" width="4" height="4"/><rect x="28" y="52" width="4" height="4"/><rect x="44" y="52" width="4" height="4"/><rect x="56" y="52" width="4" height="4"/><rect x="68" y="52" width="4" height="4"/><rect x="80" y="52" width="4" height="4"/><rect x="92" y="52" width="4" height="4"/><rect x="104" y="52" width="4" height="4"/>
+                <rect x="10" y="60" width="4" height="4"/><rect x="24" y="60" width="4" height="4"/><rect x="36" y="60" width="4" height="4"/><rect x="52" y="60" width="4" height="4"/><rect x="64" y="60" width="4" height="4"/><rect x="76" y="60" width="4" height="4"/><rect x="88" y="60" width="4" height="4"/><rect x="100" y="60" width="4" height="4"/>
+                <rect x="20" y="68" width="4" height="4"/><rect x="32" y="68" width="4" height="4"/><rect x="48" y="68" width="4" height="4"/><rect x="60" y="68" width="4" height="4"/><rect x="72" y="68" width="4" height="4"/><rect x="84" y="68" width="4" height="4"/><rect x="104" y="68" width="4" height="4"/>
+                <rect x="44" y="84" width="4" height="4"/><rect x="56" y="84" width="4" height="4"/><rect x="72" y="84" width="4" height="4"/><rect x="88" y="84" width="4" height="4"/>
+                <rect x="48" y="92" width="4" height="4"/><rect x="60" y="92" width="4" height="4"/><rect x="76" y="92" width="4" height="4"/><rect x="92" y="92" width="4" height="4"/><rect x="104" y="92" width="4" height="4"/>
+                <rect x="44" y="100" width="4" height="4"/><rect x="68" y="100" width="4" height="4"/><rect x="84" y="100" width="4" height="4"/><rect x="100" y="100" width="4" height="4"/>
+              </g>
+            </svg>
+            <div class="mockup-participants">
+              {data.mockup.participants.map((p) => (
+                <div class={`mockup-chip${p.is_host ? ' host' : ''}`}>
+                  <span class="mockup-chip-avatar">{p.initial}</span>
+                  <span>{p.name}</span>
+                  {p.is_host && p.host_label && <span class="mockup-chip-mark">{p.host_label}</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="mockup-stats-row">
+            {data.mockup.stats_row.map((s) => (
+              <span>{s.icon} <Fragment set:html={s.text_html} /></span>
+            ))}
+          </div>
+          <div style="margin-top:14px;">
+            <div class="mockup-vote-label">{data.mockup.vote.meta}</div>
+            <div class="mockup-question">{data.mockup.vote.question}</div>
+            <div class="mockup-bars">
+              {data.mockup.vote.options.map((o, i) => (
+                <div class={`mockup-bar ${i === 0 ? 'a' : 'b'}`}>
+                  <div class="mockup-bar-fill"></div>
+                  <span class="mockup-bar-label"><strong>{o.code}</strong> {o.label}</span>
+                  <span class="mockup-bar-pct">{o.pct}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href={data.scroll_indicator.href} class="scroll-indicator" aria-label={data.scroll_indicator.aria_label}>
+    <span class="scroll-indicator-arrow"></span>
+  </a>
+</div>
+
+<style>
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(90px); }
+  .orb-1 {
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, rgba(212,168,67,0.1), transparent 70%);
+    top: -80px; right: -80px;
+    animation: floatOrb 14s ease-in-out infinite;
+  }
+  .orb-2 {
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(80,100,180,0.07), transparent 70%);
+    bottom: 120px; left: -40px;
+    animation: floatOrb 10s ease-in-out infinite reverse;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(212,168,67,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212,168,67,0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 75% 75% at 50% 50%, black, transparent);
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+    padding: 110px 32px 60px; width: 100%;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero-left { max-width: 620px; }
+  .hero-right {
+    position: relative;
+    animation: fadeUp 0.85s 0.5s ease both;
+    perspective: 1600px;
+  }
+  @media (max-width: 960px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .hero-right { max-width: 440px; margin: 0 auto; }
+  }
+  @media (max-width: 580px) {
+    .hero-right { display: none; }
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    animation: fadeUp 0.75s ease both;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 8.5vw, 100px);
+    font-weight: 700;
+    line-height: 1.08;
+    color: var(--text-bright);
+    margin-bottom: 28px;
+    animation: fadeUp 0.75s 0.12s ease both;
+  }
+  .hero-title :global(em) {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold), var(--gold-bright));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+  .hero-subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-highlight);
+    max-width: 520px;
+    line-height: 1.85;
+    margin-bottom: 48px;
+    animation: fadeUp 0.75s 0.24s ease both;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.75s 0.36s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 30px;
+    background: var(--gold-bright);
+    color: var(--bg-deep);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    border-radius: 40px;
+    transition: transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 20px rgba(212,168,67,0.45);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,168,67,0.58); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 13px 30px;
+    border: 1.5px solid var(--gold);
+    color: var(--gold-bright);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-radius: 40px;
+    transition: background var(--transition), border-color var(--transition);
+  }
+  .btn-secondary:hover { background: rgba(232,184,75,0.18); border-color: var(--gold-bright); }
+
+  .hero-trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+    animation: fadeUp 0.75s 0.44s ease both;
+  }
+  .hero-trust-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--text-cream);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+  .hero-trust-chip::before {
+    content: '✓';
+    color: #7ee8a2;
+    font-weight: 700;
+    font-size: 11px;
+  }
+
+  .hero-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 22px;
+    padding: 9px 16px;
+    border: 1px solid var(--gold-bright);
+    background: rgba(14,22,40,0.5);
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text-bright);
+    text-decoration: none;
+    animation: fadeUp 0.75s 0.5s ease both;
+    transition: border-color var(--transition), background var(--transition), transform var(--transition);
+  }
+  .hero-live:hover { border-color: var(--gold); background: rgba(212,168,67,0.08); transform: translateY(-1px); }
+  .hero-live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent-green);
+    box-shadow: 0 0 8px rgba(74,222,128,0.7);
+    animation: livePulse 2.2s ease-in-out infinite;
+  }
+  .hero-live[data-state="empty"] .hero-live-dot {
+    background: var(--text-muted);
+    box-shadow: none;
+    animation: none;
+  }
+  .hero-live[data-state="flash"] .hero-live-dot { animation: livePulse 0.6s ease-in-out; }
+  .hero-live-text :global(strong) {
+    color: var(--gold-bright);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ─────── Product mockup (right column) ─────── */
+  .mockup-frame {
+    position: relative;
+    background: linear-gradient(145deg, var(--bg-hover), var(--bg-elevated));
+    border: 1px solid var(--border-strong);
+    border-radius: 22px;
+    padding: 22px 20px;
+    box-shadow:
+      0 40px 80px rgba(0,0,0,0.55),
+      0 0 0 1px rgba(212,168,67,0.06),
+      inset 0 1px 0 rgba(255,255,255,0.04);
+    transform: rotateY(-6deg) rotateX(3deg);
+    transition: transform 0.6s ease;
+  }
+  .mockup-frame:hover { transform: rotateY(-2deg) rotateX(1deg); }
+  .mockup-frame::before {
+    content: '';
+    position: absolute; top: -1px; left: 22px; right: 22px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-bright), transparent);
+    opacity: 0.4;
+  }
+
+  .mockup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(212,168,67,0.1);
+    margin-bottom: 16px;
+  }
+  .mockup-code {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .mockup-code :global(strong) { color: var(--gold); letter-spacing: 0.22em; font-weight: 600; }
+  .mockup-presence {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+  .mockup-presence-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent-green);
+    box-shadow: 0 0 8px rgba(74,222,128,0.6);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .mockup-phases {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 6px 0 14px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 14px;
+  }
+  .mockup-phase {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: var(--text-subtle);
+    letter-spacing: 0.04em;
+  }
+  .mockup-phase-num {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--border-subtle);
+    color: var(--text-subtle);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: 'lnum' 1, 'tnum' 1;
+  }
+  .mockup-phase.active { color: var(--gold-bright); }
+  .mockup-phase.active .mockup-phase-num {
+    background: var(--gold-bright);
+    color: var(--bg-deep);
+    box-shadow: 0 0 0 3px rgba(212,168,67,0.18);
+  }
+  .mockup-phase.done .mockup-phase-num {
+    background: rgba(212,168,67,0.35);
+    color: var(--bg-deep);
+  }
+
+  .mockup-body {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: 14px;
+  }
+  .mockup-qr {
+    width: 110px; height: 110px;
+    background: var(--text-paper);
+    border-radius: 8px;
+    padding: 8px;
+    display: block;
+  }
+  .mockup-participants {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+  }
+  .mockup-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 9px;
+    background: rgba(14,22,40,0.5);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 11px;
+    color: var(--text-highlight);
+  }
+  .mockup-chip-avatar {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-deep));
+    color: var(--bg-deep);
+    font-size: 9px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .mockup-chip.host { border-color: var(--gold-bright); background: rgba(212,168,67,0.12); }
+  .mockup-chip.host .mockup-chip-mark {
+    margin-left: auto;
+    padding: 2px 7px;
+    background: rgba(212,168,67,0.22);
+    border-radius: 999px;
+    font-size: 9px;
+    color: var(--gold-bright);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .mockup-stats-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 9.5px;
+    color: var(--text-muted);
+    padding: 6px 9px;
+    background: rgba(212,168,67,0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+  }
+  .mockup-stats-row :global(strong) { color: var(--gold-bright); font-weight: 700; }
+
+  .mockup-vote-label {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .mockup-question {
+    font-size: 12px;
+    color: var(--text-highlight);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .mockup-bars { display: flex; flex-direction: column; gap: 6px; }
+  .mockup-bar {
+    position: relative;
+    height: 30px;
+    background: rgba(14,22,40,0.55);
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    overflow: hidden;
+  }
+  .mockup-bar-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: linear-gradient(90deg, rgba(212,168,67,0.22), rgba(212,168,67,0.08));
+    animation: growBar 1.6s 0.9s cubic-bezier(0.4,0,0.2,1) both;
+  }
+  .mockup-bar.a .mockup-bar-fill { width: 64%; }
+  .mockup-bar.b .mockup-bar-fill { width: 36%; }
+  .mockup-bar-label { position: relative; font-size: 11px; color: var(--text-highlight); }
+  .mockup-bar-label :global(strong) { color: var(--gold-bright); margin-right: 7px; font-weight: 600; }
+  .mockup-bar-pct {
+    position: relative;
+    margin-left: auto;
+    font-family: 'DM Sans';
+    font-size: 11px;
+    color: var(--gold-bright);
+    font-weight: 600;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    left: 50%; bottom: 28px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    pointer-events: none;
+    animation: fadeUp 0.8s 1.2s ease both;
+  }
+  .scroll-indicator-arrow {
+    width: 1px; height: 32px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    animation: scrollBounce 2.2s ease-in-out infinite;
+  }
+  @media (max-width: 580px) { .scroll-indicator { display: none; } }
+</style>

@@ -1,0 +1,129 @@
+---
+import '../styles/sections.css';
+import type { ContentFor } from '../data/config';
+type Props = { data: ContentFor<'how'> };
+const { data } = Astro.props;
+---
+
+<section id="how">
+  <div class="section-tag reveal">{data.section_tag}</div>
+  <h2 class="section-title reveal">{data.title}</h2>
+  <p class="section-body reveal">{data.body}</p>
+
+  <div class="roadmap-list reveal" style="margin-top:56px;">
+    {data.steps.map((s) => (
+      <div class="roadmap-item">
+        <div class="roadmap-phase">{s.phase}<span>{s.subphase}</span></div>
+        <div class="roadmap-content">
+          <div class="roadmap-content-title">{s.title}</div>
+          <div class="roadmap-content-body">{s.body}</div>
+          <div class="roadmap-tags">
+            {s.tags.map((t) => <span class="roadmap-tag">{t}</span>)}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .roadmap-list {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .roadmap-list::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    bottom: 16px;
+    left: 68px;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--border-strong) 6%, var(--border-strong) 94%, transparent);
+    pointer-events: none;
+  }
+  .roadmap-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 36px;
+    padding: 36px 0;
+    border-bottom: 1px solid rgba(212,168,67,0.09);
+    align-items: start;
+  }
+  .roadmap-item:last-child { border-bottom: none; }
+  .roadmap-item::before {
+    content: '';
+    position: absolute;
+    left: 63px;
+    top: 52px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 12px rgba(212,168,67,0.4);
+    z-index: 1;
+  }
+
+  .roadmap-phase {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--gold);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 2px;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: 'lnum' 1, 'tnum' 1;
+  }
+  .roadmap-phase span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .roadmap-content-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .roadmap-content-body {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-highlight);
+    line-height: 1.85;
+    margin-bottom: 16px;
+  }
+  .roadmap-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .roadmap-tag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 40px;
+    color: var(--gold);
+    background: rgba(232,184,75,0.18);
+  }
+
+  @media (max-width: 960px) {
+    .roadmap-item { grid-template-columns: 1fr; gap: 10px; }
+    .roadmap-list::before { left: 4px; top: 10px; bottom: 10px; }
+    .roadmap-item::before { left: -1px; top: 6px; }
+  }
+  @media (max-width: 768px) {
+    .roadmap-list::before { display: none; }
+    .roadmap-item::before { display: none; }
+    .roadmap-item { padding: 26px 0; }
+  }
+</style>

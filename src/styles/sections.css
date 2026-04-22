@@ -1,0 +1,95 @@
+/* Shared section chrome — used by Problem, Solution, How, Model, Expansion, Roadmap, FAQ */
+
+section {
+  padding: 96px 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.section-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1.18;
+  margin-bottom: 22px;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--gold-bright);
+}
+
+.section-body {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-highlight);
+  max-width: 600px;
+  line-height: 1.9;
+}
+
+.section-cta {
+  margin-top: 56px;
+  display: flex;
+  justify-content: center;
+}
+.section-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--gold-bright);
+  color: var(--bg-deep);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  border-radius: 40px;
+  box-shadow: 0 4px 20px rgba(212,168,67,0.35);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.section-cta a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212,168,67,0.55);
+}
+.section-cta-note {
+  display: block;
+  margin-top: 12px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* Responsive section padding */
+@media (max-width: 580px) {
+  section { padding: 68px 20px; }
+}

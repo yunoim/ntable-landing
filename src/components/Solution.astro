@@ -1,0 +1,99 @@
+---
+import '../styles/sections.css';
+import type { ContentFor } from '../data/config';
+import { renderInlineBreaks } from '../lib/loadContent';
+type Props = { data: ContentFor<'solutions'> };
+const { data } = Astro.props;
+const { title } = data;
+---
+
+<section id="solution">
+  <div class="section-tag reveal">{data.section_tag}</div>
+  <h2 class="section-title reveal">
+    <Fragment set:html={renderInlineBreaks(title.prefix)} />
+    {title.emphasis && <em>{title.emphasis}</em>}
+    {title.suffix && <Fragment set:html={renderInlineBreaks(title.suffix)} />}
+  </h2>
+  <p class="section-body reveal">{data.body}</p>
+  <div class="solution-wrap reveal">
+    <div class="solution-steps">
+      {data.steps.map((s) => (
+        <div class="solution-step">
+          <div class="step-num">{s.num}</div>
+          <div class="step-title">{s.title}</div>
+          <div class="step-body">{s.body}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+  <div class="section-cta reveal">
+    <div>
+      <a href={data.cta.href} data-event={data.cta.event}>{data.cta.label}</a>
+      <span class="section-cta-note">{data.cta.note}</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .solution-wrap { margin-top: 56px; }
+  .solution-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .solution-steps > * { min-width: 0; }
+  .solution-step {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    padding: 26px 22px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color var(--transition), background var(--transition);
+    min-width: 0;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  .solution-step::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+  .solution-step:hover::after { opacity: 1; }
+  .solution-step:hover { background: var(--bg-hover); border-color: rgba(212,168,67,0.38); }
+  .step-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: 'lnum' 1, 'tnum' 1;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .step-body {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.78;
+  }
+
+  @media (max-width: 960px) {
+    .solution-steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 580px) {
+    .solution-steps { grid-template-columns: 1fr; }
+  }
+</style>

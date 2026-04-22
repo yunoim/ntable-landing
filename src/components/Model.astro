@@ -1,0 +1,252 @@
+---
+import '../styles/sections.css';
+import type { ContentFor } from '../data/config';
+import { renderInlineBreaks } from '../lib/loadContent';
+type Props = { data: ContentFor<'model'> };
+const { data } = Astro.props;
+const { title, compare } = data;
+const compareTitle = compare.title;
+---
+
+<section id="model">
+  <div class="section-tag reveal">{data.section_tag}</div>
+  <h2 class="section-title reveal">
+    <Fragment set:html={renderInlineBreaks(title.prefix)} />
+    {title.emphasis && <em>{title.emphasis}</em>}
+    {title.suffix && <Fragment set:html={renderInlineBreaks(title.suffix)} />}
+  </h2>
+  <p class="section-body reveal">{data.body}</p>
+
+  <div class="model-grid reveal" style="grid-template-columns: 1fr;">
+    <div class="model-card">
+      <div class="model-eyebrow">{data.plan_card.eyebrow}</div>
+      <div class="model-title">{data.plan_card.title}</div>
+      <div class="model-body">{data.plan_card.body}</div>
+      <div class="model-plans">
+        {data.plan_card.features.map((f) => (
+          <div class="model-plan-row"><span class="model-plan-name">{f}</span></div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="compare-wrap reveal">
+    <div class="compare-title">
+      <Fragment set:html={renderInlineBreaks(compareTitle.prefix)} />
+      {compareTitle.emphasis && <em>{compareTitle.emphasis}</em>}
+      {compareTitle.suffix && <Fragment set:html={renderInlineBreaks(compareTitle.suffix)} />}
+    </div>
+    <div class="compare-sub">{compare.subtitle}</div>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="me">{compare.me_label}</th>
+            {compare.competitors.map((c) => <th>{c}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {compare.rows.map((row) => (
+            <tr>
+              <td class="axis">{row.axis}</td>
+              <td class="me strong" data-label={compare.me_label}>
+                {row.me.mark} {row.me.text}
+                {row.me.note && <span class="note">{row.me.note}</span>}
+              </td>
+              {row.values.map((v, i) => (
+                <td data-label={compare.competitors[i]}>{v.mark} {v.text}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="compare-note">{compare.footnote}</p>
+  </div>
+
+  <div class="section-cta reveal">
+    <div>
+      <a href={data.cta.href} data-event={data.cta.event}>{data.cta.label}</a>
+      <span class="section-cta-note">{data.cta.note}</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .model-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 56px;
+  }
+  .model-grid > * { min-width: 0; }
+  .model-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    padding: 38px 36px;
+    transition: border-color var(--transition);
+  }
+  .model-card:hover { border-color: var(--border-strong); }
+  .model-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .model-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 14px;
+  }
+  .model-body {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-highlight);
+    line-height: 1.85;
+    margin-bottom: 28px;
+  }
+  .model-plans {
+    border-top: 1px solid var(--border-strong);
+    padding-top: 22px;
+  }
+  .model-plan-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(212,168,67,0.06);
+    font-size: 13px;
+  }
+  .model-plan-row:last-child { border-bottom: none; }
+  .model-plan-name {
+    color: var(--text-highlight);
+    font-weight: 300;
+  }
+
+  .compare-wrap { margin-top: 72px; }
+  .compare-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+  .compare-title :global(em) {
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+  .compare-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 22px;
+  }
+  .compare-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-lg);
+  }
+  table.compare-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .compare-table th,
+  .compare-table td {
+    padding: 14px 14px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-highlight);
+    border-bottom: 1px solid var(--border-subtle);
+    border-right: 1px solid var(--border-faint);
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table th {
+    background: rgba(14,22,40,0.55);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .compare-table th.me,
+  .compare-table td.me {
+    background: rgba(212,168,67,0.16);
+    color: var(--gold-bright);
+    border-left: 1px solid rgba(212,168,67,0.5);
+    border-right: 1px solid rgba(212,168,67,0.5);
+  }
+  .compare-table th.me { color: var(--gold); font-weight: 700; font-size: 12px; }
+  .compare-table td.strong { font-weight: 700; font-size: 13px; }
+  .compare-table .axis {
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-highlight);
+    font-weight: 500;
+    min-width: 200px;
+  }
+  .compare-table .note {
+    font-size: 10px;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 2px;
+  }
+
+  .compare-note {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: right;
+  }
+
+  @media (max-width: 960px) {
+    .model-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .compare-wrap { max-width: 100%; }
+    .compare-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      max-width: 100%;
+      border-radius: var(--radius-lg);
+    }
+    table.compare-table {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      table-layout: fixed;
+    }
+    .compare-table .axis { width: 22%; min-width: 0; }
+    .compare-table th,
+    .compare-table td {
+      padding: 10px 6px;
+      font-size: 12px;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+      line-height: 1.4;
+    }
+    .compare-table th { font-size: 11px; letter-spacing: 0.02em; padding: 10px 4px; }
+    .compare-table .axis { font-size: 11.5px; font-weight: 600; padding-left: 8px; }
+    .compare-table td.strong { font-size: 12px; }
+    .compare-table .note { font-size: 9.5px; margin-top: 3px; }
+  }
+  @media (max-width: 480px) {
+    .compare-table th,
+    .compare-table td { padding: 9px 4px; font-size: 11px; }
+    .compare-table th { font-size: 10px; padding: 8px 3px; }
+    .compare-table .axis { font-size: 11px; padding-left: 6px; width: 24%; }
+    .compare-table td.strong { font-size: 11px; }
+    .compare-table .note { font-size: 9px; }
+  }
+</style>
