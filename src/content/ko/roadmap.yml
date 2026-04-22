@@ -1,0 +1,41 @@
+section_tag: Roadmap
+
+title: 단계별 성장 전략
+
+phases:
+  - label: '현재 · 검증'
+    label_has_dot: true
+    phase_num: Phase 1
+    state: active
+    title: 직영 쇼케이스로 엔진 검증
+    body: 자체 운영 모임을 통해 플랫폼이 실제로 재미를 만들어내는지 검증합니다. 기능 완성과 운영 노하우 축적이 이 단계의 목표.
+    tags:
+      - → 멤버 100명
+      - → 월 4회 모임
+      - AI 성향 카드 가동 중
+      - 모임장 평가 누적
+    note: '→ 표시는 목표 · 표시 없음은 현재 가동 중'
+
+  - label: '3~6개월'
+    phase_num: Phase 2
+    title: 모임장 셀프 오픈 베타
+    body: '지인 모임장 5~10명과 함께 베타 운영. 모임 개설·운영 도구·카카오톡 알림 연동을 완성합니다.'
+    tags:
+      - 모임장 10명
+      - 게스트 DB 1,000명
+
+  - label: '6~12개월'
+    phase_num: Phase 3
+    title: 커스텀 질문 + B2B 팀빌딩 진입
+    body: '기업 팀빌딩용 맞춤 질문, 팀 편성, 결과 리포트 PDF 제공. 독립 모임장이 자립할 수 있는 구조 완성.'
+    tags:
+      - 모임장 50명
+      - 게스트 DB 5,000명
+
+  - label: '1~2년'
+    phase_num: Phase 4
+    title: 'AI 매칭 고도화 · 글로벌'
+    body: '누적된 투표·매칭 이력을 학습한 AI 추천 탑재. 강남·광화문·여의도로 거점 확장, 해외 진출. ntable for Teams 독립 런칭.'
+    tags:
+      - 모임장 200명
+      - 게스트 DB 20,000명

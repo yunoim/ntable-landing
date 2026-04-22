@@ -1,0 +1,19 @@
+badge: Phase 1 — 첫 모임 준비 중
+
+live_widget:
+  api: https://app.ntable.kr/api/stats
+  refresh_ms: 30000
+  meta_refresh_ms: 5000
+  rooms_label: 지금 열려 있는 모임
+  people_label: 지금 참여 중인 사람
+  cumulative_template_html: '지금까지 <strong>{people}</strong>명이 <strong>{rooms}</strong>개 모임에 참여했어요'
+
+cards:
+  - number: '12'
+    label_html: '진행 장치<br>보통 모임엔 없는 장치 12개'
+  - number: '5'
+    label_html: '모임 유형<br>둘이서·첫만남·소개팅·플리 공유회·팀·회사'
+  - number: 즉시
+    label_html: '투표 결과로<br>성향 매칭 자동 공개'
+  - number: 0원
+    label_html: '전 기능 무료<br>카드 등록·인원 제한 없음'

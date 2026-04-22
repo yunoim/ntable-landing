@@ -1,0 +1,76 @@
+section_tag: Business Model
+
+title:
+  prefix: '지금 '
+  emphasis: 전부 무료
+
+body: 모든 기능을 인원 제한 없이 사용할 수 있습니다. 회원가입·결제정보·앱 설치 어떤 것도 요구하지 않습니다.
+
+plan_card:
+  eyebrow: '모임장·게스트 모두'
+  title: 언제 어디서나 무료
+  body: 참가비는 모임장이 직접 정하고 플랫폼을 거치지 않습니다. 게스트는 익명으로 참가하고, 모임장은 누구나 모임을 열 수 있습니다.
+  features:
+    - '🔒 익명 보장 (모임 안에서만 닉네임)'
+    - '🛠 5종 모임 유형 + 진행 도구 풀세트'
+    - '⏱️ 모임 종료 후 개인 데이터 자동 정리'
+
+compare:
+  title:
+    prefix: '왜 '
+    emphasis: ntable
+    suffix: 인가
+  subtitle: '사람에 의존하지 않는 진행 엔진 · 진입 마찰 제로 · 정확한 매칭 — 다른 플랫폼과 본질 차이를 한 표로'
+  me_label: ntable
+  competitors:
+    - 문토
+    - 소모임
+    - 트레바리
+    - 넷플연가
+  rows:
+    - axis: 모임장 셀프 오픈
+      me: { mark: '○', text: 누구나 가능 }
+      values:
+        - { mark: '△', text: 심사 }
+        - { mark: '○', text: 자유 }
+        - { mark: '×', text: 큐레이션 }
+        - { mark: '×', text: 큐레이션 }
+
+    - axis: 실시간 성향 매칭
+      me: { mark: '○', text: 투표 기반 자동 매칭 }
+      values:
+        - { mark: '×', text: 없음 }
+        - { mark: '×', text: 없음 }
+        - { mark: '×', text: 없음 }
+        - { mark: '△', text: 수기 매칭 }
+
+    - axis: 구조화된 진행 장치
+      me: { mark: '○', text: 12개 장치 }
+      values:
+        - { mark: '×', text: 자유 }
+        - { mark: '×', text: 자유 }
+        - { mark: '△', text: 북토크 포맷 }
+        - { mark: '△', text: 큐레이션 }
+
+    - axis: 모임장 데이터 활용
+      me: { mark: '◐', text: AI 분석 카드, note: 'v1 · 확장 예정' }
+      values:
+        - { mark: '×', text: 없음 }
+        - { mark: '×', text: 없음 }
+        - { mark: '×', text: 없음 }
+        - { mark: '×', text: 없음 }
+
+    - axis: 진입 마찰
+      me: { mark: '○', text: '회원가입·결제정보·앱 모두 불필요' }
+      values:
+        - { mark: '△', text: '회원가입 + 앱 설치' }
+        - { mark: '△', text: '회원가입 + 앱 설치' }
+        - { mark: '△', text: '회원가입 + 결제' }
+        - { mark: '△', text: '회원가입 + 결제' }
+  footnote: '* 본 표는 공개 정보 기반 요약이며, 각 서비스의 세부 플랜·시즌에 따라 달라질 수 있습니다.'
+
+cta:
+  label: 지금 바로 시작하기
+  href: https://app.ntable.kr
+  event: model_cta
+  note: '회원가입 · 결제정보 · 앱 모두 없이'

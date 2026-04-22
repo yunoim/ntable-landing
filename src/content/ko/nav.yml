@@ -1,0 +1,15 @@
+logo: ntable
+logo_href: '#hero'
+cta:
+  label: 모임 열기
+  href: https://app.ntable.kr
+  event: nav_cta_primary
+links:
+  - { label: 문제, href: '#problem' }
+  - { label: 솔루션, href: '#solution' }
+  - { label: 진행, href: '#how' }
+  - { label: 요금, href: '#model' }
+  - { label: 확장, href: '#expansion' }
+  - { label: 로드맵, href: '#roadmap' }
+mobile_extra_links:
+  - { label: 문의, href: '#contact-wrap' }
