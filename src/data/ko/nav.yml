@@ -8,7 +8,9 @@ links:
   - { label: 문제, href: '#problem' }
   - { label: 솔루션, href: '#solution' }
   - { label: 진행, href: '#how' }
-  - { label: 요금, href: '#model' }
+  # 2026-04-23: '요금(#model)' 메뉴 비노출 — Business Model 섹션 자체도 index.astro 에서 주석 처리됨.
+  # 재활성화 시 이 주석만 풀면 복구.
+  # - { label: 요금, href: '#model' }
   - { label: 확장, href: '#expansion' }
   - { label: 로드맵, href: '#roadmap' }
 mobile_extra_links:

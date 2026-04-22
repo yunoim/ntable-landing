@@ -10,9 +10,14 @@ const { data } = Astro.props;
   <p class="section-body reveal">{data.body}</p>
 
   <div class="roadmap-list reveal" style="margin-top:56px;">
-    {data.steps.map((s) => (
+    {data.steps.map((s, i) => (
       <div class="roadmap-item">
-        <div class="roadmap-phase">{s.phase}<span>{s.subphase}</span></div>
+        {/* 2026-04-23: phase 텍스트를 index 기반 'Step NN' 로 재계산. yml 의 s.phase 가 폰트/글리프
+            이슈로 'Step 00' 처럼 깨져 보이던 문제 방어. DM Sans lining-nums 로 숫자 안전. */}
+        <div class="roadmap-phase">
+          <span class="roadmap-phase-num">Step {String(i + 1).padStart(2, '0')}</span>
+          <span class="roadmap-phase-sub">{s.subphase}</span>
+        </div>
         <div class="roadmap-content">
           <div class="roadmap-content-title">{s.title}</div>
           <div class="roadmap-content-body">{s.body}</div>
@@ -26,58 +31,76 @@ const { data } = Astro.props;
 </section>
 
 <style>
+  /* 2026-04-23: 타임라인 rail·dot 정렬 정리.
+     - phase cell width = var(--phase-w) 로 토큰화, rail/dot 중앙축을 cell 중앙과 픽셀 단위 일치.
+     - rail 은 첫 dot 중앙 → 마지막 dot 중앙 구간만. 각 item dot 의 top 은 phase-num 의 세로 중앙.
+     - phase 숫자는 DM Sans lining-nums 로 글리프 안전. */
   .roadmap-list {
     display: flex;
     flex-direction: column;
     position: relative;
+    --phase-w: 150px;
+    --rail-x: calc(var(--phase-w) / 2);     /* 150/2 = 75px */
+    --dot-size: 11px;
+    --dot-top: 48px;                         /* item padding-top(36) + phase num 세로 중앙(~12) */
   }
+  /* rail — 첫 item dot 중앙에서 마지막 item dot 중앙까지. calc 으로 item 높이 의존 제거. */
   .roadmap-list::before {
     content: '';
     position: absolute;
-    top: 16px;
-    bottom: 16px;
-    left: 68px;
+    left: calc(var(--rail-x) - 0.5px);       /* 1px 선의 왼쪽 엣지 = 중앙축 - 0.5 */
+    top: var(--dot-top);
+    bottom: var(--dot-top);
     width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--border-strong) 6%, var(--border-strong) 94%, transparent);
+    background: linear-gradient(to bottom, var(--gold) 0%, var(--border-strong) 20%, var(--border-strong) 80%, var(--gold) 100%);
+    opacity: 0.55;
     pointer-events: none;
   }
   .roadmap-item {
     position: relative;
     display: grid;
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: var(--phase-w) 1fr;
     gap: 36px;
     padding: 36px 0;
     border-bottom: 1px solid var(--border-subtle);
     align-items: start;
   }
   .roadmap-item:last-child { border-bottom: none; }
+  /* dot — rail 중앙축(var(--rail-x)) 에 수평 중심 맞춤. top = phase-num 세로 중앙. */
   .roadmap-item::before {
     content: '';
     position: absolute;
-    left: 63px;
-    top: 52px;
-    width: 11px;
-    height: 11px;
+    left: calc(var(--rail-x) - (var(--dot-size) / 2));
+    top: calc(var(--dot-top) - (var(--dot-size) / 2));
+    width: var(--dot-size);
+    height: var(--dot-size);
     border-radius: 50%;
     background: var(--bg);
     border: 2px solid var(--gold);
-    box-shadow: 0 0 12px rgba(212,168,67,0.4);
+    box-shadow: 0 0 12px rgba(212,168,67,0.45);
     z-index: 1;
   }
 
+  /* phase cell — 라벨을 cell 가로 중앙에 놓아 rail 중앙축과 일치시킴. */
   .roadmap-phase {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--gold);
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 4px;
     padding-top: 2px;
+    text-align: center;
+  }
+  .roadmap-phase-num {
+    font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.02em;
     font-variant-numeric: lining-nums tabular-nums;
     font-feature-settings: 'lnum' 1, 'tnum' 1;
+    line-height: 1;
   }
-  .roadmap-phase span {
+  .roadmap-phase-sub {
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
     letter-spacing: 0.1em;
@@ -116,13 +139,14 @@ const { data } = Astro.props;
   }
 
   @media (max-width: 960px) {
+    /* 태블릿: phase cell 을 상단 배지로. rail/dot 숨김 (사용자 요구 4번). */
     .roadmap-item { grid-template-columns: 1fr; gap: 10px; }
-    .roadmap-list::before { left: 4px; top: 10px; bottom: 10px; }
-    .roadmap-item::before { left: -1px; top: 6px; }
-  }
-  @media (max-width: 768px) {
+    .roadmap-phase { flex-direction: row; gap: 10px; align-items: baseline; text-align: left; }
     .roadmap-list::before { display: none; }
     .roadmap-item::before { display: none; }
+  }
+  @media (max-width: 768px) {
+    /* 모바일: 동일. padding 축소. */
     .roadmap-item { padding: 26px 0; }
   }
 </style>
