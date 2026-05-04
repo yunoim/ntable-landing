@@ -18,6 +18,7 @@ const meta = loadContent('meta', locale);
 const title = pageTitle ?? meta.title;
 const description = pageDescription ?? meta.description;
 const lang = htmlLang ?? meta.lang;
+const isEnFallback = locale === 'en';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -44,6 +45,7 @@ const fontsHref = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:i
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={meta.canonical} />
+  {isEnFallback && <meta name="robots" content="noindex, nofollow" />}
 
   <!-- Open Graph -->
   <meta property="og:type" content={meta.og.type} />

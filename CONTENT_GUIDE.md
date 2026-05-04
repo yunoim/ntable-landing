@@ -10,7 +10,7 @@
 |------|------|
 | `meta.yml` | `<head>` 안의 제목·설명·OG·Twitter 공유 정보 |
 | `nav.yml` | 상단 내비게이션 + 모바일 메뉴 |
-| `hero.yml` | 메인 타이틀·서브타이틀·CTA 버튼·오른쪽 목업 |
+| `hero.yml` | 메인 타이틀·서브타이틀·CTA 버튼·오른쪽 목업 (목업 클릭 시 이동 URL은 `mockup.cta.href`) |
 | `stats.yml` | Phase 1 배지·라이브 위젯 설정·통계 4카드 |
 | `problems.yml` | 3개 문제 카드 |
 | `solutions.yml` | 4단계 솔루션 + 하단 CTA |
@@ -25,6 +25,8 @@
 | `terms.md` | 이용약관 본문 (Markdown) |
 
 **컴포넌트(.astro) 파일은 건드리지 마세요.** 템플릿과 스타일은 엔지니어 영역입니다.
+
+> 첫 방문 시 노출되는 풀스크린 브랜드 인트로(`BrandSplash.astro`)는 카피·타이밍 모두 컴포넌트 내부에 있습니다. 수정 필요 시 엔지니어에게 요청하세요.
 
 ---
 
@@ -150,7 +152,7 @@ packs:
 - **내부 페이지**: `/privacy.html`, `/terms.html` — `.html` 확장자 유지
 - **앵커 이동**: `#hero`, `#faq` — 섹션 id
 - **이메일**: `mailto:` 프리픽스 없이 주소만 적으면 됨 (`connect@ntable.kr`)
-- **OG 이미지 등 공유 이미지**: `public/` 폴더에 저장, URL은 `/og-image.svg` 형태
+- **OG 이미지 등 공유 이미지**: `public/` 폴더에 저장, URL은 `/og-image.png` 형태 (PNG 공식. SVG 원본은 `og-image.svg`로 보존, 카피 변경 시 둘 다 갱신)
 
 ---
 

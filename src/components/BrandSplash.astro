@@ -18,14 +18,16 @@
       if (!el) return;
       el.classList.add('show');
       document.documentElement.style.overflow = 'hidden';
+      var isMobile = window.matchMedia('(max-width: 580px)').matches;
+      var showMs = isMobile ? 1500 : 2500;
       setTimeout(function () {
         el.classList.add('hide');
         document.documentElement.style.overflow = '';
         try { sessionStorage.setItem('ntable_splash_seen', '1'); } catch (_) {}
-      }, 2500);
+      }, showMs);
       setTimeout(function () {
         el.style.display = 'none';
-      }, 3000);
+      }, showMs + 500);
     } catch (_) {}
   })();
 </script>

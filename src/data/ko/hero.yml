@@ -35,7 +35,7 @@ mockup:
   presence_count: 4
   presence_label: '명 접속 중'
   cta:
-    href: https://app.ntable.kr
+    href: https://app.ntable.kr/?from=hero_mockup
     event: hero_mockup_click
     hint: '직접 모임 열기 →'
     aria_label: '제품 미리보기 — 클릭하면 모임 열기 페이지로 이동'
