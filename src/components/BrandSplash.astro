@@ -1,0 +1,93 @@
+---
+// 첫 방문 1회만 노출되는 브랜드 인트로. sessionStorage gate + reduced-motion respect.
+// LCP 회피를 위해 의미 마크업(h1/main 등) 사용 금지 — 순수 div+span 으로만 구성.
+---
+
+<div id="brandSplash" class="brand-splash" aria-hidden="true">
+  <div class="brand-splash-inner">
+    <span class="brand-splash-mark">ntable</span>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (sessionStorage.getItem('ntable_splash_seen') === '1') return;
+      var el = document.getElementById('brandSplash');
+      if (!el) return;
+      el.classList.add('show');
+      document.documentElement.style.overflow = 'hidden';
+      setTimeout(function () {
+        el.classList.add('hide');
+        document.documentElement.style.overflow = '';
+        try { sessionStorage.setItem('ntable_splash_seen', '1'); } catch (_) {}
+      }, 3000);
+      setTimeout(function () {
+        el.style.display = 'none';
+      }, 3500);
+    } catch (_) {}
+  })();
+</script>
+
+<style>
+  .brand-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-deep, #0a0f1e);
+    opacity: 1;
+    transition: opacity 0.45s ease-out;
+    pointer-events: none;
+  }
+  .brand-splash.show {
+    display: flex;
+    pointer-events: auto;
+  }
+  .brand-splash.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .brand-splash-inner {
+    position: relative;
+    text-align: center;
+    padding: 0 28px;
+  }
+  .brand-splash-mark {
+    display: inline-block;
+    position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 9vw, 110px);
+    font-weight: 600;
+    color: var(--text-bright, #f5f2ec);
+    letter-spacing: 0.06em;
+    line-height: 1;
+    animation: brandSplashFade 0.65s 0.08s both ease-out;
+  }
+  .brand-splash-mark::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -14px;
+    width: 60%;
+    height: 1px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, var(--gold-bright, #e8b84b), transparent);
+    transform-origin: center;
+    animation: brandSplashUnderline 0.85s 0.22s both ease-out;
+  }
+  @keyframes brandSplashFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes brandSplashUnderline {
+    from { opacity: 0; transform: translateX(-50%) scaleX(0.2); }
+    to   { opacity: 0.85; transform: translateX(-50%) scaleX(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .brand-splash { display: none !important; }
+  }
+</style>

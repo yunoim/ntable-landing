@@ -10,7 +10,7 @@ og:
   url: https://ntable.kr/
   title: 'ntable — 누구나 모임장이 된다'
   description: '누구나 모임장이 된다. 아이스브레이킹·대화·매칭·결과 정리까지 앱이 진행을 맡는 소셜 모임 서비스(오프라인·온라인·하이브리드).'
-  image: https://ntable.kr/og-image.svg
+  image: https://ntable.kr/og-image.png
   image_width: 1200
   image_height: 630
   site_name: ntable
@@ -19,13 +19,13 @@ twitter:
   card: summary_large_image
   title: 'ntable — 누구나 모임장이 된다'
   description: '누구나 모임장이 된다. 앱이 진행을 대신 맡아요.'
-  image: https://ntable.kr/og-image.svg
+  image: https://ntable.kr/og-image.png
 
 organization:
   name: ntable
   slogan: 누구나 모임장이 된다
   url: https://ntable.kr
-  logo: https://ntable.kr/og-image.svg
+  logo: https://ntable.kr/og-image.png
   email: connect@ntable.kr
   description: '누구나 모임장이 된다. 모임장 역량에 관계없이 진행을 도와주는 소셜 모임 서비스.'
   same_as:

@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import BrandSplash from '../components/BrandSplash.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
 import Stats from '../components/Stats.astro';
@@ -30,6 +31,7 @@ const footer = loadContent('footer', locale);
 ---
 
 <Layout locale={locale}>
+  <BrandSplash />
   <Nav data={nav} />
   <Hero data={hero} />
   <Stats data={stats} />
