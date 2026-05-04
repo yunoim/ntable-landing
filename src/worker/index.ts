@@ -47,6 +47,7 @@ const handler = {
     headers.set('X-Content-Type-Options', 'nosniff');
     headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
     headers.set('X-Frame-Options', 'DENY');
+    headers.set('X-Worker', 'ntable-landing');
 
     return new Response(response.body, {
       status: response.status,

@@ -100,6 +100,20 @@ const wordmark = ['n', 't', 'a', 'b', 'l', 'e'];
     font-weight: 600;
     letter-spacing: 0.05em;
     line-height: 1;
+    filter: drop-shadow(0 0 28px rgba(232, 184, 75, 0.22));
+  }
+  @keyframes brandShimmer {
+    0%   { background-position: 0% center; }
+    100% { background-position: 220% center; }
+  }
+
+  /* bg-clip은 자식 char에 직접 적용 — 부모 bg-clip + 자식 transform 조합은
+     stacking context 충돌로 일부 브라우저에서 글자 미렌더 */
+  .brand-splash-char {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(22px) scale(0.82);
     background: linear-gradient(
       135deg,
       var(--gold-bright, #e8b84b),
@@ -111,21 +125,11 @@ const wordmark = ['n', 't', 'a', 'b', 'l', 'e'];
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
-    filter: drop-shadow(0 0 28px rgba(232, 184, 75, 0.22));
-    animation: brandShimmer 5.5s 0.7s linear infinite;
-  }
-  @keyframes brandShimmer {
-    0%   { background-position: 0% center; }
-    100% { background-position: 220% center; }
-  }
-
-  .brand-splash-char {
-    display: inline-block;
-    opacity: 0;
-    filter: blur(14px);
-    transform: translateY(22px) scale(0.82);
-    animation: charReveal 0.85s cubic-bezier(0.2, 0.75, 0.2, 1) forwards;
-    animation-delay: calc(0.15s + var(--i) * 0.09s);
+    text-shadow: 0 0 24px rgba(232, 184, 75, 0.18);
+    animation:
+      charReveal 0.85s cubic-bezier(0.2, 0.75, 0.2, 1) forwards,
+      brandShimmer 5.5s linear infinite;
+    animation-delay: calc(0.15s + var(--i) * 0.09s), 0.7s;
   }
   @keyframes charReveal {
     to {
