@@ -110,6 +110,12 @@ export const heroSchema = z.object({
     status_label: z.string(),
     presence_count: z.number().int(),
     presence_label: z.string(),
+    cta: z.object({
+      href: z.string().url(),
+      event: z.string(),
+      hint: z.string(),
+      aria_label: z.string(),
+    }),
     phases: z.array(z.object({
       num: z.string(),
       label: z.string(),
