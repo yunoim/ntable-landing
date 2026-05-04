@@ -67,9 +67,30 @@ const fontsHref = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:i
 
   <!-- Favicon (inline SVG) -->
   <link rel="icon" type="image/svg+xml" href={faviconSvg} />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0a0f1e" />
+  <meta name="msapplication-TileColor" content="#0a0f1e" />
 
   <!-- JSON-LD Organization -->
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline></script>
+
+  <!-- JSON-LD WebSite -->
+  <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ntable",
+      "alternateName": "엔테이블",
+      "url": "https://ntable.kr",
+      "description": "누구나 모임장이 된다. 아이스브레이킹·대화·매칭·결과 정리까지 앱이 진행을 맡는 소셜 모임 진행 도우미.",
+      "inLanguage": "ko-KR",
+      "publisher": {
+        "@type": "Organization",
+        "name": "ntable",
+        "url": "https://ntable.kr"
+      }
+    }
+  </script>
 
   <!-- JSON-LD SoftwareApplication -->
   <script type="application/ld+json" is:inline>
