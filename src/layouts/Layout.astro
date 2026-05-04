@@ -131,10 +131,11 @@ const fontsHref = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:i
     }
   </script>
 
-  <!-- Fonts -->
+  <!-- Fonts (비동기 로드로 FCP/LCP 차단 회피 — splash가 1.8s 가려서 FOUT 안 보임) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href={fontsHref} rel="stylesheet" />
+  <link rel="preload" as="style" href={fontsHref} onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href={fontsHref} /></noscript>
 
   <AnalyticsScript />
 
