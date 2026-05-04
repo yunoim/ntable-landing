@@ -11,5 +11,8 @@ export default defineConfig({
   // in YAML + SEO + external backlinks depend on the .html extension).
   build: {
     format: 'file',
+    // CSS 인라인 강제 — splash 가 모바일 slow 4G 에서 외부 CSS 다운로드 (~300ms) 대기로 늦게 paint 되는 문제 해결
+    // Trade-off: HTML 약간 커지지만 cache 됨. 첫 paint 가 압도적으로 중요.
+    inlineStylesheets: 'always',
   },
 });
