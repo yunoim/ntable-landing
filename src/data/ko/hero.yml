@@ -25,7 +25,7 @@ live_badge:
   href: https://app.ntable.kr
   event: hero_live_badge
   initial_text: '라이브 현황 불러오는 중…'
-  empty_html: '지금 조용한 시간 — <strong>당신이 첫 모임장</strong>이 될 수 있어요'
+  empty_html: '<strong>지금이 첫 모임장</strong>이 되기 가장 좋은 순간'
   live_template_html: '지금 <strong>{rooms}곳</strong>의 모임에서 <strong>{people}명</strong>이 대화 중'
   error_text: 라이브 현황을 불러올 수 없어요
 
