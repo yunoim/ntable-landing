@@ -23,8 +23,8 @@ const { title } = data;
         </h1>
         <p class="hero-subtitle">{data.subtitle}</p>
         <div class="hero-actions">
-          <a href={data.cta.primary.href} class="btn-primary" data-event={data.cta.primary.event}>{data.cta.primary.label}</a>
-          <a href={data.cta.secondary.href} class="btn-secondary" data-event={data.cta.secondary.event}>{data.cta.secondary.label}</a>
+          <a href={data.cta.primary.href} class="btn-primary" data-umami-event={data.cta.primary.event}>{data.cta.primary.label}</a>
+          <a href={data.cta.secondary.href} class="btn-secondary" data-umami-event={data.cta.secondary.event}>{data.cta.secondary.label}</a>
         </div>
         <div class="hero-trust-row" aria-label="진입 마찰 제거">
           {data.trust_chips.map((chip) => (
@@ -36,7 +36,7 @@ const { title } = data;
           class="hero-live"
           id="heroLive"
           data-state="empty"
-          data-event={data.live_badge.event}
+          data-umami-event={data.live_badge.event}
           data-empty-html={data.live_badge.empty_html}
           data-live-template={data.live_badge.live_template_html}
           data-error-text={data.live_badge.error_text}
@@ -47,7 +47,7 @@ const { title } = data;
         </a>
       </div>
       <div class="hero-right">
-        <a class="mockup-frame" href={data.mockup.cta.href} data-event={data.mockup.cta.event} aria-label={data.mockup.cta.aria_label}>
+        <a class="mockup-frame" href={data.mockup.cta.href} data-umami-event={data.mockup.cta.event} aria-label={data.mockup.cta.aria_label}>
           <div class="mockup-header">
             <div class="mockup-code">
               모임 코드 <strong>{data.mockup.code}</strong>

@@ -9,7 +9,7 @@ const { data } = Astro.props;
   <div class="contact-inner reveal">
     <h2 class="contact-title"><Fragment set:html={renderInlineBreaks(data.title)} /></h2>
     <p class="contact-body"><Fragment set:html={renderInlineBreaks(data.body)} /></p>
-    <a href={`mailto:${data.email}`} class="contact-email" data-event={data.email_event}>{data.email}</a>
+    <a href={`mailto:${data.email}`} class="contact-email" data-umami-event={data.email_event}>{data.email}</a>
   </div>
 </div>
 

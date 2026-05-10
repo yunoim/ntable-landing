@@ -227,19 +227,25 @@ YAML 편집 → PR 생성 → 리뷰 → main 브랜치 머지 → 자동 배포
 
 ---
 
-## 분석 설정 (Plausible)
+## 분석 설정 (Umami self-hosted)
 
-외부 `PUBLIC_PLAUSIBLE_DOMAIN` 환경변수가 설정되면 페이지 로드 시 Plausible 스크립트가 자동 주입됩니다.
+Umami 자체 호스팅(Railway) + admin.ntable.kr/u/* path 프록시 구조. 환경변수 두 개가 모두 설정되면 페이지 로드 시 Umami 스크립트가 자동 주입됩니다.
 
 **프로덕션 세팅 (한 번만):**
-1. Cloudflare Dashboard → Workers & Pages → `ntable-landing` → Settings → Variables
-2. 환경변수 추가: `PUBLIC_PLAUSIBLE_DOMAIN` = `ntable.kr`
-3. 다음 배포부터 반영
+1. Railway에 PostgreSQL + Umami 서비스 추가 (별 프로젝트 — 미래 다 프로젝트 공유)
+2. Cloudflare Worker로 `admin.ntable.kr/u/*` → Railway Umami 도메인 reverse proxy
+3. Umami 대시보드 → Settings → Websites → "Add Website" → Domain: `ntable.kr` → Website ID 복사
+4. Cloudflare Dashboard → Workers & Pages → `ntable-landing` → Settings → Variables 에 두 개 등록:
+   - `PUBLIC_UMAMI_WEBSITE_ID` = (위에서 복사한 UUID)
+   - `PUBLIC_UMAMI_SCRIPT_SRC` = `https://admin.ntable.kr/u/script.js`
+5. 다음 배포부터 반영. 둘 중 하나라도 빠지면 스크립트 미주입(no-op).
 
-자체 호스팅 Plausible을 쓴다면 `PUBLIC_PLAUSIBLE_SCRIPT_SRC`도 설정:
-- `PUBLIC_PLAUSIBLE_SCRIPT_SRC` = `https://analytics.yourdomain/js/script.js`
+**왜 admin.ntable.kr/u/*인가:**
+- 1st-party host라 ad-block 우회
+- 새 서브도메인 추가 비용 없음 — admin.ntable.kr DNS 자원 재활용
+- Cloudflare Worker level path 라우팅이라 ntable-app admin 페이지와 충돌 없음
 
-**추적 이벤트**: 템플릿의 `data-event` 속성이 있는 모든 요소(CTA 버튼 등) 클릭 시 Plausible 사용자 정의 이벤트로 기록.
+**추적 이벤트**: 템플릿의 `data-umami-event` 속성이 박힌 요소(CTA 버튼 등) 클릭 시 Umami가 자동 추적 (별도 JS 핸들러 불필요). YAML에서는 `cta.event: hero_cta_primary` 식으로 키만 정의하면 됨 — 컴포넌트가 자동으로 `data-umami-event="..."`로 렌더링.
 
 ---
 

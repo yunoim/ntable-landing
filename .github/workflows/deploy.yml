@@ -21,6 +21,11 @@ jobs:
 
       - name: Build Astro
         run: npm run build
+        env:
+          # Vite inlines PUBLIC_* at build time — Cloudflare Workers runtime
+          # env doesn't reach the static HTML, so these must be GitHub Secrets.
+          PUBLIC_UMAMI_WEBSITE_ID: ${{ secrets.PUBLIC_UMAMI_WEBSITE_ID }}
+          PUBLIC_UMAMI_SCRIPT_SRC: ${{ secrets.PUBLIC_UMAMI_SCRIPT_SRC }}
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3

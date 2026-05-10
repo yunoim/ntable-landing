@@ -1,12 +1,19 @@
+// Optional helper for explicit event tracking from components.
+// AnalyticsScript already auto-tracks elements with [data-umami-event],
+// so this is only needed when a non-click trigger (e.g. timer, scroll)
+// must fire an event programmatically. Currently unused — kept for future.
+
 declare global {
   interface Window {
-    plausible?: (event: string, options?: { props?: Record<string, string> }) => void;
+    umami?: {
+      track?: (event: string, data?: Record<string, unknown>) => void;
+    };
   }
 }
 
-export function track(event: string, props?: Record<string, string>): void {
+export function track(event: string, data?: Record<string, unknown>): void {
   if (typeof window === 'undefined') return;
-  window.plausible?.(event, props ? { props } : undefined);
+  window.umami?.track?.(event, data);
 }
 
 export {};

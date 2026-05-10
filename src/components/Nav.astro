@@ -13,7 +13,7 @@ const { data } = Astro.props;
       ))}
     </ul>
     <div class="nav-actions">
-      <a href={data.cta.href} class="nav-cta-primary" data-event={data.cta.event}>{data.cta.label}</a>
+      <a href={data.cta.href} class="nav-cta-primary" data-umami-event={data.cta.event}>{data.cta.label}</a>
       <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="메뉴">
         <span></span><span></span><span></span>
       </button>

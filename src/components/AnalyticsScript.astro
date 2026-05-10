@@ -1,34 +1,31 @@
 ---
-// Conditional Plausible analytics script.
-// Injected only if PUBLIC_PLAUSIBLE_DOMAIN env var is set.
+// Conditional Umami analytics script (self-hosted on Railway, proxied via admin.ntable.kr/u/).
+// Injected only when both PUBLIC_UMAMI_WEBSITE_ID and PUBLIC_UMAMI_SCRIPT_SRC are set.
 //
 // Setup:
 // - Production: Cloudflare Workers env vars
 //   (Dashboard → Workers & Pages → ntable-landing → Settings → Variables)
-// - Local dev: .env file with PUBLIC_PLAUSIBLE_DOMAIN=ntable.kr
-// - Optional: PUBLIC_PLAUSIBLE_SCRIPT_SRC to override default script URL
-//   (self-hosted Plausible: your script URL)
+//     PUBLIC_UMAMI_WEBSITE_ID   — Umami website UUID (Settings → Websites → Edit)
+//     PUBLIC_UMAMI_SCRIPT_SRC   — e.g. https://admin.ntable.kr/u/script.js
+// - Local dev: .env file with the same vars
+// - Either var missing → script not injected, no-op.
 //
-// Click tracking runs regardless of Plausible presence — any element
-// with [data-event] fires window.plausible?.(eventName) on click.
-// Plausible absent → no-op.
+// Click tracking: any element with [data-umami-event="name"] is auto-tracked
+// by the Umami script (no manual delegation needed). When the script is
+// absent (env vars missing), clicks simply produce no analytics traffic.
+//
+// Migration history: 2026-05-09 Plausible → Umami self-hosted (path-proxied
+// via admin.ntable.kr/u/* to ad-block-resilient first-party host).
 
-const domain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
-const scriptSrc =
-  import.meta.env.PUBLIC_PLAUSIBLE_SCRIPT_SRC || 'https://plausible.io/js/script.js';
+const websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
+const scriptSrc = import.meta.env.PUBLIC_UMAMI_SCRIPT_SRC;
+const enabled = Boolean(websiteId && scriptSrc);
 ---
-{domain && <script is:inline defer data-domain={domain} src={scriptSrc}></script>}
-
-<script>
-  // Event delegation for [data-event] click tracking. Works without
-  // Plausible loaded (the optional chaining no-ops).
-  document.addEventListener('click', (e) => {
-    const target = e.target;
-    if (!(target instanceof HTMLElement)) return;
-    const trigger = target.closest('[data-event]');
-    if (!trigger) return;
-    const name = trigger.getAttribute('data-event');
-    if (!name) return;
-    window.plausible?.(name);
-  });
-</script>
+{enabled && (
+  <script
+    is:inline
+    defer
+    src={scriptSrc}
+    data-website-id={websiteId}
+  ></script>
+)}
