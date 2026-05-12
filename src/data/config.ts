@@ -12,6 +12,7 @@ import { z } from 'zod';
 const link = z.object({
   label: z.string(),
   href: z.string(),
+  event: z.string().optional(),
 });
 
 const cta = z.object({
@@ -82,6 +83,7 @@ export const navSchema = z.object({
   logo: z.string(),
   logo_href: z.string(),
   cta: cta,
+  cta_demo: cta.optional(),
   links: z.array(link),
   mobile_extra_links: z.array(link),
 });
@@ -191,6 +193,7 @@ export const solutionsSchema = z.object({
     body: z.string(),
   })),
   cta: sectionCta,
+  cta_secondary: sectionCta.optional(),
 });
 
 // ─────────────────────────────── how.yml ───────────────────────────────
@@ -206,6 +209,7 @@ export const howSchema = z.object({
     body: z.string(),
     tags: z.array(z.string()),
   })),
+  cta: sectionCta,
 });
 
 // ─────────────────────────────── model.yml ───────────────────────────────

@@ -9,12 +9,12 @@
 | 파일 | 섹션 |
 |------|------|
 | `meta.yml` | `<head>` 안의 제목·설명·OG·Twitter 공유 정보 |
-| `nav.yml` | 상단 내비게이션 + 모바일 메뉴 |
+| `nav.yml` | 상단 내비게이션 + 모바일 메뉴 (선택: `cta_demo` 보조 진입점, `mobile_extra_links[].event` Umami 이벤트) |
 | `hero.yml` | 메인 타이틀·서브타이틀·CTA 버튼·오른쪽 목업 (목업 클릭 시 이동 URL은 `mockup.cta.href`) |
 | `stats.yml` | Phase 1 배지·라이브 위젯 설정·통계 4카드 |
 | `problems.yml` | 3개 문제 카드 |
-| `solutions.yml` | 4단계 솔루션 + 하단 CTA |
-| `how.yml` | 4 스텝 진행 장치 |
+| `solutions.yml` | 4단계 솔루션 + 하단 CTA (선택: `cta_secondary` 듀얼 버튼 — 첫 번째가 primary 강조, 두 번째가 ghost) |
+| `how.yml` | 4 스텝 진행 장치 + 하단 CTA |
 | `model.yml` | 비즈니스 모델 카드 + 5사 비교표 + 하단 CTA |
 | `expansion.yml` | 5 팩 + 툴킷 로드맵 5 |
 | `roadmap.yml` | Phase 1~4 |

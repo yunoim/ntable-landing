@@ -25,3 +25,9 @@ cta:
   href: '#how'
   event: solution_cta_ghost
   note: '4단계 · 12개 진행 장치'
+
+cta_secondary:
+  label: 먼저 체험해보기
+  href: https://app.ntable.kr/demo?from=solution
+  event: solution_cta_demo
+  note: '5분 · 회원가입 없이'

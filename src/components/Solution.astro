@@ -27,8 +27,11 @@ const { title } = data;
   </div>
   <div class="section-cta reveal">
     <div>
+      {data.cta_secondary && (
+        <a href={data.cta_secondary.href} data-umami-event={data.cta_secondary.event}>{data.cta_secondary.label}</a>
+      )}
       <a href={data.cta.href} class="section-cta-ghost" data-umami-event={data.cta.event}>{data.cta.label}</a>
-      <span class="section-cta-note">{data.cta.note}</span>
+      <span class="section-cta-note">{data.cta_secondary?.note ?? data.cta.note}</span>
     </div>
   </div>
 </section>

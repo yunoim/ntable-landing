@@ -62,6 +62,14 @@ section {
   display: flex;
   justify-content: center;
 }
+/* 2026-05-09: cta_secondary 듀얼 CTA 정합. 단일일 땐 영향 없음. */
+.section-cta > div {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
 .section-cta a {
   display: inline-flex;
   align-items: center;
@@ -93,6 +101,7 @@ section {
 }
 .section-cta-note {
   display: block;
+  flex-basis: 100%;
   margin-top: 12px;
   text-align: center;
   font-size: 12px;

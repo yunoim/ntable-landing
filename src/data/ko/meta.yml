@@ -2,14 +2,14 @@ lang: ko
 locale: ko_KR
 site: https://ntable.kr
 title: 'ntable — 누구나 모임장이 된다'
-description: 'ntable — 누구나 모임장이 된다. 아이스브레이킹·대화·매칭·결과 정리까지 앱이 진행을 맡는 소셜 모임 서비스(오프라인·온라인·하이브리드).'
+description: 'ntable — 누구나 모임장이 된다. 5분 체험으로 미리 보고, 아이스브레이킹·대화·매칭·결과 정리까지 앱이 진행을 맡는 소셜 모임 서비스(오프라인·온라인·하이브리드).'
 canonical: https://ntable.kr/
 
 og:
   type: website
   url: https://ntable.kr/
   title: 'ntable — 누구나 모임장이 된다'
-  description: '누구나 모임장이 된다. 아이스브레이킹·대화·매칭·결과 정리까지 앱이 진행을 맡는 소셜 모임 서비스(오프라인·온라인·하이브리드).'
+  description: '누구나 모임장이 된다. 5분 체험으로 미리 보고, 아이스브레이킹·대화·매칭·결과 정리까지 앱이 진행을 맡는 소셜 모임 서비스(오프라인·온라인·하이브리드).'
   image: https://ntable.kr/og-image.png
   image_width: 1200
   image_height: 630
@@ -18,7 +18,7 @@ og:
 twitter:
   card: summary_large_image
   title: 'ntable — 누구나 모임장이 된다'
-  description: '누구나 모임장이 된다. 앱이 진행을 대신 맡아요.'
+  description: '누구나 모임장이 된다. 5분 체험으로 미리 봐요.'
   image: https://ntable.kr/og-image.png
 
 organization:

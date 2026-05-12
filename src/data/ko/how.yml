@@ -42,3 +42,9 @@ steps:
       - ⑩ 상호 지명 매칭
       - ⑪ 인스타 상호 공개 [소개팅]
       - ⑫ AI 성향 카드
+
+cta:
+  label: 먼저 체험해보기
+  href: https://app.ntable.kr/demo?from=how
+  event: how_cta_demo
+  note: '5분 · 회원가입 없이'

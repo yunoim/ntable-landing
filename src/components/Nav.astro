@@ -13,6 +13,9 @@ const { data } = Astro.props;
       ))}
     </ul>
     <div class="nav-actions">
+      {data.cta_demo && (
+        <a href={data.cta_demo.href} class="nav-cta-demo" data-umami-event={data.cta_demo.event}>{data.cta_demo.label}</a>
+      )}
       <a href={data.cta.href} class="nav-cta-primary" data-umami-event={data.cta.event}>{data.cta.label}</a>
       <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="메뉴">
         <span></span><span></span><span></span>
@@ -21,10 +24,10 @@ const { data } = Astro.props;
   </div>
   <div class="mobile-menu" id="mobile-menu">
     {data.links.map((l) => (
-      <a href={l.href} onclick="toggleMenu()">{l.label}</a>
+      <a href={l.href} onclick="toggleMenu()" data-umami-event={l.event}>{l.label}</a>
     ))}
     {data.mobile_extra_links.map((l) => (
-      <a href={l.href} onclick="toggleMenu()">{l.label}</a>
+      <a href={l.href} onclick="toggleMenu()" data-umami-event={l.event}>{l.label}</a>
     ))}
   </div>
 </nav>
@@ -95,6 +98,24 @@ const { data } = Astro.props;
   .nav-cta-primary:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 18px rgba(212, 168, 67, 0.55);
+  }
+
+  /* 2026-05-09: 데모 진입점 (ghost). 모바일에선 mobile_extra_links 로 대체. */
+  .nav-cta-demo {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border: 1.5px solid var(--gold);
+    color: var(--gold-bright);
+    border-radius: 40px;
+    transition: background var(--transition), border-color var(--transition);
+  }
+  .nav-cta-demo:hover {
+    background: rgba(232, 184, 75, 0.15);
+    border-color: var(--gold-bright);
+  }
+  @media (max-width: 760px) {
+    .nav-cta-demo { display: none; }
   }
 
   .hamburger {

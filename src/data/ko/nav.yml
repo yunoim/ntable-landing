@@ -4,6 +4,10 @@ cta:
   label: 모임 열기
   href: https://app.ntable.kr
   event: nav_cta_primary
+cta_demo:
+  label: 먼저 체험해보기
+  href: https://app.ntable.kr/demo?from=nav
+  event: nav_cta_demo
 links:
   - { label: 문제, href: '#problem' }
   - { label: 솔루션, href: '#solution' }
@@ -14,4 +18,5 @@ links:
   - { label: 확장, href: '#expansion' }
   - { label: 로드맵, href: '#roadmap' }
 mobile_extra_links:
+  - { label: 먼저 체험해보기, href: 'https://app.ntable.kr/demo?from=nav_mobile', event: nav_cta_demo_mobile }
   - { label: 문의, href: '#contact-wrap' }

@@ -28,6 +28,13 @@ const { data } = Astro.props;
       </div>
     ))}
   </div>
+
+  <div class="section-cta reveal">
+    <div>
+      <a href={data.cta.href} data-umami-event={data.cta.event}>{data.cta.label}</a>
+      <span class="section-cta-note">{data.cta.note}</span>
+    </div>
+  </div>
 </section>
 
 <style>
