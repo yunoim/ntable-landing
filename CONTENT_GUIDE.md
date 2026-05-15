@@ -152,7 +152,8 @@ packs:
 - **내부 페이지**: `/privacy.html`, `/terms.html` — `.html` 확장자 유지
 - **앵커 이동**: `#hero`, `#faq` — 섹션 id
 - **이메일**: `mailto:` 프리픽스 없이 주소만 적으면 됨 (`connect@ntable.kr`)
-- **OG 이미지 등 공유 이미지**: `public/` 폴더에 저장, URL은 `/og-image.png` 형태 (PNG 공식. SVG 원본은 `og-image.svg`로 보존, 카피 변경 시 둘 다 갱신)
+- **OG 이미지 등 공유 이미지**: `public/` 폴더에 저장, URL은 `/og-image.png` 형태 (PNG 공식. SVG 원본은 `og-image.svg`로 보존)
+  - SVG 카피 변경 후 **로컬에서 `npm run og:build` 실행** → `public/og-image.png` 자동 갱신 → 결과 PNG를 viewer로 한 번 열어 한글 깨짐·시각 확인 → PNG도 함께 commit. CI(GitHub Actions)에는 hook되어 있지 않음 (Linux 환경에 한글 폰트·Cormorant Garamond 부재로 fallback 시각이 어색해질 수 있어 의도적으로 로컬 전용).
 
 ---
 

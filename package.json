@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "astro": "astro",
+    "og:build": "node scripts/build-og.mjs"
   },
   "dependencies": {
     "astro": "^4.16.18",
