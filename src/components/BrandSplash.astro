@@ -22,14 +22,15 @@ const wordmark = ['n', 't', 'a', 'b', 'l', 'e'];
 <script is:inline>
   (function () {
     try {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       if (sessionStorage.getItem('ntable_splash_seen') === '1') return;
       var el = document.getElementById('brandSplash');
       if (!el) return;
+      var isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       el.classList.add('show');
+      if (isReduced) el.classList.add('static');
       document.documentElement.style.overflow = 'hidden';
       var isMobile = window.matchMedia('(max-width: 580px)').matches;
-      var showMs = isMobile ? 1800 : 2500;
+      var showMs = isReduced ? 900 : (isMobile ? 1800 : 2500);
       setTimeout(function () {
         el.classList.add('hide');
         document.documentElement.style.overflow = '';
@@ -188,7 +189,16 @@ const wordmark = ['n', 't', 'a', 'b', 'l', 'e'];
     100% { transform: translateY(-50%) scale(1.05); opacity: 0.45; }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .brand-splash { display: none !important; }
+  /* reduced-motion: 애니메이션은 모두 무력화하되 정적 splash(로고 + 밑줄)는 짧게 노출.
+     JS 가 .static 토글 + showMs 900 으로 단축. */
+  .brand-splash.static .brand-splash-bg,
+  .brand-splash.static .brand-splash-char,
+  .brand-splash.static .brand-splash-underline {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
   }
+  .brand-splash.static .brand-splash-underline { transform: scaleX(1); }
+  .brand-splash.static .brand-splash-spark { display: none; }
 </style>
