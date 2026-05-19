@@ -25,16 +25,16 @@ const { title } = data;
 
 <style>
   .faq-section {
-    padding: 80px 32px;
+    padding: 96px 32px;
     background: var(--bg-alt);
     border-top: 1px solid var(--border-subtle);
   }
   .faq-list {
     max-width: 760px;
-    margin: 40px auto 0;
+    margin: 48px auto 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
   .faq-item {
     background: var(--bg-elevated);
@@ -72,9 +72,9 @@ const { title } = data;
   .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
   .faq-item summary:hover { color: var(--text-rose); }
   .faq-body {
-    padding: 0 22px 20px;
+    padding: 0 22px 22px;
     font-size: 14px;
-    line-height: 1.75;
+    line-height: 1.82;
     color: var(--text-muted);
     white-space: pre-line;
   }
@@ -88,7 +88,7 @@ const { title } = data;
   }
 
   @media (max-width: 720px) {
-    .faq-section { padding: 56px 20px; }
+    .faq-section { padding: 72px 20px; }
     .faq-item summary { font-size: 14px; padding: 16px 18px; padding-right: 40px; }
     .faq-body { font-size: 13.5px; padding: 0 18px 18px; }
   }

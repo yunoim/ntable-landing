@@ -9,7 +9,7 @@ const { data } = Astro.props;
   <h2 class="section-title reveal">{data.title}</h2>
   <p class="section-body reveal">{data.body}</p>
 
-  <div class="roadmap-list reveal" style="margin-top:56px;">
+  <div class="roadmap-list reveal" style="margin-top:64px;">
     {data.steps.map((s, i) => (
       <div class="roadmap-item">
         {/* 2026-04-23: phase 텍스트를 index 기반 'Step NN' 로 재계산. yml 의 s.phase 가 폰트/글리프
@@ -76,7 +76,7 @@ const { data } = Astro.props;
   .roadmap-phase-sub {
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     color: var(--text-muted);
     font-weight: 400;
   }
@@ -85,15 +85,16 @@ const { data } = Astro.props;
     font-size: 21px;
     font-weight: 600;
     color: var(--text-bright);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     line-height: 1.3;
+    letter-spacing: -0.005em;
   }
   .roadmap-content-body {
     font-size: 14px;
     font-weight: 300;
     color: var(--text-highlight);
-    line-height: 1.85;
-    margin-bottom: 16px;
+    line-height: 1.88;
+    margin-bottom: 18px;
   }
   .roadmap-tags {
     display: flex;

@@ -76,50 +76,51 @@ const compareTitle = compare.title;
   .model-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 22px;
-    margin-top: 56px;
+    gap: 24px;
+    margin-top: 64px;
   }
   .model-grid > * { min-width: 0; }
   .model-card {
     background: var(--bg-elevated);
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-lg);
-    padding: 38px 36px;
+    padding: 40px 38px;
     transition: border-color var(--transition);
   }
   .model-card:hover { border-color: var(--border-strong); }
   .model-eyebrow {
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.16em;
     color: var(--gold);
     text-transform: uppercase;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
   .model-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 34px;
     font-weight: 700;
     color: var(--text-bright);
-    margin-bottom: 14px;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
   }
   .model-body {
     font-size: 14px;
     font-weight: 300;
     color: var(--text-highlight);
-    line-height: 1.85;
-    margin-bottom: 28px;
+    line-height: 1.88;
+    margin-bottom: 32px;
     white-space: pre-line;
   }
   .model-plans {
     border-top: 1px solid var(--border-strong);
-    padding-top: 22px;
+    padding-top: 24px;
   }
   .model-plan-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 9px 0;
+    padding: 10px 0;
     border-bottom: 1px solid var(--border-faint);
     font-size: 13px;
   }
@@ -129,13 +130,14 @@ const compareTitle = compare.title;
     font-weight: 300;
   }
 
-  .compare-wrap { margin-top: 72px; }
+  .compare-wrap { margin-top: 80px; }
   .compare-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 26px;
     font-weight: 600;
     color: var(--text-bright);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    letter-spacing: -0.005em;
   }
   .compare-title :global(em) {
     font-style: italic;
