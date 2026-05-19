@@ -126,21 +126,11 @@ const { data } = Astro.props;
 </script>
 
 <style>
-  /* 2026-05-13 Phase A: 라이트 모드 prototype (사용자 letsur.ai 참고 개편 결정).
-     scoped 변수로만 처리 — tokens.css 안 건드림. Phase B에서 토큰 통일 예정.
-     색상 정책: 배경 순백 / 본문 navy / 보조 차콜 / gold·navy 포인트는 브랜드 자산으로 유지. */
   #stats {
-    --stats-bg: #ffffff;
-    --stats-ink: #1a2b4d;
-    --stats-ink-soft: #4a5568;
-    --stats-ink-muted: #94a3b8;
-    --stats-line: #e5e7eb;
-
-    padding: 80px 32px;
-    border-top: 1px solid var(--stats-line);
-    border-bottom: 1px solid var(--stats-line);
-    background: var(--stats-bg);
-    color: var(--stats-ink);
+    padding: 56px 32px;
+    border-top: 1px solid var(--border-strong);
+    border-bottom: 1px solid var(--border-strong);
+    background: var(--bg-elevated);
   }
   .stats-inner {
     max-width: 1100px;
@@ -152,20 +142,20 @@ const { data } = Astro.props;
     align-items: center;
     gap: 8px;
     padding: 7px 18px;
-    border: 1px solid var(--gold);
-    background: transparent;
+    border: 1px solid var(--gold-bright);
+    background: rgba(212,168,67,0.06);
     border-radius: 40px;
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--stats-ink);
+    color: var(--text-bright);
     margin-bottom: 36px;
   }
   .stats-badge-dot {
     width: 6px; height: 6px; border-radius: 50%;
-    background: var(--gold);
-    box-shadow: 0 0 8px rgba(212,168,67,0.45);
+    background: var(--accent-green);
+    box-shadow: 0 0 8px rgba(74,222,128,0.6);
     animation: pulse 2s ease-in-out infinite;
   }
 
@@ -174,7 +164,7 @@ const { data } = Astro.props;
     margin-top: 8px;
     text-align: center;
     font-size: 10.5px;
-    color: var(--stats-ink-muted);
+    color: var(--text-muted);
     letter-spacing: 0.04em;
   }
 
@@ -183,21 +173,21 @@ const { data } = Astro.props;
     margin-top: 14px;
     text-align: center;
     font-size: 13px;
-    color: var(--stats-ink-soft);
-    font-weight: 400;
+    color: var(--text-cream);
+    font-weight: 300;
     letter-spacing: 0.02em;
   }
   .cumulative-stats :global(strong) {
-    color: var(--gold);
+    color: var(--gold-bright);
     font-weight: 700;
     font-variant-numeric: tabular-nums;
     transition: color var(--transition);
   }
-  .cumulative-stats :global(strong.flash) { color: var(--stats-ink); }
+  .cumulative-stats :global(strong.flash) { color: var(--text-bright); }
 
   .stats-grid {
     max-width: 1100px;
-    margin: 56px auto 0;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
@@ -216,8 +206,8 @@ const { data } = Astro.props;
   }
   .stat-label {
     font-size: 13px;
-    font-weight: 400;
-    color: var(--stats-ink-soft);
+    font-weight: 300;
+    color: var(--text-cream);
     line-height: 1.55;
   }
 
